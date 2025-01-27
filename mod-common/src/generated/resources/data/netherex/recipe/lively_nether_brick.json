@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": "netherex:lively_netherrack",
+  "result": {
+    "count": 1,
+    "id": "netherex:lively_nether_brick"
+  }
+}

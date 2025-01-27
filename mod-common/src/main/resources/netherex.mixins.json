@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "logictechcorp.netherex.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_18",
+  "mixins": [
+    "NEBlockBehaviourMixin",
+    "NEFungusBlockMixin",
+    "NEHorseMixin",
+    "NEShovelItemAccessor",
+    "NEStriderMixin"
+  ],
+  "client": [
+    "client.NEEntityRenderersMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

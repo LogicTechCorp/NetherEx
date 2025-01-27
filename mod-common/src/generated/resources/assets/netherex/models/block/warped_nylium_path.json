@@ -1,0 +1,9 @@
+{
+  "parent": "netherex:block/path",
+  "textures": {
+    "bottom": "minecraft:block/netherrack",
+    "particle": "netherex:block/warped_nylium_path_top",
+    "side": "netherex:block/warped_nylium_path_side",
+    "top": "netherex:block/warped_nylium_path_top"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lively_netherrack": {
+      "conditions": {
+        "items": [
+          {
+            "items": "netherex:lively_netherrack"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:lively_nether_brick_from_blasting_lively_netherrack"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_lively_netherrack"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:lively_nether_brick_from_blasting_lively_netherrack"
+    ]
+  }
+}

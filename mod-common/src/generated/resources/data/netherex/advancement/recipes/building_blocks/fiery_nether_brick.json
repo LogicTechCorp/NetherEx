@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fiery_netherrack": {
+      "conditions": {
+        "items": [
+          {
+            "items": "netherex:fiery_netherrack"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "netherex:fiery_nether_brick"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_fiery_netherrack"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "netherex:fiery_nether_brick"
+    ]
+  }
+}

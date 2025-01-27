@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "netherex:block/ashen_nether_bricks",
+    "side": "netherex:block/ashen_nether_bricks",
+    "top": "netherex:block/ashen_nether_bricks"
+  }
+}

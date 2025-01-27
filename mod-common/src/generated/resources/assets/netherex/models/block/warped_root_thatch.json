@@ -1,0 +1,9 @@
+{
+  "parent": "netherex:block/thatch",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "netherex:block/warped_root_thatch",
+    "thatch": "netherex:block/warped_root_thatch",
+    "thatch_extrudes": "netherex:block/warped_root_thatch_extrudes"
+  }
+}

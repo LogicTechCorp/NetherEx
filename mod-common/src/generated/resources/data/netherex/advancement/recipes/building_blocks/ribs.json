@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cooked_ribs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "netherex:cooked_ribs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "netherex:ribs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cooked_ribs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "netherex:ribs"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bonemeal",
+  "ingredients": [
+    "netherex:wither_bone_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "netherex:wither_bone_meal"
+  }
+}

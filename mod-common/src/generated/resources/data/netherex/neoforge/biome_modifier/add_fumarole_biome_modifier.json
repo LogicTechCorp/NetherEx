@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:basalt_deltas",
+  "features": [
+    "netherex:basalt_fumarole",
+    "netherex:blackstone_fumarole"
+  ],
+  "step": "underground_decoration"
+}

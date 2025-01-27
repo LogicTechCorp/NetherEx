@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_single_face",
+  "textures": {
+    "texture": "netherex:block/brown_elder_mushroom_cap"
+  }
+}

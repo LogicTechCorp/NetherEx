@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "netherex:block/cracked_lively_nether_bricks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "loot_table": "netherex:entities/flaemoth/warped",
+  "spawn_biomes": "minecraft:warped_forest",
+  "spawn_weight": 10,
+  "texture": "netherex:textures/entity/flaemoth/warped.png"
+}

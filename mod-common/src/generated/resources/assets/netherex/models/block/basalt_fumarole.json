@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "minecraft:block/basalt_top",
+    "particle": "minecraft:block/basalt_side",
+    "side": "netherex:block/basalt_fumarole",
+    "top": "minecraft:block/basalt_side"
+  }
+}

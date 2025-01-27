@@ -1,0 +1,6 @@
+{
+  "loot_table": "netherex:entities/flaemoth/crimson",
+  "spawn_biomes": "minecraft:crimson_forest",
+  "spawn_weight": 10,
+  "texture": "netherex:textures/entity/flaemoth/crimson.png"
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "netherex:block/polished_fiery_netherrack",
+    "side": "netherex:block/polished_fiery_netherrack",
+    "top": "netherex:block/polished_fiery_netherrack"
+  }
+}

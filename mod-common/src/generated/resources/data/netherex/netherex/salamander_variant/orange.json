@@ -1,0 +1,5 @@
+{
+  "loot_table": "netherex:entities/salamander/orange",
+  "spawn_weight": 20,
+  "texture": "netherex:textures/entity/salamander/orange.png"
+}

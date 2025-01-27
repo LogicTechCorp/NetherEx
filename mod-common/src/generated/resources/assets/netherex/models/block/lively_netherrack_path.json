@@ -1,0 +1,9 @@
+{
+  "parent": "netherex:block/path",
+  "textures": {
+    "bottom": "netherex:block/lively_netherrack",
+    "particle": "netherex:block/lively_netherrack_path",
+    "side": "netherex:block/lively_netherrack_path_side",
+    "top": "netherex:block/lively_netherrack_path"
+  }
+}

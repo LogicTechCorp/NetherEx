@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#netherex:ruthless_sands",
+      "required": false
+    },
+    {
+      "id": "#netherex:torrid_wasteland",
+      "required": false
+    },
+    {
+      "id": "#netherex:fungi_forest",
+      "required": false
+    }
+  ]
+}

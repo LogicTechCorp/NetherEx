@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "netherex:block/polished_lively_netherrack_slab"
+    },
+    "type=double": {
+      "model": "netherex:block/polished_lively_netherrack"
+    },
+    "type=top": {
+      "model": "netherex:block/polished_lively_netherrack_slab_top"
+    }
+  }
+}

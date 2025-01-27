@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_netherrack_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "netherex:polished_netherrack_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "netherex:chiseled_polished_netherrack"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_netherrack_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "netherex:chiseled_polished_netherrack"
+    ]
+  }
+}

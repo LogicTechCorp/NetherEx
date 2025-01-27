@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "netherex:block/lively_netherrack_path"
+      },
+      {
+        "model": "netherex:block/lively_netherrack_path",
+        "y": 90
+      },
+      {
+        "model": "netherex:block/lively_netherrack_path",
+        "y": 180
+      },
+      {
+        "model": "netherex:block/lively_netherrack_path",
+        "y": 270
+      }
+    ]
+  }
+}

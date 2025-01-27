@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "netherex:polished_netherrack",
+  "result": {
+    "count": 1,
+    "id": "netherex:chiseled_polished_netherrack"
+  }
+}

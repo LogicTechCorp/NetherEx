@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "netherex:block/polished_netherrack",
+    "side": "netherex:block/polished_netherrack",
+    "top": "netherex:block/polished_netherrack"
+  }
+}

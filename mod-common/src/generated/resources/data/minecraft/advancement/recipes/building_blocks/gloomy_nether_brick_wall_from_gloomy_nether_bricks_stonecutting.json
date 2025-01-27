@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gloomy_nether_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "netherex:gloomy_nether_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:gloomy_nether_brick_wall_from_gloomy_nether_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gloomy_nether_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:gloomy_nether_brick_wall_from_gloomy_nether_bricks_stonecutting"
+    ]
+  }
+}

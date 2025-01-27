@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "netherex:polished_netherrack",
+  "result": {
+    "count": 2,
+    "id": "netherex:polished_netherrack_slab"
+  }
+}

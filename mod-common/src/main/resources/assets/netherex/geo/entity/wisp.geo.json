@@ -1,0 +1,59 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.wisp",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "wisp",
+					"pivot": [3, 0, -3]
+				},
+				{
+					"name": "head",
+					"parent": "wisp",
+					"pivot": [3, 0, -3],
+					"cubes": [
+						{"origin": [-4, 0, -4], "size": [8, 8, 8], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "whiskers",
+					"parent": "head",
+					"pivot": [3, 0, -3]
+				},
+				{
+					"name": "whisker_left",
+					"parent": "whiskers",
+					"pivot": [-4, 3, -3],
+					"cubes": [
+						{"origin": [-8, 1, -3], "size": [4, 4, 0], "pivot": [-4, 3, -3], "rotation": [0, 15, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "whisker_right",
+					"parent": "whiskers",
+					"pivot": [4, 3, -3],
+					"cubes": [
+						{"origin": [4, 1, -3], "size": [4, 4, 0], "pivot": [4, 3, -3], "rotation": [0, -15, 0], "uv": [0, 4]}
+					]
+				},
+				{
+					"name": "fire",
+					"parent": "head",
+					"pivot": [0, 0, -3],
+					"rotation": [15, 0, 0],
+					"cubes": [
+						{"origin": [-3, -5, -3], "size": [6, 6, 6], "uv": [0, 16]}
+					]
+				}
+			]
+		}
+	]
+}

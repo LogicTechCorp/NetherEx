@@ -1,0 +1,5 @@
+{
+  "loot_table": "netherex:entities/mogus/red",
+  "spawn_weight": 10,
+  "texture": "netherex:textures/entity/mogus/red.png"
+}

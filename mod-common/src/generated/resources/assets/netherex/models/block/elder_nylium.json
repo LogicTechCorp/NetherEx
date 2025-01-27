@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "netherex:block/lively_netherrack",
+    "particle": "netherex:block/elder_nylium_top",
+    "side": "netherex:block/elder_nylium_side",
+    "top": "netherex:block/elder_nylium_top"
+  }
+}

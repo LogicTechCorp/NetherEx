@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "netherex:red_elder_mushroom_block"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "netherex:blocks/red_elder_mushroom_block"
+}

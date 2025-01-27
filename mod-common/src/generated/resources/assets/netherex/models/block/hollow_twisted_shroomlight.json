@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "netherex:block/hollow_twisted_shroomlight"
+  }
+}

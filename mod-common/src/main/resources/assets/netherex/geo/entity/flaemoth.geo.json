@@ -1,0 +1,87 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.flaemoth",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "flaemoth",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "flaemoth",
+					"pivot": [0, 3, 0],
+					"cubes": [
+						{"origin": [-2, 1, -4], "size": [4, 4, 8], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "antenna",
+					"parent": "body",
+					"pivot": [0, 5, -4],
+					"cubes": [
+						{"origin": [-2, 4, -7], "size": [4, 4, 4], "uv": [0, 12]}
+					]
+				},
+				{
+					"name": "wings",
+					"parent": "body",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "wing_left",
+					"parent": "wings",
+					"pivot": [-2, 4, 2],
+					"cubes": [
+						{"origin": [-16, 4, -5], "size": [14, 0, 14], "pivot": [-2, 4, 2], "rotation": [0, 0, 15], "uv": [2, 16]}
+					]
+				},
+				{
+					"name": "wing_right",
+					"parent": "wings",
+					"pivot": [2, 4, 3],
+					"cubes": [
+						{"origin": [2, 4, -4], "size": [14, 0, 14], "pivot": [2, 4, 3], "rotation": [0, 0, -15], "uv": [2, 30]}
+					]
+				},
+				{
+					"name": "legs",
+					"parent": "body",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "legs_front",
+					"parent": "legs",
+					"pivot": [0, 1, -1],
+					"cubes": [
+						{"origin": [-2, -1, -1], "size": [4, 2, 0], "uv": [16, 4]}
+					]
+				},
+				{
+					"name": "legs_middle",
+					"parent": "legs",
+					"pivot": [0, 1, 1],
+					"cubes": [
+						{"origin": [-2, -1, 1], "size": [4, 2, 0], "uv": [16, 4]}
+					]
+				},
+				{
+					"name": "legs_back",
+					"parent": "legs",
+					"pivot": [0, 1, 3],
+					"cubes": [
+						{"origin": [-2, -1, 3], "size": [4, 2, 0], "uv": [16, 4]}
+					]
+				}
+			]
+		}
+	]
+}

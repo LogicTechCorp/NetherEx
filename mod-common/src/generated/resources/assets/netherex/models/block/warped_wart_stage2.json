@@ -1,0 +1,7 @@
+{
+  "parent": "netherex:block/warped_wart",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "warped_wart": "netherex:block/warped_wart_stage2"
+  }
+}
