@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "netherex:netherite_horse_armor"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "netherex:chests/netherite_horse_armor_addition"
+}

@@ -1,6 +1,7 @@
 package logictechcorp.netherex;
 
 import logictechcorp.netherex.event.NEInteractionEventsFabric;
+import logictechcorp.netherex.event.NELootEventsFabric;
 import logictechcorp.netherex.registry.NetherExBiomeModifiersFabric;
 import logictechcorp.netherex.registry.NetherExEntityTypesFabric;
 import net.fabricmc.api.ModInitializer;
@@ -15,6 +16,7 @@ public class NetherExFabric implements ModInitializer, TerraBlenderApi
         NetherEx.onCommonSetup();
         NetherExEntityTypesFabric.registerAttributes();
         NetherExBiomeModifiersFabric.register();
+        NELootEventsFabric.register();
         NEInteractionEventsFabric.register();
     }
 

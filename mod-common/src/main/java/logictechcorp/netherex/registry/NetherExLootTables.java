@@ -19,6 +19,8 @@ public class NetherExLootTables
     public static final ResourceKey<LootTable> FLAEMOTH_CRIMSON = register("entities/flaemoth/crimson");
     public static final ResourceKey<LootTable> FLAEMOTH_WARPED = register("entities/flaemoth/warped");
 
+    public static final ResourceKey<LootTable> NETHERITE_HORSE_ARMOR_ADDITION = register("chests/netherite_horse_armor_addition");
+
     private static ResourceKey<LootTable> register(String name)
     {
         return register(ResourceKey.create(Registries.LOOT_TABLE, NetherExConstants.resource(name)));

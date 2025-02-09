@@ -19,7 +19,7 @@
       "logictechcorp.netherex.${mod_name}Fabric"
     ],
     "client": [
-      "logictechcorp.netherex.${mod_name}FabricClient"
+      "logictechcorp.netherex.${mod_name}ClientFabric"
     ],
     "terrablender": [
       "logictechcorp.netherex.${mod_name}Fabric"
