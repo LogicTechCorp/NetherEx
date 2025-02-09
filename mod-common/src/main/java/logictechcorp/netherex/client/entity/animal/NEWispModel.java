@@ -1,4 +1,4 @@
-package logictechcorp.netherex.client.entity.monster;
+package logictechcorp.netherex.client.entity.animal;
 
 import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.entity.monster.NEWisp;

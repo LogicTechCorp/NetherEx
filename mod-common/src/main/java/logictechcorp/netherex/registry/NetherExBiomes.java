@@ -50,16 +50,18 @@ public class NetherExBiomes extends OverworldBiomes
                 .backgroundMusic(Musics.createGameMusic(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY));
 
         MobSpawnSettings.Builder mobSpawnSettingsBuilder = new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.WISP.get(), 8, 1, 4))
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 60, 1, 2))
                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.SPINOUT.get(), 30, 2, 4))
                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.WITHER_SKELETON, 20, 1, 3))
                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.GHAST, 50, 1, 2))
                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 1, 4, 4))
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 60, 1, 2))
+                .addMobCharge(NetherExEntityTypes.WISP.get(), 0.7d, 0.15d)
+                .addMobCharge(EntityType.STRIDER, 0.7d, 0.15d)
                 .addMobCharge(NetherExEntityTypes.SPINOUT.get(), 0.7d, 0.15d)
                 .addMobCharge(EntityType.SKELETON, 0.7d, 0.15d)
                 .addMobCharge(EntityType.GHAST, 0.7d, 0.15d)
-                .addMobCharge(EntityType.ENDERMAN, 0.7d, 0.15d)
-                .addMobCharge(EntityType.STRIDER, 0.7d, 0.15d);
+                .addMobCharge(EntityType.ENDERMAN, 0.7d, 0.15d);
 
         BiomeGenerationSettings.Builder biomeGenerationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatureHolderGetter, configuredWorldCarverHolderGetter)
                 .addCarver(Carvers.NETHER_CAVE)
