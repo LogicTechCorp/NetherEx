@@ -16,6 +16,9 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.MobBucketItem;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.function.Function;
@@ -80,10 +83,10 @@ public class NetherExItems
     {
         public static final Item.Properties NETHERITE_HORSE_ARMOR = new Item.Properties().fireResistant();
         public static final Item.Properties WITHER_BONE_MEAL = new Item.Properties();
-        public static final Item.Properties RIBS = new Item.Properties().food(NEFoods.RIBS);
-        public static final Item.Properties COOKED_RIBS = new Item.Properties().food(NEFoods.COOKED_RIBS);
-        public static final Item.Properties SHROOMFRUIT = new Item.Properties().food(NEFoods.SHROOMFRUIT);
-        public static final Item.Properties TWISTED_SHROOMFRUIT = new Item.Properties().food(NEFoods.TWISTED_SHROOMFRUIT);
+        public static final Item.Properties RIBS = new Item.Properties().food(NEFoods.RIBS, NEConsumables.RIBS);
+        public static final Item.Properties COOKED_RIBS = new Item.Properties().food(NEFoods.COOKED_RIBS, NEConsumables.COOKED_RIBS);
+        public static final Item.Properties SHROOMFRUIT = new Item.Properties().food(NEFoods.SHROOMFRUIT, NEConsumables.SHROOMFRUIT);
+        public static final Item.Properties TWISTED_SHROOMFRUIT = new Item.Properties().food(NEFoods.TWISTED_SHROOMFRUIT, NEConsumables.TWISTED_SHROOMFRUIT);
         public static final Item.Properties STRIDER_BUCKET = new Item.Properties().stacksTo(1);
         public static final Item.Properties ASHEN_ARROW = new Item.Properties();
     }
@@ -94,5 +97,13 @@ public class NetherExItems
         public static final FoodProperties COOKED_RIBS = new FoodProperties.Builder().nutrition(11).saturationModifier(0.5f).build();
         public static final FoodProperties SHROOMFRUIT = new FoodProperties.Builder().nutrition(2).saturationModifier(0.2f).build();
         public static final FoodProperties TWISTED_SHROOMFRUIT = new FoodProperties.Builder().nutrition(1).saturationModifier(0.2f).build();
+    }
+
+    public static class NEConsumables
+    {
+        public static final Consumable RIBS = Consumables.defaultFood().onConsume((new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 0)))).build();
+        public static final Consumable COOKED_RIBS = Consumables.defaultFood().onConsume((new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600)))).build();
+        public static final Consumable SHROOMFRUIT = Consumables.defaultFood().onConsume((new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.GLOWING, 300)))).build();
+        public static final Consumable TWISTED_SHROOMFRUIT = Consumables.defaultFood().onConsume((new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.GLOWING, 300)))).build();
     }
 }
