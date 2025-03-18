@@ -59,7 +59,7 @@ public class NetherExBiomes extends OverworldBiomes
                 .addMobCharge(NetherExEntityTypes.WISP.get(), 0.7d, 0.15d)
                 .addMobCharge(EntityType.STRIDER, 0.7d, 0.15d)
                 .addMobCharge(NetherExEntityTypes.SPINOUT.get(), 0.7d, 0.15d)
-                .addMobCharge(EntityType.SKELETON, 0.7d, 0.15d)
+                .addMobCharge(EntityType.WITHER_SKELETON, 0.7d, 0.15d)
                 .addMobCharge(EntityType.GHAST, 0.7d, 0.15d)
                 .addMobCharge(EntityType.ENDERMAN, 0.7d, 0.15d);
 
@@ -143,7 +143,7 @@ public class NetherExBiomes extends OverworldBiomes
                 .backgroundMusic(Musics.createGameMusic(SoundEvents.MUSIC_BIOME_WARPED_FOREST));
 
         MobSpawnSettings.Builder mobSpawnSettingsBuilder = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.MOGUS.get(), 60, 2, 4))
+                .addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.MOGUS.get(), 120, 4, 4))
                 .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 15, 1, 2));
 
         BiomeGenerationSettings.Builder biomeGenerationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatureHolderGetter, configuredWorldCarverHolderGetter)

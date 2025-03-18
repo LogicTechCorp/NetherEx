@@ -59,8 +59,8 @@
       {
         "type": "netherex:mogus",
         "maxCount": 4,
-        "minCount": 2,
-        "weight": 60
+        "minCount": 4,
+        "weight": 120
       }
     ],
     "axolotls": [],

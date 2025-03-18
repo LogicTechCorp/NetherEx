@@ -1,16 +1,16 @@
 {
   "values": [
+    "netherex:lively_nether_brick_fence_gate",
     "netherex:nether_brick_fence_gate",
     "netherex:gloomy_nether_brick_fence_gate",
-    "netherex:crimson_nether_brick_fence_gate",
-    "netherex:polished_lively_netherrack_fence_gate",
+    "netherex:polished_glowstone_fence_gate",
     "netherex:ashen_nether_brick_fence_gate",
-    "netherex:warped_nether_brick_fence_gate",
     "netherex:polished_gloomy_netherrack_fence_gate",
     "netherex:polished_netherrack_fence_gate",
+    "netherex:crimson_nether_brick_fence_gate",
     "netherex:polished_fiery_netherrack_fence_gate",
-    "netherex:polished_glowstone_fence_gate",
-    "netherex:lively_nether_brick_fence_gate",
-    "netherex:fiery_nether_brick_fence_gate"
+    "netherex:fiery_nether_brick_fence_gate",
+    "netherex:warped_nether_brick_fence_gate",
+    "netherex:polished_lively_netherrack_fence_gate"
   ]
 }

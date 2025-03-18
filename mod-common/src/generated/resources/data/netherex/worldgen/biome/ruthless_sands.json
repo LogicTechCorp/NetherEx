@@ -79,11 +79,11 @@
       "charge": 0.7,
       "energy_budget": 0.15
     },
-    "minecraft:skeleton": {
+    "minecraft:strider": {
       "charge": 0.7,
       "energy_budget": 0.15
     },
-    "minecraft:strider": {
+    "minecraft:wither_skeleton": {
       "charge": 0.7,
       "energy_budget": 0.15
     },
