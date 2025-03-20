@@ -8,21 +8,20 @@
     "${mod_author}"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/LogicTechCorp/NetherEx"
   },
   "license": "${license}",
   "icon": "${mod_id}.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "logictechcorp.netherex.${mod_name}Fabric"
+      "logictechcorp.${mod_id}.${mod_name}Fabric"
     ],
     "client": [
-      "logictechcorp.netherex.${mod_name}ClientFabric"
+      "logictechcorp.${mod_id}.${mod_name}ClientFabric"
     ],
     "terrablender": [
-      "logictechcorp.netherex.${mod_name}Fabric"
+      "logictechcorp.${mod_id}.${mod_name}Fabric"
     ]
   },
   "mixins": [

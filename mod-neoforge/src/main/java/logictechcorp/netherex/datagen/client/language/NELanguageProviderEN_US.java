@@ -29,8 +29,17 @@ public class NELanguageProviderEN_US extends LanguageProvider
     @Override
     protected void addTranslations()
     {
+        // Config
+        add("config." + NetherExConstants.MOD_ID + ".info.title", "NetherEx");
+        add("config." + NetherExConstants.MOD_ID + ".info.description", "Config options for " + NetherExConstants.MOD_NAME);
+
+        add("config." + NetherExConstants.MOD_ID + ".terra_blender.info.title", "Terra Blender");
+        add("config." + NetherExConstants.MOD_ID + ".terra_blender.info.description", "Terra Blender config options for NetherEx");
+        add("config." + NetherExConstants.MOD_ID + ".terra_blender.region_weight", "Region Weight");
+        add("config." + NetherExConstants.MOD_ID + ".terra_blender.region_weight.comment", "How common NetherEx biomes are in the Nether");
+
         // Creative Mode Tabs
-        add("creative_mode_tab.netherex.default", "NetherEx");
+        add("creative_mode_tab." + NetherExConstants.MOD_ID + ".default", "NetherEx");
 
         // Blocks
         for (NENetherrackType netherrackType : NENetherrackType.values())

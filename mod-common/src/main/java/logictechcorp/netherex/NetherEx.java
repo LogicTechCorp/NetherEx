@@ -1,5 +1,6 @@
 package logictechcorp.netherex;
 
+import logictechcorp.netherex.config.NetherExConfig;
 import logictechcorp.netherex.mixin.NEShovelItemAccessor;
 import logictechcorp.netherex.registry.*;
 import logictechcorp.netherex.world.level.levelgen.NESurfaceRuleData;
@@ -12,7 +13,13 @@ public class NetherEx
 {
     public static void onLoad()
     {
+        registerConfig();
         initializeContent();
+    }
+
+    private static void registerConfig()
+    {
+        NetherExConstants.CONFIGURATOR.register(NetherExConfig.class);
     }
 
     private static void initializeContent()
@@ -34,7 +41,7 @@ public class NetherEx
 
     public static void onInitializeTerraBlender()
     {
-        Regions.register(new NENetherRegion(2));
+        Regions.register(new NENetherRegion());
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, NetherExConstants.MOD_ID, NESurfaceRuleData.nether());
     }
 

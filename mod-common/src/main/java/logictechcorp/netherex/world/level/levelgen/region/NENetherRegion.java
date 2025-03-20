@@ -2,6 +2,7 @@ package logictechcorp.netherex.world.level.levelgen.region;
 
 import com.mojang.datafixers.util.Pair;
 import logictechcorp.netherex.NetherExConstants;
+import logictechcorp.netherex.config.NetherExTerraBlenderConfig;
 import logictechcorp.netherex.registry.NetherExBiomes;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -14,9 +15,9 @@ import java.util.function.Consumer;
 
 public class NENetherRegion extends Region
 {
-    public NENetherRegion(int weight)
+    public NENetherRegion()
     {
-        super(NetherExConstants.resource("nether"), RegionType.NETHER, weight);
+        super(NetherExConstants.resource("nether"), RegionType.NETHER, NetherExTerraBlenderConfig.terraBlenderRegionWeight);
     }
 
     @Override

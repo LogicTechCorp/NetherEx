@@ -1,14 +1,14 @@
 {
   "values": [
     "netherex:polished_gloomy_netherrack_slab",
-    "netherex:polished_fiery_netherrack_slab",
-    "netherex:ashen_nether_brick_slab",
     "netherex:gloomy_nether_brick_slab",
-    "netherex:fiery_nether_brick_slab",
-    "netherex:warped_nether_brick_slab",
+    "netherex:ashen_nether_brick_slab",
     "netherex:polished_glowstone_slab",
-    "netherex:polished_lively_netherrack_slab",
     "netherex:polished_netherrack_slab",
-    "netherex:lively_nether_brick_slab"
+    "netherex:warped_nether_brick_slab",
+    "netherex:polished_lively_netherrack_slab",
+    "netherex:polished_fiery_netherrack_slab",
+    "netherex:lively_nether_brick_slab",
+    "netherex:fiery_nether_brick_slab"
   ]
 }
