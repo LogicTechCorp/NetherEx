@@ -1,14 +1,14 @@
 {
   "values": [
-    "netherex:lively_nether_brick_stairs",
-    "netherex:polished_glowstone_stairs",
-    "netherex:polished_fiery_netherrack_stairs",
-    "netherex:warped_nether_brick_stairs",
-    "netherex:polished_gloomy_netherrack_stairs",
+    "netherex:fiery_nether_brick_stairs",
     "netherex:polished_netherrack_stairs",
+    "netherex:warped_nether_brick_stairs",
     "netherex:ashen_nether_brick_stairs",
+    "netherex:lively_nether_brick_stairs",
     "netherex:polished_lively_netherrack_stairs",
+    "netherex:polished_glowstone_stairs",
+    "netherex:polished_gloomy_netherrack_stairs",
     "netherex:gloomy_nether_brick_stairs",
-    "netherex:fiery_nether_brick_stairs"
+    "netherex:polished_fiery_netherrack_stairs"
   ]
 }

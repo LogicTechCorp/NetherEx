@@ -1,9 +1,6 @@
 package logictechcorp.netherex.entity.animal;
 
-import logictechcorp.netherex.registry.NetherExBlockTags;
-import logictechcorp.netherex.registry.NetherExEntityDataSerializers;
-import logictechcorp.netherex.registry.NetherExRegistries;
-import logictechcorp.netherex.registry.NetherExSalamanderVariants;
+import logictechcorp.netherex.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -15,7 +12,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -37,7 +33,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -111,6 +106,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
         goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.0d, true));
         goalSelector.addGoal(4, new FollowOwnerGoal(this, 1.0d, 10.0f, 2.0f));
         goalSelector.addGoal(5, new BreedGoal(this, 1.0d));
+        goalSelector.addGoal(6, new TemptGoal(this, 1.15d, (stack) -> stack.is(NetherExItemTags.SALAMANDER_FOOD), false));
         goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0d));
         goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0f));
         goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -240,7 +236,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
 
             }
         }
-        else if (!level().isClientSide && heldStack.is(Items.BONE) && !isAngry())
+        else if (!level().isClientSide && heldStack.is(NetherExItemTags.SALAMANDER_FOOD) && !isAngry())
         {
             heldStack.consume(1, player);
             tryToTame(player);
@@ -332,7 +328,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     @Override
     public boolean isFood(ItemStack stack)
     {
-        return stack.is(ItemTags.FISHES);
+        return stack.is(NetherExItemTags.SALAMANDER_FOOD);
     }
 
     @Override
@@ -378,9 +374,27 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     }
 
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent)
+    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob otherParent)
     {
-        return null;
+        NESalamander salamander = NetherExEntityTypes.SALAMANDER.get().create(serverLevel, EntitySpawnReason.BREEDING);
+
+        if (salamander != null)
+        {
+            Holder<NESalamanderVariant> variant;
+
+            if (getVariant() == ((NESalamander) otherParent).getVariant())
+            {
+                variant = getVariant();
+            }
+            else
+            {
+                variant = random.nextBoolean() ? getVariant() : ((NESalamander) otherParent).getVariant();
+            }
+
+            salamander.setVariant(variant);
+        }
+
+        return salamander;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package logictechcorp.netherex.entity.animal;
 
-import logictechcorp.netherex.registry.NetherExEntityDataSerializers;
-import logictechcorp.netherex.registry.NetherExFlaemothVariants;
-import logictechcorp.netherex.registry.NetherExItemTags;
-import logictechcorp.netherex.registry.NetherExRegistries;
+import logictechcorp.netherex.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -91,11 +88,13 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     protected void registerGoals()
     {
         goalSelector.addGoal(0, new FloatGoal(this));
-        goalSelector.addGoal(1, new TemptGoal(this, 1.15d, (stack) -> stack.is(NetherExItemTags.FLAEMOTH_FOOD), false));
-        goalSelector.addGoal(2, new PanicGoal(this, 1.5d));
-        goalSelector.addGoal(3, new WaterAvoidingRandomFlyingGoal(this, 1.0d));
-        goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0f));
-        goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        goalSelector.addGoal(1, new PanicGoal(this, 1.5d));
+        goalSelector.addGoal(2, new FollowParentGoal(this, 1.1d));
+        goalSelector.addGoal(3, new BreedGoal(this, 1.0d));
+        goalSelector.addGoal(4, new WaterAvoidingRandomFlyingGoal(this, 1.0d));
+        goalSelector.addGoal(5, new TemptGoal(this, 1.15d, (stack) -> stack.is(NetherExItemTags.FLAEMOTH_FOOD), false));
+        goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0f));
+        goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -143,19 +142,23 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     {
         spawnGroupData = super.finalizeSpawn(levelAccessor, difficultyInstance, spawnReason, spawnGroupData);
 
-        Holder<Biome> biome = levelAccessor.getBiome(blockPosition());
-        Holder<NEFlaemothVariant> flaemothVariantHolder;
-
-        if (spawnReason == EntitySpawnReason.NATURAL)
+        if (spawnReason != EntitySpawnReason.BREEDING)
         {
-            flaemothVariantHolder = NetherExFlaemothVariants.getBiomeSpawnVariant(registryAccess(), biome, random);
-        }
-        else
-        {
-            flaemothVariantHolder = NetherExFlaemothVariants.getRandomSpawnVariant(registryAccess(), random);
+            Holder<Biome> biome = levelAccessor.getBiome(blockPosition());
+            Holder<NEFlaemothVariant> flaemothVariantHolder;
+
+            if (spawnReason == EntitySpawnReason.NATURAL)
+            {
+                flaemothVariantHolder = NetherExFlaemothVariants.getBiomeSpawnVariant(registryAccess(), biome, random);
+            }
+            else
+            {
+                flaemothVariantHolder = NetherExFlaemothVariants.getRandomSpawnVariant(registryAccess(), random);
+            }
+
+            setVariant(flaemothVariantHolder);
         }
 
-        setVariant(flaemothVariantHolder);
         return spawnGroupData;
     }
 
@@ -214,9 +217,27 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob)
+    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob otherParent)
     {
-        return null;
+        NEFlaemoth flaemoth = NetherExEntityTypes.FLAEMOTH.get().create(serverLevel, EntitySpawnReason.BREEDING);
+
+        if (flaemoth != null)
+        {
+            Holder<NEFlaemothVariant> variant;
+
+            if (getVariant() == ((NEFlaemoth) otherParent).getVariant())
+            {
+                variant = getVariant();
+            }
+            else
+            {
+                variant = random.nextBoolean() ? getVariant() : ((NEFlaemoth) otherParent).getVariant();
+            }
+
+            flaemoth.setVariant(variant);
+        }
+
+        return flaemoth;
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 
 public class NetherExItemTags
 {
+    public static final TagKey<Item> SALAMANDER_FOOD = createTag("salamander_food");
     public static final TagKey<Item> MOGUS_FOOD = createTag("mogus_food");
     public static final TagKey<Item> FLAEMOTH_FOOD = createTag("flaemoth_food");
 

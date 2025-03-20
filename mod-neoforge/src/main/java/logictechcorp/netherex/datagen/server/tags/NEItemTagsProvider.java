@@ -26,6 +26,9 @@ public class NEItemTagsProvider extends ItemTagsProvider
         tag(ItemTags.ARROWS)
                 .add(NetherExItems.ASHEN_ARROW.get());
 
+        tag(NetherExItemTags.SALAMANDER_FOOD)
+                .add(Items.MAGMA_CREAM);
+        
         tag(NetherExItemTags.MOGUS_FOOD)
                 .add(Items.BROWN_MUSHROOM)
                 .add(Items.RED_MUSHROOM)

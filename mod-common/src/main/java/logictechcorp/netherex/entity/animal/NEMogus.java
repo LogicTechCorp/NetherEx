@@ -1,9 +1,6 @@
 package logictechcorp.netherex.entity.animal;
 
-import logictechcorp.netherex.registry.NetherExEntityDataSerializers;
-import logictechcorp.netherex.registry.NetherExItemTags;
-import logictechcorp.netherex.registry.NetherExMogusVariants;
-import logictechcorp.netherex.registry.NetherExRegistries;
+import logictechcorp.netherex.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -79,9 +76,9 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(1, new PanicGoal(this, 1.25d));
-        goalSelector.addGoal(2, new BreedGoal(this, 1.0d));
-        goalSelector.addGoal(3, new TemptGoal(this, 1.2d, stack -> stack.is(NetherExItemTags.MOGUS_FOOD), false));
-        goalSelector.addGoal(4, new FollowParentGoal(this, 1.1d));
+        goalSelector.addGoal(2, new FollowParentGoal(this, 1.1d));
+        goalSelector.addGoal(3, new BreedGoal(this, 1.0d));
+        goalSelector.addGoal(4, new TemptGoal(this, 1.2d, stack -> stack.is(NetherExItemTags.MOGUS_FOOD), false));
         goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0d));
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0f));
         goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -163,9 +160,27 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent)
+    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob otherParent)
     {
-        return null;
+        NEMogus mogus = NetherExEntityTypes.MOGUS.get().create(serverLevel, EntitySpawnReason.BREEDING);
+
+        if (mogus != null)
+        {
+            Holder<NEMogusVariant> variant;
+
+            if (getVariant() == ((NEMogus) otherParent).getVariant())
+            {
+                variant = getVariant();
+            }
+            else
+            {
+                variant = random.nextBoolean() ? getVariant() : ((NEMogus) otherParent).getVariant();
+            }
+
+            mogus.setVariant(variant);
+        }
+
+        return mogus;
     }
 
     @Override
