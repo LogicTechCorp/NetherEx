@@ -57,11 +57,11 @@
       "netherex:ore_soul_sand",
       "netherex:ore_gravel",
       "netherex:ore_blackstone",
-      "netherex:ore_gold",
-      "netherex:ore_quartz",
       "netherex:ore_ancient_debris_small",
       "netherex:ore_ancient_debris_large",
-      "netherex:ore_boomstone"
+      "netherex:ore_boomstone",
+      "netherex:ore_gloomy_gold",
+      "netherex:ore_gloomy_quartz"
     ],
     [],
     [

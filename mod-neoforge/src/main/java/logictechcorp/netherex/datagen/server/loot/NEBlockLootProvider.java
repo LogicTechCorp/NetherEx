@@ -39,7 +39,11 @@ public class NEBlockLootProvider extends BlockLootSubProvider
     @Override
     protected void generate()
     {
-        HolderLookup.RegistryLookup<Enchantment> enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        HolderLookup.RegistryLookup<Enchantment> enchantments = registries.lookupOrThrow(Registries.ENCHANTMENT);
+
+        addOreBlocks(NetherExBlocks.GLOOMY_QUARTZ_ORE.get(), NetherExBlocks.GLOOMY_GOLD_ORE.get(), enchantments);
+        addOreBlocks(NetherExBlocks.FIERY_QUARTZ_ORE.get(), NetherExBlocks.FIERY_GOLD_ORE.get(), enchantments);
+        addOreBlocks(NetherExBlocks.LIVELY_QUARTZ_ORE.get(), NetherExBlocks.LIVELY_GOLD_ORE.get(), enchantments);
 
         add(NetherExBlocks.BROWN_ELDER_MUSHROOM_BLOCK.get(), (block) -> createMushroomBlockDrop(block, NetherExBlocks.BROWN_ELDER_MUSHROOM.get()));
         add(NetherExBlocks.RED_ELDER_MUSHROOM_BLOCK.get(), (block) -> createMushroomBlockDrop(block, NetherExBlocks.RED_ELDER_MUSHROOM.get()));
@@ -82,6 +86,22 @@ public class NEBlockLootProvider extends BlockLootSubProvider
 
         List<Block> blocks = StreamSupport.stream(getKnownBlocks().spliterator(), false).toList();
         blocks.forEach(this::dropSelf);
+    }
+
+    protected void addOreBlocks(Block quartzOreBlock, Block goldOreBlock, HolderLookup.RegistryLookup<Enchantment> enchantments)
+    {
+        add(quartzOreBlock, block -> createOreDrop(block, Items.QUARTZ));
+        add(goldOreBlock,
+                block -> createSilkTouchDispatchTable(
+                        block,
+                        applyExplosionDecay(
+                                block,
+                                LootItem.lootTableItem(Items.GOLD_NUGGET)
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F)))
+                                        .apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE)))
+                        )
+                )
+        );
     }
 
     @Override

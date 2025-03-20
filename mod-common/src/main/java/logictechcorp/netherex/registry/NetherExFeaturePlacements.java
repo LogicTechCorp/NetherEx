@@ -20,8 +20,12 @@ public class NetherExFeaturePlacements
     public static final ResourceKey<PlacedFeature> PATCH_FIRE = createKey("patch_fire");
     public static final ResourceKey<PlacedFeature> PATCH_FIRE_HEAVY = createKey("patch_fire_heavy");
 
-    public static final ResourceKey<PlacedFeature> ORE_QUARTZ = createKey("ore_quartz");
-    public static final ResourceKey<PlacedFeature> ORE_GOLD = createKey("ore_gold");
+    public static final ResourceKey<PlacedFeature> ORE_GLOOMY_QUARTZ = createKey("ore_gloomy_quartz");
+    public static final ResourceKey<PlacedFeature> ORE_GLOOMY_GOLD = createKey("ore_gloomy_gold");
+    public static final ResourceKey<PlacedFeature> ORE_FIERY_QUARTZ = createKey("ore_fiery_quartz");
+    public static final ResourceKey<PlacedFeature> ORE_FIERY_GOLD = createKey("ore_fiery_gold");
+    public static final ResourceKey<PlacedFeature> ORE_LIVELY_QUARTZ = createKey("ore_lively_quartz");
+    public static final ResourceKey<PlacedFeature> ORE_LIVELY_GOLD = createKey("ore_lively_gold");
     public static final ResourceKey<PlacedFeature> ORE_ANCIENT_DEBRIS_SMALL = createKey("ore_ancient_debris_small");
     public static final ResourceKey<PlacedFeature> ORE_ANCIENT_DEBRIS_LARGE = createKey("ore_ancient_debris_large");
     public static final ResourceKey<PlacedFeature> ORE_MAGMA = createKey("ore_magma");
@@ -59,8 +63,14 @@ public class NetherExFeaturePlacements
         Holder.Reference<ConfiguredFeature<?, ?>> patchFireReference = configuredFeatures.getOrThrow(NetherExFeatureConfigs.PATCH_FIRE);
         register(context, PATCH_FIRE, patchFireReference, CountPlacement.of(UniformInt.of(0, 5)), InSquarePlacement.spread(), PlacementUtils.RANGE_4_4, BiomeFilter.biome());
         register(context, PATCH_FIRE_HEAVY, patchFireReference, CountPlacement.of(UniformInt.of(10, 20)), InSquarePlacement.spread(), PlacementUtils.RANGE_8_8, BiomeFilter.biome());
-        register(context, ORE_QUARTZ, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_QUARTZ), CountPlacement.of(16), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
-        register(context, ORE_GOLD, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_GOLD), CountPlacement.of(10), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
+
+        register(context, ORE_GLOOMY_QUARTZ, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_GLOOMY_QUARTZ), CountPlacement.of(16), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
+        register(context, ORE_GLOOMY_GOLD, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_GLOOMY_GOLD), CountPlacement.of(10), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
+        register(context, ORE_FIERY_QUARTZ, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_FIERY_QUARTZ), CountPlacement.of(16), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
+        register(context, ORE_FIERY_GOLD, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_FIERY_GOLD), CountPlacement.of(10), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
+        register(context, ORE_LIVELY_QUARTZ, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_LIVELY_QUARTZ), CountPlacement.of(16), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
+        register(context, ORE_LIVELY_GOLD, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_LIVELY_GOLD), CountPlacement.of(10), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
+
         register(context, ORE_ANCIENT_DEBRIS_SMALL, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_ANCIENT_DEBRIS_SMALL), InSquarePlacement.spread(), PlacementUtils.RANGE_8_8, BiomeFilter.biome());
         register(context, ORE_ANCIENT_DEBRIS_LARGE, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_ANCIENT_DEBRIS_LARGE), InSquarePlacement.spread(), HeightRangePlacement.triangle(VerticalAnchor.absolute(8), VerticalAnchor.absolute(24)), BiomeFilter.biome());
 

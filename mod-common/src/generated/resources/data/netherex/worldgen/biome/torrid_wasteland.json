@@ -48,11 +48,11 @@
       "minecraft:red_mushroom_nether",
       "netherex:ore_gravel",
       "netherex:ore_blackstone",
-      "netherex:ore_gold",
-      "netherex:ore_quartz",
       "netherex:ore_ancient_debris_small",
       "netherex:ore_ancient_debris_large",
-      "netherex:ore_boomstone_heavy"
+      "netherex:ore_boomstone_heavy",
+      "netherex:ore_fiery_gold",
+      "netherex:ore_fiery_quartz"
     ],
     [],
     [

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lively_gold_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "netherex:lively_gold_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:gold_ingot_from_smelting_lively_gold_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_lively_gold_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:gold_ingot_from_smelting_lively_gold_ore"
+    ]
+  }
+}

@@ -6,11 +6,11 @@
     "targets": [
       {
         "state": {
-          "Name": "minecraft:nether_gold_ore"
+          "Name": "netherex:fiery_gold_ore"
         },
         "target": {
-          "predicate_type": "minecraft:tag_match",
-          "tag": "netherex:netherrack"
+          "block": "netherex:fiery_netherrack",
+          "predicate_type": "minecraft:block_match"
         }
       }
     ]

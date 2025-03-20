@@ -34,6 +34,8 @@ public class NEBlockModelGenerator
             String typeName = netherrackType.getSerializedName();
             String bricksName = typeName + "_nether_bricks";
             Block blockNetherrack = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_netherrack"));
+            Block blockQuartzOre = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_quartz_ore"));
+            Block blockGoldOre = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_gold_ore"));
             Block blockNetherrackPath = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_netherrack_path"));
             Block blockNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc(bricksName));
             Block blockCrackedNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc("cracked_" + bricksName));
@@ -42,6 +44,8 @@ public class NEBlockModelGenerator
             Block blockChiseledPolishedNetherrack = BuiltInRegistries.BLOCK.getValue(modLoc("chiseled_polished_" + typeName + "_netherrack"));
 
             simple(blockNetherrack);
+            simple(blockQuartzOre);
+            simple(blockGoldOre);
             path(blockNetherrackPath, modBlockLoc(typeName + "_netherrack_path"), modBlockLoc(typeName + "_netherrack_path_side"), modBlockLoc(typeName + "_netherrack"));
             familyDecorative(blockNetherBricks, true);
             simple(blockCrackedNetherBricks);

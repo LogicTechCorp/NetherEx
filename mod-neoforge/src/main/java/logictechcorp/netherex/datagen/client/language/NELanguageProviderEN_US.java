@@ -39,6 +39,8 @@ public class NELanguageProviderEN_US extends LanguageProvider
             String bricksName = typeName + "_nether_bricks";
 
             Block blockNetherrack = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_netherrack"));
+            Block blockQuartzOre = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_quartz_ore"));
+            Block blockGoldOre = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_gold_ore"));
             Block blockNetherrackPath = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_netherrack_path"));
             Block blockNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc(bricksName));
             Block blockCrackedNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc("cracked_" + bricksName));
@@ -51,6 +53,8 @@ public class NELanguageProviderEN_US extends LanguageProvider
             String typeDisplayName = typeName.substring(0, 1).toUpperCase() + typeName.substring(1);
 
             add(blockNetherrack, typeDisplayName + " Netherrack");
+            add(blockQuartzOre, typeDisplayName + " Quartz Ore");
+            add(blockGoldOre, typeDisplayName + " Gold Ore");
             add(blockNetherrackPath, typeDisplayName + " Netherrack Path");
             addBlockWithDecorative(blockNetherBricks, typeDisplayName + " Nether Bricks", true);
             add(blockCrackedNetherBricks, "Cracked " + typeDisplayName + " Nether Bricks");

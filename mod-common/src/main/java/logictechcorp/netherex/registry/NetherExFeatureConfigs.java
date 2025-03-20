@@ -21,6 +21,7 @@ import net.minecraft.world.level.levelgen.feature.HugeFungusConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
@@ -29,8 +30,12 @@ public class NetherExFeatureConfigs
 {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_FIRE = createKey("patch_fire");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_QUARTZ = createKey("ore_quartz");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GOLD = createKey("ore_gold");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GLOOMY_QUARTZ = createKey("ore_gloomy_quartz");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GLOOMY_GOLD = createKey("ore_gloomy_gold");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_FIERY_QUARTZ = createKey("ore_fiery_quartz");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_FIERY_GOLD = createKey("ore_fiery_gold");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_LIVELY_QUARTZ = createKey("ore_lively_quartz");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_LIVELY_GOLD = createKey("ore_lively_gold");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ANCIENT_DEBRIS_SMALL = createKey("ore_ancient_debris_small");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ANCIENT_DEBRIS_LARGE = createKey("ore_ancient_debris_large");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_MAGMA = createKey("ore_magma");
@@ -63,10 +68,20 @@ public class NetherExFeatureConfigs
     {
         FeatureUtils.register(context, PATCH_FIRE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.FIRE)), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.NETHERRACK)))));
 
+        RuleTest gloomyNetherrackRuleTest = new BlockMatchTest(NetherExBlocks.GLOOMY_NETHERRACK.get());
+        register(context, ORE_GLOOMY_QUARTZ, Feature.ORE, new OreConfiguration(gloomyNetherrackRuleTest, NetherExBlocks.GLOOMY_QUARTZ_ORE.get().defaultBlockState(), 14));
+        register(context, ORE_GLOOMY_GOLD, Feature.ORE, new OreConfiguration(gloomyNetherrackRuleTest, NetherExBlocks.GLOOMY_GOLD_ORE.get().defaultBlockState(), 10));
+
+        RuleTest fieryNetherrackRuleTest = new BlockMatchTest(NetherExBlocks.FIERY_NETHERRACK.get());
+        register(context, ORE_FIERY_QUARTZ, Feature.ORE, new OreConfiguration(fieryNetherrackRuleTest, NetherExBlocks.FIERY_QUARTZ_ORE.get().defaultBlockState(), 14));
+        register(context, ORE_FIERY_GOLD, Feature.ORE, new OreConfiguration(fieryNetherrackRuleTest, NetherExBlocks.FIERY_GOLD_ORE.get().defaultBlockState(), 10));
+
+        RuleTest livelyNetherrackRuleTest = new BlockMatchTest(NetherExBlocks.LIVELY_NETHERRACK.get());
+        register(context, ORE_LIVELY_QUARTZ, Feature.ORE, new OreConfiguration(livelyNetherrackRuleTest, NetherExBlocks.LIVELY_QUARTZ_ORE.get().defaultBlockState(), 14));
+        register(context, ORE_LIVELY_GOLD, Feature.ORE, new OreConfiguration(livelyNetherrackRuleTest, NetherExBlocks.LIVELY_GOLD_ORE.get().defaultBlockState(), 10));
+
         RuleTest netherrackRuleTest = new TagMatchTest(NetherExBlockTags.NETHERRACK);
         RuleTest netherBaseStoneRuleTest = new TagMatchTest(NetherExBlockTags.NETHER_BASE_STONE);
-        register(context, ORE_QUARTZ, Feature.ORE, new OreConfiguration(netherrackRuleTest, Blocks.NETHER_QUARTZ_ORE.defaultBlockState(), 14));
-        register(context, ORE_GOLD, Feature.ORE, new OreConfiguration(netherrackRuleTest, Blocks.NETHER_GOLD_ORE.defaultBlockState(), 10));
         register(context, ORE_ANCIENT_DEBRIS_SMALL, Feature.SCATTERED_ORE, new OreConfiguration(netherBaseStoneRuleTest, Blocks.ANCIENT_DEBRIS.defaultBlockState(), 2, 1.0f));
         register(context, ORE_ANCIENT_DEBRIS_LARGE, Feature.SCATTERED_ORE, new OreConfiguration(netherrackRuleTest, Blocks.ANCIENT_DEBRIS.defaultBlockState(), 3, 1.0f));
         register(context, ORE_MAGMA, Feature.ORE, new OreConfiguration(netherrackRuleTest, Blocks.MAGMA_BLOCK.defaultBlockState(), 33));

@@ -77,6 +77,9 @@ public class NetherExBiomes extends OverworldBiomes
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_MAGMA)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_SOUL_SAND);
         addOres(biomeGenerationSettingsBuilder, false);
+        biomeGenerationSettingsBuilder
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_GLOOMY_GOLD)
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_GLOOMY_QUARTZ);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
@@ -119,6 +122,9 @@ public class NetherExBiomes extends OverworldBiomes
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, VegetationPlacements.BROWN_MUSHROOM_NETHER)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, VegetationPlacements.RED_MUSHROOM_NETHER);
         addOres(biomeGenerationSettingsBuilder, true);
+        biomeGenerationSettingsBuilder
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_FIERY_GOLD)
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_FIERY_QUARTZ);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
@@ -152,6 +158,9 @@ public class NetherExBiomes extends OverworldBiomes
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.GLOWSTONE_EXTRA)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.GLOWSTONE);
         addOres(biomeGenerationSettingsBuilder, false);
+        biomeGenerationSettingsBuilder
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_LIVELY_GOLD)
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_LIVELY_QUARTZ);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
@@ -167,8 +176,6 @@ public class NetherExBiomes extends OverworldBiomes
     {
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_GRAVEL)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_BLACKSTONE)
-                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_GOLD)
-                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_QUARTZ)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_ANCIENT_DEBRIS_SMALL)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_ANCIENT_DEBRIS_LARGE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, useHeavyPlacements ? NetherExFeaturePlacements.ORE_BOOMSTONE_HEAVY : NetherExFeaturePlacements.ORE_BOOMSTONE);

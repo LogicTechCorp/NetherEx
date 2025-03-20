@@ -64,6 +64,8 @@ public class NERecipeProvider extends RecipeProvider
             String typeName = netherrackType.getSerializedName();
             String bricksName = typeName + "_nether_bricks";
             Block blockNetherrack = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_netherrack"));
+            Block blockQuartzOre = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_quartz_ore"));
+            Block blockGoldOre = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_gold_ore"));
             Block blockNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc(bricksName));
             Block blockNetherBricksSlab = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_nether_brick_slab"));
             Block blockCrackedNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc("cracked_" + bricksName));
@@ -71,6 +73,10 @@ public class NERecipeProvider extends RecipeProvider
             Item itemNetherBrick = BuiltInRegistries.ITEM.getValue(modLoc(typeName + "_nether_brick"));
 
             smeltingResultFromBase(itemNetherBrick, blockNetherrack);
+            oreSmelting(List.of(blockQuartzOre), RecipeCategory.MISC, Items.QUARTZ, 0.2F, 200, "quartz");
+            oreBlasting(List.of(blockQuartzOre), RecipeCategory.MISC, Items.QUARTZ, 0.2F, 100, "quartz");
+            oreSmelting(List.of(blockGoldOre), RecipeCategory.MISC, Items.GOLD_INGOT, 1.0F, 200, "gold_ingot");
+            oreBlasting(List.of(blockGoldOre), RecipeCategory.MISC, Items.GOLD_INGOT, 1.0F, 100, "gold_ingot");
             oreBlasting(List.of(blockNetherrack), RecipeCategory.MISC, itemNetherBrick, 0.1F, 100, typeName + "_nether_brick");
             twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, blockNetherBricks, itemNetherBrick);
             smeltingResultFromBase(blockCrackedNetherBricks, blockNetherBricks);
