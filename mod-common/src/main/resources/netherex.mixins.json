@@ -6,6 +6,10 @@
   "compatibilityLevel": "JAVA_18",
   "mixins": [
     "NEBlockBehaviourMixin",
+    "NECoralBlockAccessor",
+    "NECoralFanBlockAccessor",
+    "NECoralPlantBlockAccessor",
+    "NECropBlockAccessor",
     "NEFungusBlockMixin",
     "NEHorseMixin",
     "NEShovelItemAccessor",
