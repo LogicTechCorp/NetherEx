@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "netherex:warped_nylium_path"
+          "name": "minecraft:warped_nylium"
         }
       ],
       "rolls": 1.0

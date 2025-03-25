@@ -156,6 +156,7 @@ public class NetherExBlocks
     public static final RegistryObject<Block, RotatedPillarBlock> WITHER_BONE_BLOCK = registerBlockWithBaseItem("wither_bone_block", RotatedPillarBlock::new, Properties.WITHER_BONE_BLOCK);
     public static final RegistryObject<Block, NEFumaroleBlock> BASALT_FUMAROLE = registerBlockWithBaseItem("basalt_fumarole", NEFumaroleBlock::new, Properties.BASALT_FUMAROLE);
     public static final RegistryObject<Block, NEFumaroleBlock> BLACKSTONE_FUMAROLE = registerBlockWithBaseItem("blackstone_fumarole", NEFumaroleBlock::new, Properties.BLACKSTONE_FUMAROLE);
+    public static final RegistryObject<Block, NEKilnBlock> KILN = registerBlockWithBaseItem("kiln", NEKilnBlock::new, Properties.KILN);
 
     public static void initialize()
     {
@@ -354,6 +355,7 @@ public class NetherExBlocks
         static final BlockBehaviour.Properties WITHER_BONE_BLOCK = BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).mapColor(MapColor.COLOR_BLACK);
         static final BlockBehaviour.Properties BASALT_FUMAROLE = BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT);
         static final BlockBehaviour.Properties BLACKSTONE_FUMAROLE = BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE);
+        static final BlockBehaviour.Properties KILN = BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).mapColor(MapColor.NETHER);
 
         private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos)
         {

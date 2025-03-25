@@ -99,6 +99,7 @@ public class NEBlockModelGenerator
         blockModels.createAxisAlignedPillarBlock(NetherExBlocks.WITHER_BONE_BLOCK.get(), TexturedModel.COLUMN);
         slabLike(NetherExBlocks.BASALT_FUMAROLE.get(), mcBlockLoc("basalt_side"), mcBlockLoc("basalt_top"), modBlockLoc("basalt_fumarole"));
         slabLike(NetherExBlocks.BLACKSTONE_FUMAROLE.get(), mcBlockLoc("blackstone"), mcBlockLoc("blackstone"), modBlockLoc("blackstone_fumarole"));
+        blockModels.createFurnace(NetherExBlocks.KILN.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
     }
 
     void simple(Block block)

@@ -29,6 +29,7 @@ public class NetherEx
         NetherExFeaturePlacements.initialize();
         NetherExBlocks.initialize();
         NetherExItems.initialize();
+        NetherExBlockEntityTypes.initialize();
         NetherExCreativeTabs.initialize();
         NetherExEntityTypes.initialize();
         NetherExEntityDataSerializers.initialize();

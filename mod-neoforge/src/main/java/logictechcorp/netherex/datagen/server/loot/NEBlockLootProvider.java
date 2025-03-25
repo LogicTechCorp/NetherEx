@@ -107,10 +107,13 @@ public class NEBlockLootProvider extends BlockLootSubProvider
     @Override
     protected void add(Block block, LootTable.Builder builder)
     {
-        if (!map.containsKey(block.getLootTable()))
+        block.getLootTable().ifPresent(lootTableResourceKey ->
         {
-            super.add(block, builder);
-        }
+            if (!map.containsKey(lootTableResourceKey))
+            {
+                super.add(block, builder);
+            }
+        });
     }
 
     @Override

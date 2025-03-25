@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "netherex:lively_netherrack_path"
+          "name": "netherex:gloomy_netherrack"
         }
       ],
       "rolls": 1.0

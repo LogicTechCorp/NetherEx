@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "netherex:gloomy_netherrack"
+          "name": "netherex:kiln"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "netherex:blocks/fiery_netherrack_path"
+  "random_sequence": "netherex:blocks/kiln"
 }

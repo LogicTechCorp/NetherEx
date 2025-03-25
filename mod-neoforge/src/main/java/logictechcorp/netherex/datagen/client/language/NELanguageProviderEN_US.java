@@ -119,6 +119,10 @@ public class NELanguageProviderEN_US extends LanguageProvider
         add(NetherExBlocks.WITHER_BONE_BLOCK.get(), "Wither Bone Block");
         add(NetherExBlocks.BASALT_FUMAROLE.get(), "Basalt Fumarole");
         add(NetherExBlocks.BLACKSTONE_FUMAROLE.get(), "Blackstone Fumarole");
+        add(NetherExBlocks.KILN.get(), "Kiln");
+
+        // Block Entities
+        add("container." + NetherExConstants.MOD_ID + ".kiln", "Kiln");
 
         // Items
         add(NetherExItems.NETHERITE_NUGGET.get(), "Netherite Nugget");

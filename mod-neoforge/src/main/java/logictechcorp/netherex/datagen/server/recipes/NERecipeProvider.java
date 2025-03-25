@@ -122,6 +122,15 @@ public class NERecipeProvider extends RecipeProvider
         twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, NetherExBlocks.BOOMSTONE.get(), Items.FIRE_CHARGE);
         twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, NetherExBlocks.ASH_BLOCK.get(), NetherExItems.ASH.get());
 
+        shaped(RecipeCategory.DECORATIONS, NetherExBlocks.KILN.get())
+                .define('#', Blocks.NETHER_BRICKS)
+                .define('X', Blocks.FURNACE)
+                .pattern("###")
+                .pattern("#X#")
+                .pattern("###")
+                .unlockedBy("has_nether_bricks", has(Blocks.NETHER_BRICKS))
+                .save(output);
+
         // Items
         shapeless(NetherExItems.WITHER_BONE_MEAL.get(), 3, NetherExItems.WITHER_BONE.get());
         nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, NetherExItems.WITHER_BONE_MEAL.get(), RecipeCategory.BUILDING_BLOCKS, NetherExBlocks.WITHER_BONE_BLOCK.get(), "wither_bone_meal_from_wither_bone_block", "bonemeal");

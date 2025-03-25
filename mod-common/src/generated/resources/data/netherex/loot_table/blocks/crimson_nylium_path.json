@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "netherex:crimson_nylium_path"
+          "name": "minecraft:crimson_nylium"
         }
       ],
       "rolls": 1.0
