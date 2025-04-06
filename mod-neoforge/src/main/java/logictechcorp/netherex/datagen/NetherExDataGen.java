@@ -5,6 +5,7 @@ import logictechcorp.netherex.datagen.client.language.NELanguageProviderEN_US;
 import logictechcorp.netherex.datagen.client.model.NEEquipmentAssetProvider;
 import logictechcorp.netherex.datagen.client.model.NEModelProvider;
 import logictechcorp.netherex.datagen.server.NEDataPackProvider;
+import logictechcorp.netherex.datagen.server.advancements.NEAdvancements;
 import logictechcorp.netherex.datagen.server.loot.NELootModifiers;
 import logictechcorp.netherex.datagen.server.loot.NELootTableProvider;
 import logictechcorp.netherex.datagen.server.recipes.NERecipeProvider;
@@ -36,6 +37,7 @@ public class NetherExDataGen
         event.createProvider(NERecipeProvider.Runner::new);
         event.createProvider(NEBiomeTagsProvider::new);
         event.createBlockAndItemTags(NEBlockTagsProvider::new, NEItemTagsProvider::new);
+        event.addProvider(NEAdvancements.create(packOutput, registries));
 
         // Client
         event.createProvider(NEModelProvider::new);

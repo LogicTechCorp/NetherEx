@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:nether/ride_strider",
+  "criteria": {
+    "has_strider_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "netherex:strider_bucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.netherex.vanilla_nether.bucket_strider.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "netherex:strider_bucket"
+    },
+    "title": {
+      "translate": "advancements.netherex.vanilla_nether.bucket_strider.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_strider_bucket"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

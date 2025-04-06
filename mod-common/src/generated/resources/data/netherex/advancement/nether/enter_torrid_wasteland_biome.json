@@ -1,0 +1,41 @@
+{
+  "parent": "netherex:nether/root",
+  "criteria": {
+    "netherex:torrid_wasteland": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "netherex:torrid_wasteland"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.netherex.nether.enter_torrid_wasteland_biome.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "netherex:fiery_netherrack"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.netherex.nether.enter_torrid_wasteland_biome.title"
+    }
+  },
+  "requirements": [
+    [
+      "netherex:torrid_wasteland"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

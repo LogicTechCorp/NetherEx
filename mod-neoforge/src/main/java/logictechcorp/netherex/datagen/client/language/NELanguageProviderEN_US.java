@@ -38,6 +38,26 @@ public class NELanguageProviderEN_US extends LanguageProvider
         add("config." + NetherExConstants.MOD_ID + ".terra_blender.region_weight", "Region Weight");
         add("config." + NetherExConstants.MOD_ID + ".terra_blender.region_weight.comment", "How common NetherEx biomes are in the Nether");
 
+        // Advancements - Nether
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExConstants.MOD_ID + "_biome.title", NetherExConstants.MOD_NAME);
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExConstants.MOD_ID + "_biome.description", "Enter a " + NetherExConstants.MOD_NAME + " biome.");
+
+        // Advancements - Nether - Ruthless Sands
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.title", "Ruthless Sands");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.description", "Enter the Ruthless Sands biome.");
+
+        // Advancements - Nether - Torrid Wasteland
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.title", "Torrid Wasteland");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.description", "Enter the Torrid Wasteland biome.");
+
+        // Advancements - Nether - Fungi Forest
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.title", "Fungi Forest");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.description", "Enter the Fungi Forest biome.");
+
+        // Advancements - Vanilla Nether
+        add("advancements." + NetherExConstants.MOD_ID + ".vanilla_nether.bucket_strider.title", "A Boat in a Bucket?");
+        add("advancements." + NetherExConstants.MOD_ID + ".vanilla_nether.bucket_strider.description", "Catch a Strider in a bucket.");
+
         // Creative Mode Tabs
         add("creative_mode_tab." + NetherExConstants.MOD_ID + ".default", "NetherEx");
 
