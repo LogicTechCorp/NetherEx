@@ -7,7 +7,7 @@
       "tick_chance": 0.0111
     },
     "ambient_sound": "minecraft:ambient.nether_wastes.loop",
-    "fog_color": 3344392,
+    "fog_color": 10505495,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,

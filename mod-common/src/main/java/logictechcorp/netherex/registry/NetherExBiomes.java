@@ -94,7 +94,7 @@ public class NetherExBiomes extends OverworldBiomes
     private static Biome torridWasteland(HolderGetter<PlacedFeature> placedFeatureHolderGetter, HolderGetter<ConfiguredWorldCarver<?>> configuredWorldCarverHolderGetter)
     {
         BiomeSpecialEffects.Builder biomeSpecialEffectsBuilder = new BiomeSpecialEffects.Builder()
-                .fogColor(3344392)
+                .fogColor(10505495)
                 .waterColor(4159204)
                 .waterFogColor(329011)
                 .skyColor(calculateSkyColor(2.0f))
