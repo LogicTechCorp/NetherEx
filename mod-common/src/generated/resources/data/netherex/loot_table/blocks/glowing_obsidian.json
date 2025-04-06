@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "netherex:glowing_obsidian"
+          "name": "minecraft:obsidian"
         }
       ],
       "rolls": 1.0

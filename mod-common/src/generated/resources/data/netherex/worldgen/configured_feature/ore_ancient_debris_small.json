@@ -10,7 +10,7 @@
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
-          "tag": "netherex:nether_base_stone"
+          "tag": "minecraft:base_stone_nether"
         }
       }
     ]

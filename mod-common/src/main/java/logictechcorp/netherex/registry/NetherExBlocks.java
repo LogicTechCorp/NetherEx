@@ -351,7 +351,7 @@ public class NetherExBlocks
         static final BlockBehaviour.Properties WARPED_NETHER_BRICK_WALL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
 
         static final BlockBehaviour.Properties BOOMSTONE = BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).strength(5.0f, 1.0f).lightLevel(state -> 3).isValidSpawn((state, blockGetter, pos, entityType) -> entityType.fireImmune()).hasPostProcess(Properties::always).emissiveRendering(Properties::always);
-        static final BlockBehaviour.Properties ASH_BLOCK = BlockBehaviour.Properties.ofFullCopy(Blocks.POWDER_SNOW).mapColor(MapColor.COLOR_GRAY);
+        static final BlockBehaviour.Properties ASH_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(0.25F).sound(SoundType.POWDER_SNOW).noOcclusion().isRedstoneConductor(Properties::never);
         static final BlockBehaviour.Properties WITHER_BONE_BLOCK = BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).mapColor(MapColor.COLOR_BLACK);
         static final BlockBehaviour.Properties BASALT_FUMAROLE = BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT);
         static final BlockBehaviour.Properties BLACKSTONE_FUMAROLE = BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE);
@@ -363,6 +363,11 @@ public class NetherExBlocks
         }
 
         private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entityType)
+        {
+            return false;
+        }
+
+        private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos)
         {
             return false;
         }

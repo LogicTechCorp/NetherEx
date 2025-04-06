@@ -1,9 +1,9 @@
 package logictechcorp.netherex.world.level.levelgen.feature;
 
 import com.mojang.serialization.Codec;
-import logictechcorp.netherex.registry.NetherExBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -34,7 +34,7 @@ public class NEGlowstoneBlobFeature extends Feature<NoneFeatureConfiguration>
         {
             BlockState aboveState = level.getBlockState(pos.above());
 
-            if (!aboveState.is(NetherExBlockTags.NETHER_BASE_STONE))
+            if (!aboveState.is(BlockTags.BASE_STONE_NETHER))
             {
                 return false;
             }

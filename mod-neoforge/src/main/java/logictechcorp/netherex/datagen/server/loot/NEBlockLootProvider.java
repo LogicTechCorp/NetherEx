@@ -49,6 +49,8 @@ public class NEBlockLootProvider extends BlockLootSubProvider
         add(NetherExBlocks.RED_ELDER_MUSHROOM_BLOCK.get(), (block) -> createMushroomBlockDrop(block, NetherExBlocks.RED_ELDER_MUSHROOM.get()));
         dropWhenSilkTouch(NetherExBlocks.ELDER_MUSHROOM_STEM.get());
 
+        dropOther(NetherExBlocks.GLOWING_OBSIDIAN.get(), Blocks.OBSIDIAN);
+
         add(NetherExBlocks.WARPED_WART.get(), (block) ->
         {
             return LootTable.lootTable().withPool(applyExplosionDecay(block, LootPool.lootPool()

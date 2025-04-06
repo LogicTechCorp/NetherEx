@@ -11,6 +11,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
@@ -81,7 +82,7 @@ public class NetherExFeatureConfigs
         register(context, ORE_LIVELY_GOLD, Feature.ORE, new OreConfiguration(livelyNetherrackRuleTest, NetherExBlocks.LIVELY_GOLD_ORE.get().defaultBlockState(), 10));
 
         RuleTest netherrackRuleTest = new TagMatchTest(NetherExBlockTags.NETHERRACK);
-        RuleTest netherBaseStoneRuleTest = new TagMatchTest(NetherExBlockTags.NETHER_BASE_STONE);
+        RuleTest netherBaseStoneRuleTest = new TagMatchTest(BlockTags.BASE_STONE_NETHER);
         register(context, ORE_ANCIENT_DEBRIS_SMALL, Feature.SCATTERED_ORE, new OreConfiguration(netherBaseStoneRuleTest, Blocks.ANCIENT_DEBRIS.defaultBlockState(), 2, 1.0f));
         register(context, ORE_ANCIENT_DEBRIS_LARGE, Feature.SCATTERED_ORE, new OreConfiguration(netherrackRuleTest, Blocks.ANCIENT_DEBRIS.defaultBlockState(), 3, 1.0f));
         register(context, ORE_MAGMA, Feature.ORE, new OreConfiguration(netherrackRuleTest, Blocks.MAGMA_BLOCK.defaultBlockState(), 33));

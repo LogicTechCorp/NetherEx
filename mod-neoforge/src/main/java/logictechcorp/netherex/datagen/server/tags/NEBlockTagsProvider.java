@@ -1,15 +1,11 @@
 package logictechcorp.netherex.datagen.server.tags;
 
 import logictechcorp.netherex.NetherExConstants;
-import logictechcorp.netherex.block.state.properties.NENetherrackType;
 import logictechcorp.netherex.registry.NetherExBlockTags;
 import logictechcorp.netherex.registry.NetherExBlocks;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 
@@ -26,88 +22,263 @@ public class NEBlockTagsProvider extends BlockTagsProvider
     protected void addTags(HolderLookup.Provider lookupProvider)
     {
         tag(BlockTags.MUSHROOM_GROW_BLOCK)
-                .add(NetherExBlocks.ELDER_NYLIUM.get());
-
+                .add(
+                        NetherExBlocks.ELDER_NYLIUM.get()
+                );
         tag(NetherExBlockTags.NETHERRACK)
-                .add(Blocks.NETHERRACK)
-                .add(NetherExBlocks.GLOOMY_NETHERRACK.get())
-                .add(NetherExBlocks.FIERY_NETHERRACK.get())
-                .add(NetherExBlocks.LIVELY_NETHERRACK.get());
-
-        tag(NetherExBlockTags.NETHER_BASE_STONE)
-                .add(Blocks.NETHERRACK)
-                .add(Blocks.BASALT)
-                .add(Blocks.BLACKSTONE)
-                .add(NetherExBlocks.GLOOMY_NETHERRACK.get())
-                .add(NetherExBlocks.FIERY_NETHERRACK.get())
-                .add(NetherExBlocks.LIVELY_NETHERRACK.get());
-
+                .add(
+                        Blocks.NETHERRACK,
+                        NetherExBlocks.GLOOMY_NETHERRACK.get(),
+                        NetherExBlocks.FIERY_NETHERRACK.get(),
+                        NetherExBlocks.LIVELY_NETHERRACK.get()
+                );
+        tag(BlockTags.INFINIBURN_OVERWORLD)
+                .add(
+                        NetherExBlocks.GLOOMY_NETHERRACK.get(),
+                        NetherExBlocks.FIERY_NETHERRACK.get(),
+                        NetherExBlocks.LIVELY_NETHERRACK.get()
+                );
+        tag(BlockTags.BASE_STONE_NETHER)
+                .add(
+                        NetherExBlocks.GLOOMY_NETHERRACK.get(),
+                        NetherExBlocks.FIERY_NETHERRACK.get(),
+                        NetherExBlocks.LIVELY_NETHERRACK.get()
+                );
+        tag(BlockTags.NETHER_CARVER_REPLACEABLES)
+                .add(
+                        NetherExBlocks.ASHEN_NETHER_BRICKS.get(),
+                        NetherExBlocks.ELDER_NYLIUM.get()
+                );
         tag(NetherExBlockTags.THORNSTALK_PLACEABLE_ON)
-                .add(Blocks.SOUL_SAND)
-                .add(Blocks.SOUL_SOIL);
-
+                .add(
+                        Blocks.SOUL_SAND,
+                        Blocks.SOUL_SOIL
+                );
+        tag(BlockTags.NYLIUM)
+                .add(
+                        NetherExBlocks.ELDER_NYLIUM.get()
+                );
         tag(NetherExBlockTags.OBSIDIAN_HEATER)
-                .add(Blocks.LAVA)
-                .add(Blocks.MAGMA_BLOCK)
+                .add(
+                        Blocks.LAVA,
+                        Blocks.MAGMA_BLOCK
+                )
                 .addTag(BlockTags.FIRE);
-
         tag(NetherExBlockTags.OBSIDIAN_COOLER)
-                .add(Blocks.WATER)
+                .add(
+                        Blocks.WATER
+                )
                 .addTag(BlockTags.ICE)
                 .addTag(BlockTags.SNOW);
-
         tag(NetherExBlockTags.LOW_FUMAROLE_HEATER)
-                .add(Blocks.MAGMA_BLOCK);
-
+                .add(
+                        Blocks.MAGMA_BLOCK
+                );
         tag(NetherExBlockTags.HIGH_FUMAROLE_HEATER)
-                .add(Blocks.LAVA);
+                .add(
+                        Blocks.LAVA
+                );
+        tag(BlockTags.GOLD_ORES)
+                .add(
+                        NetherExBlocks.GLOOMY_GOLD_ORE.get(),
+                        NetherExBlocks.FIERY_GOLD_ORE.get(),
+                        NetherExBlocks.LIVELY_GOLD_ORE.get()
+                );
+        tag(BlockTags.FENCES)
+                .add(
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_FENCE.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_FENCE.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_FENCE.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_FENCE.get(),
+                        NetherExBlocks.POLISHED_GLOWSTONE_FENCE.get(),
+                        NetherExBlocks.CRIMSON_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_FENCE.get()
+                );
+        tag(BlockTags.FENCE_GATES)
+                .add(
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_FENCE_GATE.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_FENCE_GATE.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_GLOWSTONE_FENCE_GATE.get(),
+                        NetherExBlocks.NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.CRIMSON_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_FENCE_GATE.get()
+                );
+        tag(BlockTags.SLABS)
+                .add(
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_SLAB.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_SLAB.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_SLAB.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_SLAB.get(),
+                        NetherExBlocks.POLISHED_GLOWSTONE_SLAB.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_SLAB.get()
+                );
+        tag(BlockTags.STAIRS)
+                .add(
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_STAIRS.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_STAIRS.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_GLOWSTONE_STAIRS.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_STAIRS.get()
+                );
+        tag(BlockTags.WALLS)
+                .add(
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_WALL.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_WALL.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_WALL.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_WALL.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_WALL.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_WALL.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_WALL.get(),
+                        NetherExBlocks.POLISHED_GLOWSTONE_WALL.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_WALL.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_WALL.get()
+                );
+        tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(
+                        NetherExBlocks.THORNSTALK.get(),
+                        NetherExBlocks.BROWN_ELDER_MUSHROOM.get(),
+                        NetherExBlocks.BROWN_ELDER_MUSHROOM_BLOCK.get(),
+                        NetherExBlocks.RED_ELDER_MUSHROOM.get(),
+                        NetherExBlocks.RED_ELDER_MUSHROOM_BLOCK.get(),
+                        NetherExBlocks.WARPED_WART.get(),
+                        NetherExBlocks.SHROOMSTEM.get(),
+                        NetherExBlocks.TWISTED_SHROOMSTEM.get()
+                );
+        tag(BlockTags.MINEABLE_WITH_HOE)
+                .add(
+                        NetherExBlocks.TWISTED_SHROOMLIGHT.get()
+                );
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(
+                        NetherExBlocks.GLOOMY_NETHERRACK.get(),
+                        NetherExBlocks.GLOOMY_QUARTZ_ORE.get(),
+                        NetherExBlocks.GLOOMY_GOLD_ORE.get(),
+                        NetherExBlocks.GLOOMY_NETHERRACK_PATH.get(),
+                        NetherExBlocks.GLOOMY_NETHER_BRICKS.get(),
+                        NetherExBlocks.CRACKED_GLOOMY_NETHER_BRICKS.get(),
+                        NetherExBlocks.CHISELED_GLOOMY_NETHER_BRICKS.get(),
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.GLOOMY_NETHER_BRICK_WALL.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_FENCE.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_SLAB.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_GLOOMY_NETHERRACK_WALL.get(),
+                        NetherExBlocks.CHISELED_POLISHED_GLOOMY_NETHERRACK.get(),
 
-        for (NENetherrackType netherrackType : NENetherrackType.values())
-        {
-            String typeName = netherrackType.getSerializedName();
-            Block blockNetherrack = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_netherrack"));
-            tag(BlockTags.INFINIBURN_OVERWORLD)
-                    .add(blockNetherrack);
-        }
+                        NetherExBlocks.FIERY_NETHERRACK.get(),
+                        NetherExBlocks.FIERY_QUARTZ_ORE.get(),
+                        NetherExBlocks.FIERY_GOLD_ORE.get(),
+                        NetherExBlocks.FIERY_NETHERRACK_PATH.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICKS.get(),
+                        NetherExBlocks.CRACKED_FIERY_NETHER_BRICKS.get(),
+                        NetherExBlocks.CHISELED_FIERY_NETHER_BRICKS.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.FIERY_NETHER_BRICK_WALL.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_FENCE.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_SLAB.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_FIERY_NETHERRACK_WALL.get(),
+                        NetherExBlocks.CHISELED_POLISHED_FIERY_NETHERRACK.get(),
 
-        NetherExBlocks.BLOCKS.getEntries().forEach(blockRegistryObject ->
-        {
-            Block block = blockRegistryObject.get();
-            String blockName = blockRegistryObject.getId().getPath();
+                        NetherExBlocks.LIVELY_NETHERRACK.get(),
+                        NetherExBlocks.LIVELY_QUARTZ_ORE.get(),
+                        NetherExBlocks.LIVELY_GOLD_ORE.get(),
+                        NetherExBlocks.LIVELY_NETHERRACK_PATH.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICKS.get(),
+                        NetherExBlocks.CRACKED_LIVELY_NETHER_BRICKS.get(),
+                        NetherExBlocks.CHISELED_LIVELY_NETHER_BRICKS.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.LIVELY_NETHER_BRICK_WALL.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_FENCE.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_SLAB.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_LIVELY_NETHERRACK_WALL.get(),
+                        NetherExBlocks.CHISELED_POLISHED_LIVELY_NETHERRACK.get(),
 
-            if (blockName.contains("fence"))
-            {
-                if (blockName.contains("gate"))
-                {
-                    tag(BlockTags.FENCE_GATES)
-                            .add(block);
-                }
-                else
-                {
-                    tag(BlockTags.FENCES)
-                            .add(block);
-                }
-            }
-            else if (blockName.contains("slab"))
-            {
-                tag(BlockTags.SLABS)
-                        .add(block);
-            }
-            else if (blockName.contains("stairs"))
-            {
-                tag(BlockTags.STAIRS)
-                        .add(block);
-            }
-            else if (blockName.contains("wall"))
-            {
-                tag(BlockTags.WALLS)
-                        .add(block);
-            }
-        });
-    }
+                        NetherExBlocks.GLOWING_OBSIDIAN.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK.get(),
+                        NetherExBlocks.CHISELED_POLISHED_NETHERRACK.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_FENCE.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_FENCE_GATE.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_SLAB.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_STAIRS.get(),
+                        NetherExBlocks.POLISHED_NETHERRACK_WALL.get(),
+                        NetherExBlocks.NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.CRACKED_CRIMSON_NETHER_BRICKS.get(),
+                        NetherExBlocks.CHISELED_CRIMSON_NETHER_BRICKS.get(),
+                        NetherExBlocks.CRIMSON_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.CRIMSON_NETHER_BRICK_FENCE_GATE.get(),
 
-    public ResourceLocation modLoc(String name)
-    {
-        return NetherExConstants.resource(name);
+                        NetherExBlocks.ASHEN_NETHER_BRICKS.get(),
+                        NetherExBlocks.CRACKED_ASHEN_NETHER_BRICKS.get(),
+                        NetherExBlocks.CHISELED_ASHEN_NETHER_BRICKS.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.ASHEN_NETHER_BRICK_WALL.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICKS.get(),
+                        NetherExBlocks.CRACKED_WARPED_NETHER_BRICKS.get(),
+                        NetherExBlocks.CHISELED_WARPED_NETHER_BRICKS.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_FENCE.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_FENCE_GATE.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_SLAB.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_STAIRS.get(),
+                        NetherExBlocks.WARPED_NETHER_BRICK_WALL.get(),
+
+                        NetherExBlocks.BOOMSTONE.get(),
+                        NetherExBlocks.WITHER_BONE_BLOCK.get(),
+                        NetherExBlocks.BASALT_FUMAROLE.get(),
+                        NetherExBlocks.BLACKSTONE_FUMAROLE.get(),
+                        NetherExBlocks.KILN.get()
+                );
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(
+                        NetherExBlocks.ASH_BLOCK.get()
+                );
+        tag(BlockTags.SWORD_EFFICIENT)
+                .add(
+                        NetherExBlocks.BROWN_ELDER_MUSHROOM.get(),
+                        NetherExBlocks.RED_ELDER_MUSHROOM.get(),
+                        NetherExBlocks.WARPED_WART.get()
+                );
+        tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(
+                        NetherExBlocks.GLOWING_OBSIDIAN.get()
+                );
     }
 }
