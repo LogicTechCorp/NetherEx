@@ -1,0 +1,38 @@
+{
+  "parent": "netherex:nether/enter_fungi_forest_biome",
+  "criteria": {
+    "killed_mogus": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "netherex:mogus"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.netherex.nether.killed_mogus.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "netherex:mogus_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.netherex.nether.killed_mogus.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed_mogus"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

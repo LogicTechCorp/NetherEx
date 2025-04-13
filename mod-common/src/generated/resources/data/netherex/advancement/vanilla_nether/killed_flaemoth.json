@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:nether/root",
+  "criteria": {
+    "killed_flaemoth": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "netherex:flaemoth"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.netherex.vanilla_nether.killed_flaemoth.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "netherex:flaemoth_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.netherex.vanilla_nether.killed_flaemoth.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed_flaemoth"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

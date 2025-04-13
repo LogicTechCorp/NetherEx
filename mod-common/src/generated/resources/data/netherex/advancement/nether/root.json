@@ -50,6 +50,7 @@
     }
   },
   "display": {
+    "announce_to_chat": false,
     "background": "minecraft:textures/gui/advancements/backgrounds/nether.png",
     "description": {
       "translate": "advancements.netherex.nether.enter_netherex_biome.description"
