@@ -28,6 +28,7 @@ public class NetherExBiomeModifiersNeoForge
     private static final ResourceKey<BiomeModifier> ADD_BOOMSTONE_BIOME_MODIFIER = createKey("add_boomstone_biome_modifier");
     private static final ResourceKey<BiomeModifier> ADD_FUMAROLE_BIOME_MODIFIER = createKey("add_fumarole_biome_modifier");
     private static final ResourceKey<BiomeModifier> ADD_FLAEMOTHS_BIOME_MODIFIER = createKey("add_flaemoths_biome_modifier");
+    private static final ResourceKey<BiomeModifier> ADD_WISPS_BIOME_MODIFIER = createKey("add_wisps_biome_modifier");
 
     public static void boostrap(BootstrapContext<BiomeModifier> context)
     {
@@ -76,7 +77,11 @@ public class NetherExBiomeModifiersNeoForge
         ));
         context.register(ADD_FLAEMOTHS_BIOME_MODIFIER, new BiomeModifiers.AddSpawnsBiomeModifier(
                 vanillaNetherForestBiomes,
-                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.FLAEMOTH.get(), 15, 1, 3))
+                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.FLAEMOTH.get(), 15, 1, 4))
+        ));
+        context.register(ADD_WISPS_BIOME_MODIFIER, new BiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.SOUL_SAND_VALLEY)),
+                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.WISP.get(), 15, 1, 4))
         ));
     }
 

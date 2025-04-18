@@ -149,8 +149,8 @@ public class NetherExBiomes extends OverworldBiomes
                 .backgroundMusic(Musics.createGameMusic(SoundEvents.MUSIC_BIOME_WARPED_FOREST));
 
         MobSpawnSettings.Builder mobSpawnSettingsBuilder = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.MOGUS.get(), 120, 4, 4))
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 15, 1, 2));
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.MOGUS.get(), 80, 4, 4))
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 10, 1, 2));
 
         BiomeGenerationSettings.Builder biomeGenerationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatureHolderGetter, configuredWorldCarverHolderGetter)
                 .addCarver(Carvers.NETHER_CAVE)

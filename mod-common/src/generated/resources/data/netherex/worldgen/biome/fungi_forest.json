@@ -55,25 +55,25 @@
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [
-      {
-        "type": "netherex:mogus",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 120
-      }
-    ],
+    "ambient": [],
     "axolotls": [],
     "creature": [
       {
         "type": "minecraft:strider",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 15
+        "weight": 10
       }
     ],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "netherex:mogus",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 80
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

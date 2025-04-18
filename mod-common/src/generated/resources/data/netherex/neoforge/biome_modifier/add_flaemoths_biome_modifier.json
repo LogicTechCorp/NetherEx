@@ -6,7 +6,7 @@
   ],
   "spawners": {
     "type": "netherex:flaemoth",
-    "maxCount": 3,
+    "maxCount": 4,
     "minCount": 1,
     "weight": 15
   }

@@ -64,7 +64,15 @@ public class NetherExBiomeModifiersFabric
                 NetherExEntityTypes.FLAEMOTH.get(),
                 15,
                 1,
-                3
+                4
+        );
+        addSpawn(
+                BiomeSelectors.includeByKey(Biomes.SOUL_SAND_VALLEY),
+                MobCategory.AMBIENT,
+                NetherExEntityTypes.WISP.get(),
+                15,
+                1,
+                4
         );
     }
 
