@@ -1,7 +1,7 @@
 {
-  "parent": "netherex:nether/enter_ruthless_sands_biome",
+  "parent": "netherex:nether/entered_ruthless_sands_biome",
   "criteria": {
-    "killed_wisp": {
+    "kill_wisp": {
       "conditions": {
         "entity": [
           {
@@ -17,10 +17,10 @@
     }
   },
   "display": {
+    "announce_to_chat": false,
     "description": {
       "translate": "advancements.netherex.nether.killed_wisp.description"
     },
-    "hidden": true,
     "icon": {
       "count": 1,
       "id": "netherex:wisp_spawn_egg"
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "killed_wisp"
+      "kill_wisp"
     ]
   ],
   "sends_telemetry_event": true

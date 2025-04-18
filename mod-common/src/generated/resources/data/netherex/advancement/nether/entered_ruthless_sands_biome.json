@@ -21,15 +21,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.netherex.nether.enter_ruthless_sands_biome.description"
+      "translate": "advancements.netherex.nether.entered_ruthless_sands_biome.description"
     },
     "icon": {
       "count": 1,
       "id": "netherex:gloomy_netherrack"
     },
-    "show_toast": false,
     "title": {
-      "translate": "advancements.netherex.nether.enter_ruthless_sands_biome.title"
+      "translate": "advancements.netherex.nether.entered_ruthless_sands_biome.title"
     }
   },
   "requirements": [

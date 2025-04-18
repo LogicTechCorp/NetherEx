@@ -1,7 +1,7 @@
 {
-  "parent": "netherex:nether/enter_torrid_wasteland_biome",
+  "parent": "netherex:nether/entered_torrid_wasteland_biome",
   "criteria": {
-    "tamed_salamander": {
+    "tame_salamander": {
       "conditions": {
         "entity": [
           {
@@ -17,10 +17,10 @@
     }
   },
   "display": {
+    "announce_to_chat": false,
     "description": {
       "translate": "advancements.netherex.nether.tamed_salamander.description"
     },
-    "hidden": true,
     "icon": {
       "count": 1,
       "id": "netherex:salamander_spawn_egg"
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "tamed_salamander"
+      "tame_salamander"
     ]
   ],
   "sends_telemetry_event": true

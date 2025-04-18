@@ -39,36 +39,40 @@ public class NELanguageProviderEN_US extends LanguageProvider
         add("config." + NetherExConstants.MOD_ID + ".terra_blender.region_weight.comment", "How common NetherEx biomes are in the Nether");
 
         // Advancements - Nether
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExConstants.MOD_ID + "_biome.title", NetherExConstants.MOD_NAME);
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExConstants.MOD_ID + "_biome.description", "Enter a " + NetherExConstants.MOD_NAME + " biome.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.entered_nether.title", NetherExConstants.MOD_NAME);
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.entered_nether.description", "The Nether, But Hotter Than Ever.");
 
         // Advancements - Nether - Ruthless Sands
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.title", "Ruthless Sands");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.description", "Enter the Ruthless Sands biome.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.entered_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.title", "Ruthless Sands");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.entered_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.description", "Entered the Ruthless Sands biome.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_spinout.title", "You Spin Me Right 'round");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_spinout.description", "Killed a Spinout.");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_wisp.title", "Flame on? More Like Flame off.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_wisp.title", "Flame On? More Like Flame Off.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_wisp.description", "Killed a Wisp.");
 
         // Advancements - Nether - Torrid Wasteland
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.title", "Torrid Wasteland");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.description", "Enter the Torrid Wasteland biome.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.entered_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.title", "Torrid Wasteland");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.entered_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.description", "Entered the Torrid Wasteland biome.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_salamander.title", "You Can’t Handle The Heat.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_salamander.description", "Killed a Salamander.");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.tamed_salamander.title", "It’s Getting Hot in Here.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.tamed_salamander.title", "It’s Getting Hot In Here.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.tamed_salamander.description", "Tamed a Salamander.");
 
         // Advancements - Nether - Fungi Forest
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.title", "Fungi Forest");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.description", "Enter the Fungi Forest biome.");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_mogus.title", "Silence of the Shrooms.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.entered_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.title", "Fungi Forest");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.entered_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.description", "Entered the Fungi Forest biome.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_mogus.title", "Shroom No More.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_mogus.description", "Killed a Mogus.");
 
+        // Advancements - Nether - Miscellaneous
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_flaemoth.title", "Wings Of Silence.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.killed_flaemoth.description", "Killed a Flaemoth.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.crafted_kiln.title", "Double The Heat, Double The Speed.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.crafted_kiln.description", "Crafted a Kiln.");
+
         // Advancements - Vanilla Nether
-        add("advancements." + NetherExConstants.MOD_ID + ".vanilla_nether.bucket_strider.title", "A Boat in a Bucket?");
+        add("advancements." + NetherExConstants.MOD_ID + ".vanilla_nether.bucket_strider.title", "A Boat In A Bucket?");
         add("advancements." + NetherExConstants.MOD_ID + ".vanilla_nether.bucket_strider.description", "Catch a Strider in a bucket.");
-        add("advancements." + NetherExConstants.MOD_ID + ".vanilla_nether.killed_flaemoth.title", "Wings of Silence.");
-        add("advancements." + NetherExConstants.MOD_ID + ".vanilla_nether.killed_flaemoth.description", "Killed a Flaemoth.");
 
         // Creative Mode Tabs
         add("creative_mode_tab." + NetherExConstants.MOD_ID + ".default", "NetherEx");

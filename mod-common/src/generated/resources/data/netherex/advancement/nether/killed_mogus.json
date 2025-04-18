@@ -1,7 +1,7 @@
 {
-  "parent": "netherex:nether/enter_fungi_forest_biome",
+  "parent": "netherex:nether/entered_fungi_forest_biome",
   "criteria": {
-    "killed_mogus": {
+    "kill_mogus": {
       "conditions": {
         "entity": [
           {
@@ -17,10 +17,10 @@
     }
   },
   "display": {
+    "announce_to_chat": false,
     "description": {
       "translate": "advancements.netherex.nether.killed_mogus.description"
     },
-    "hidden": true,
     "icon": {
       "count": 1,
       "id": "netherex:mogus_spawn_egg"
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "killed_mogus"
+      "kill_mogus"
     ]
   ],
   "sends_telemetry_event": true

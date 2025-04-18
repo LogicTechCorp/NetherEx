@@ -1,0 +1,30 @@
+{
+  "parent": "netherex:nether/root",
+  "criteria": {
+    "craft_kiln": {
+      "conditions": {
+        "recipe_id": "netherex:kiln"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.netherex.nether.crafted_kiln.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "netherex:kiln"
+    },
+    "title": {
+      "translate": "advancements.netherex.nether.crafted_kiln.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_kiln"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

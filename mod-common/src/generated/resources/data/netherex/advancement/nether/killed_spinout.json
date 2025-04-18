@@ -1,7 +1,7 @@
 {
-  "parent": "netherex:nether/enter_ruthless_sands_biome",
+  "parent": "netherex:nether/entered_ruthless_sands_biome",
   "criteria": {
-    "killed_spinout": {
+    "kill_spinout": {
       "conditions": {
         "entity": [
           {
@@ -17,10 +17,10 @@
     }
   },
   "display": {
+    "announce_to_chat": false,
     "description": {
       "translate": "advancements.netherex.nether.killed_spinout.description"
     },
-    "hidden": true,
     "icon": {
       "count": 1,
       "id": "netherex:spinout_spawn_egg"
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "killed_spinout"
+      "kill_spinout"
     ]
   ],
   "sends_telemetry_event": true

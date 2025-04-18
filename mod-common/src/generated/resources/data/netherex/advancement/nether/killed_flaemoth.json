@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:nether/root",
+  "parent": "netherex:nether/root",
   "criteria": {
-    "killed_flaemoth": {
+    "kill_flaemoth": {
       "conditions": {
         "entity": [
           {
@@ -17,21 +17,21 @@
     }
   },
   "display": {
+    "announce_to_chat": false,
     "description": {
-      "translate": "advancements.netherex.vanilla_nether.killed_flaemoth.description"
+      "translate": "advancements.netherex.nether.killed_flaemoth.description"
     },
-    "hidden": true,
     "icon": {
       "count": 1,
       "id": "netherex:flaemoth_spawn_egg"
     },
     "title": {
-      "translate": "advancements.netherex.vanilla_nether.killed_flaemoth.title"
+      "translate": "advancements.netherex.nether.killed_flaemoth.title"
     }
   },
   "requirements": [
     [
-      "killed_flaemoth"
+      "kill_flaemoth"
     ]
   ],
   "sends_telemetry_event": true
