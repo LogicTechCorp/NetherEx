@@ -34,7 +34,8 @@
     "minecraft": "${minecraft_version}",
     "java": ">=${java_version}",
     "terrablender": ">=${terrablender_version}",
-    "geckolib": ">=${geckolib_version}"
+    "geckolib": ">=${geckolib_version}",
+    "resourcefulconfig": ">=${resourcefulconfig_version}"
   },
   "suggests": {
     "another-mod": "*"
