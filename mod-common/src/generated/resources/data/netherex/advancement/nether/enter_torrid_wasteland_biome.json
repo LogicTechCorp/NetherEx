@@ -1,7 +1,7 @@
 {
   "parent": "netherex:nether/root",
   "criteria": {
-    "netherex:ruthless_sands": {
+    "netherex:torrid_wasteland": {
       "conditions": {
         "player": [
           {
@@ -9,7 +9,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "biomes": "netherex:ruthless_sands"
+                "biomes": "netherex:torrid_wasteland"
               }
             }
           }
@@ -21,19 +21,19 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.netherex.nether.entered_ruthless_sands_biome.description"
+      "translate": "advancements.netherex.nether.enter_torrid_wasteland_biome.description"
     },
     "icon": {
       "count": 1,
-      "id": "netherex:gloomy_netherrack"
+      "id": "netherex:fiery_netherrack"
     },
     "title": {
-      "translate": "advancements.netherex.nether.entered_ruthless_sands_biome.title"
+      "translate": "advancements.netherex.nether.enter_torrid_wasteland_biome.title"
     }
   },
   "requirements": [
     [
-      "netherex:ruthless_sands"
+      "netherex:torrid_wasteland"
     ]
   ],
   "sends_telemetry_event": true

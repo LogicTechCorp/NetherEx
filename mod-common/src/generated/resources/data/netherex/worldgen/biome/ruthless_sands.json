@@ -90,17 +90,13 @@
     "netherex:spinout": {
       "charge": 0.7,
       "energy_budget": 0.15
-    },
-    "netherex:wisp": {
-      "charge": 0.7,
-      "energy_budget": 0.15
     }
   },
   "spawners": {
     "ambient": [
       {
         "type": "netherex:wisp",
-        "maxCount": 4,
+        "maxCount": 2,
         "minCount": 1,
         "weight": 8
       }

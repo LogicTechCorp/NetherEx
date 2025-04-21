@@ -11,14 +11,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.netherex.nether.crafted_kiln.description"
+      "translate": "advancements.netherex.nether.craft_kiln.description"
     },
     "icon": {
       "count": 1,
       "id": "netherex:kiln"
     },
     "title": {
-      "translate": "advancements.netherex.nether.crafted_kiln.title"
+      "translate": "advancements.netherex.nether.craft_kiln.title"
     }
   },
   "requirements": [

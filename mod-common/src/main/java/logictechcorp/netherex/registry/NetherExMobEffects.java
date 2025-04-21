@@ -17,21 +17,6 @@ public class NetherExMobEffects
     private static final RegistrationProvider<MobEffect> MOB_EFFECTS = RegistrationProvider.get(BuiltInRegistries.MOB_EFFECT, NetherExConstants.MOD_ID);
 
     public static final RegistryObject<MobEffect, MobEffect> GENTLE = registerMobEffect("gentle", () ->
-            new NEMobEffect(MobEffectCategory.BENEFICIAL, 10251191)
-                    .addAttributeModifier(
-                            Attributes.ATTACK_KNOCKBACK,
-                            NetherExConstants.resource("effect.attack_knockback"),
-                            1.0d,
-                            AttributeModifier.Operation.ADD_VALUE
-                    )
-                    .addAttributeModifier(
-                            Attributes.KNOCKBACK_RESISTANCE,
-                            NetherExConstants.resource("effect.knockback_resistance"),
-                            -1.0d,
-                            AttributeModifier.Operation.ADD_VALUE
-                    )
-    );
-    public static final RegistryObject<MobEffect, MobEffect> ROUGH = registerMobEffect("rough", () ->
             new NEMobEffect(MobEffectCategory.NEUTRAL, 15063701)
                     .addAttributeModifier(
                             Attributes.ARMOR_TOUGHNESS,
@@ -42,6 +27,21 @@ public class NetherExMobEffects
                     .addAttributeModifier(
                             Attributes.ATTACK_DAMAGE,
                             NetherExConstants.resource("effect.attack_damage"),
+                            -1.0d,
+                            AttributeModifier.Operation.ADD_VALUE
+                    )
+    );
+    public static final RegistryObject<MobEffect, MobEffect> ROUGH = registerMobEffect("rough", () ->
+            new NEMobEffect(MobEffectCategory.BENEFICIAL, 10251191)
+                    .addAttributeModifier(
+                            Attributes.ATTACK_KNOCKBACK,
+                            NetherExConstants.resource("effect.attack_knockback"),
+                            1.0d,
+                            AttributeModifier.Operation.ADD_VALUE
+                    )
+                    .addAttributeModifier(
+                            Attributes.KNOCKBACK_RESISTANCE,
+                            NetherExConstants.resource("effect.knockback_resistance"),
                             -1.0d,
                             AttributeModifier.Operation.ADD_VALUE
                     )

@@ -1,14 +1,13 @@
 package logictechcorp.netherex.event;
 
+import logictechcorp.netherex.events.NEInteractionEvents;
 import logictechcorp.netherex.registry.NetherExBlocks;
 import logictechcorp.netherex.registry.NetherExItems;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -26,6 +25,11 @@ public class NEInteractionEventsFabric
     {
         UseBlockCallback.EVENT.register((player, level, hand, hitResult) ->
         {
+            if (level.isClientSide)
+            {
+                return InteractionResult.PASS;
+            }
+
             ItemStack heldStack = player.getItemInHand(hand);
 
             if (player.isSpectator() || hitResult.getType() != HitResult.Type.BLOCK || !heldStack.is(Items.SHEARS))
@@ -35,25 +39,35 @@ public class NEInteractionEventsFabric
 
             BlockPos hitPos = hitResult.getBlockPos();
             Block usedBlock = level.getBlockState(hitPos).getBlock();
-            RandomSource random = level.getRandom();
+
+            ServerLevel serverLevel = (ServerLevel) level;
+            ServerPlayer serverPlayer = (ServerPlayer) player;
 
             boolean shearedBlock = false;
 
             if (usedBlock == Blocks.SHROOMLIGHT)
             {
-                level.setBlock(hitPos, NetherExBlocks.HOLLOW_SHROOMLIGHT.get().defaultBlockState(), 3);
-                level.playSound(player, hitPos, SoundEvents.BEEHIVE_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
-                Block.popResource(level, hitPos, new ItemStack(NetherExItems.SHROOMFRUIT.get(), random.nextIntBetweenInclusive(2, 4)));
-                heldStack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+                NEInteractionEvents.shearShroomlight(
+                        serverLevel,
+                        hitPos,
+                        serverPlayer,
+                        heldStack,
+                        NetherExBlocks.HOLLOW_SHROOMLIGHT.get().defaultBlockState(),
+                        NetherExItems.SHROOMFRUIT.get()
+                );
                 shearedBlock = true;
             }
             else if (usedBlock == NetherExBlocks.TWISTED_SHROOMLIGHT.get())
             {
-                level.setBlock(hitPos, NetherExBlocks.HOLLOW_TWISTED_SHROOMLIGHT.get().defaultBlockState(), 3);
-                level.playSound(player, hitPos, SoundEvents.BEEHIVE_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
-                Block.popResource(level, hitPos, new ItemStack(NetherExItems.TWISTED_SHROOMFRUIT.get(), random.nextIntBetweenInclusive(2, 4)));
+                NEInteractionEvents.shearShroomlight(
+                        serverLevel,
+                        hitPos,
+                        serverPlayer,
+                        heldStack,
+                        NetherExBlocks.HOLLOW_TWISTED_SHROOMLIGHT.get().defaultBlockState(),
+                        NetherExItems.TWISTED_SHROOMFRUIT.get()
+                );
                 shearedBlock = true;
-                heldStack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
             }
 
             if (!shearedBlock)

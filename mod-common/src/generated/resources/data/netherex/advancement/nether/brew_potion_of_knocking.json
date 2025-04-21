@@ -1,0 +1,30 @@
+{
+  "parent": "netherex:nether/pick_up_hoglin_tusk",
+  "criteria": {
+    "brew_potion_of_knocking": {
+      "conditions": {
+        "potion": "netherex:knocking"
+      },
+      "trigger": "minecraft:brewed_potion"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.netherex.nether.brew_potion_of_knocking.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:potion"
+    },
+    "title": {
+      "translate": "advancements.netherex.nether.brew_potion_of_knocking.title"
+    }
+  },
+  "requirements": [
+    [
+      "brew_potion_of_knocking"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

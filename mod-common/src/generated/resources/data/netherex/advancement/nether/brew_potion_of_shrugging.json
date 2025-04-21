@@ -1,0 +1,30 @@
+{
+  "parent": "netherex:nether/brew_potion_of_knocking",
+  "criteria": {
+    "brew_potion_of_shrugging": {
+      "conditions": {
+        "potion": "netherex:shrugging"
+      },
+      "trigger": "minecraft:brewed_potion"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.netherex.nether.brew_potion_of_shrugging.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:potion"
+    },
+    "title": {
+      "translate": "advancements.netherex.nether.brew_potion_of_shrugging.title"
+    }
+  },
+  "requirements": [
+    [
+      "brew_potion_of_shrugging"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

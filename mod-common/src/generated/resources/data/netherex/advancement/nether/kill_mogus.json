@@ -1,5 +1,5 @@
 {
-  "parent": "netherex:nether/entered_fungi_forest_biome",
+  "parent": "netherex:nether/enter_fungi_forest_biome",
   "criteria": {
     "kill_mogus": {
       "conditions": {
@@ -19,14 +19,14 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.netherex.nether.killed_mogus.description"
+      "translate": "advancements.netherex.nether.kill_mogus.description"
     },
     "icon": {
       "count": 1,
       "id": "netherex:mogus_spawn_egg"
     },
     "title": {
-      "translate": "advancements.netherex.nether.killed_mogus.title"
+      "translate": "advancements.netherex.nether.kill_mogus.title"
     }
   },
   "requirements": [

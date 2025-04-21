@@ -1,0 +1,67 @@
+{
+  "parent": "netherex:nether/root",
+  "criteria": {
+    "shear_shroomlight": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "minecraft:shroomlight"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "minecraft:shears"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    },
+    "shear_twisted_shroomlight": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "netherex:twisted_shroomlight"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "minecraft:shears"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.netherex.nether.shear_shroomlights.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:shroomlight"
+    },
+    "title": {
+      "translate": "advancements.netherex.nether.shear_shroomlights.title"
+    }
+  },
+  "requirements": [
+    [
+      "shear_shroomlight",
+      "shear_twisted_shroomlight"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

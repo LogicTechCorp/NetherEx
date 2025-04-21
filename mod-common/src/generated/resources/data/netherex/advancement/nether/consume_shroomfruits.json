@@ -1,0 +1,41 @@
+{
+  "parent": "netherex:nether/shear_shroomlights",
+  "criteria": {
+    "consume_shroomfruit": {
+      "conditions": {
+        "item": {
+          "items": "netherex:shroomfruit"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "consume_twisted_shroomfruit": {
+      "conditions": {
+        "item": {
+          "items": "netherex:twisted_shroomfruit"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.netherex.nether.consume_shroomfruits.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "netherex:shroomfruit"
+    },
+    "title": {
+      "translate": "advancements.netherex.nether.consume_shroomfruits.title"
+    }
+  },
+  "requirements": [
+    [
+      "consume_shroomfruit",
+      "consume_twisted_shroomfruit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

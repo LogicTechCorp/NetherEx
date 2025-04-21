@@ -1,7 +1,7 @@
 {
   "parent": "netherex:nether/root",
   "criteria": {
-    "netherex:torrid_wasteland": {
+    "netherex:fungi_forest": {
       "conditions": {
         "player": [
           {
@@ -9,7 +9,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "biomes": "netherex:torrid_wasteland"
+                "biomes": "netherex:fungi_forest"
               }
             }
           }
@@ -21,19 +21,19 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.netherex.nether.entered_torrid_wasteland_biome.description"
+      "translate": "advancements.netherex.nether.enter_fungi_forest_biome.description"
     },
     "icon": {
       "count": 1,
-      "id": "netherex:fiery_netherrack"
+      "id": "netherex:lively_netherrack"
     },
     "title": {
-      "translate": "advancements.netherex.nether.entered_torrid_wasteland_biome.title"
+      "translate": "advancements.netherex.nether.enter_fungi_forest_biome.title"
     }
   },
   "requirements": [
     [
-      "netherex:torrid_wasteland"
+      "netherex:fungi_forest"
     ]
   ],
   "sends_telemetry_event": true

@@ -11,14 +11,14 @@
     "announce_to_chat": false,
     "background": "minecraft:textures/gui/advancements/backgrounds/nether.png",
     "description": {
-      "translate": "advancements.netherex.nether.entered_nether.description"
+      "translate": "advancements.netherex.nether.enter_nether.description"
     },
     "icon": {
       "count": 1,
       "id": "netherex:warped_nether_bricks"
     },
     "title": {
-      "translate": "advancements.netherex.nether.entered_nether.title"
+      "translate": "advancements.netherex.nether.enter_nether.title"
     }
   },
   "requirements": [

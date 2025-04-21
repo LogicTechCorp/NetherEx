@@ -1,37 +1,37 @@
 {
-  "parent": "netherex:nether/entered_ruthless_sands_biome",
+  "parent": "netherex:nether/enter_torrid_wasteland_biome",
   "criteria": {
-    "kill_spinout": {
+    "tame_salamander": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "netherex:spinout"
+              "type": "netherex:salamander"
             }
           }
         ]
       },
-      "trigger": "minecraft:player_killed_entity"
+      "trigger": "minecraft:tame_animal"
     }
   },
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.netherex.nether.killed_spinout.description"
+      "translate": "advancements.netherex.nether.tame_salamander.description"
     },
     "icon": {
       "count": 1,
-      "id": "netherex:spinout_spawn_egg"
+      "id": "minecraft:magma_cream"
     },
     "title": {
-      "translate": "advancements.netherex.nether.killed_spinout.title"
+      "translate": "advancements.netherex.nether.tame_salamander.title"
     }
   },
   "requirements": [
     [
-      "kill_spinout"
+      "tame_salamander"
     ]
   ],
   "sends_telemetry_event": true

@@ -1,0 +1,47 @@
+{
+  "parent": "netherex:nether/shear_shroomlights",
+  "criteria": {
+    "plant_shroomfruit": {
+      "conditions": {
+        "location": [
+          {
+            "block": "netherex:shroomstem",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "plant_twisted_shroomfruit": {
+      "conditions": {
+        "location": [
+          {
+            "block": "netherex:twisted_shroomstem",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.netherex.nether.plant_shroomfruits.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "netherex:shroomfruit"
+    },
+    "title": {
+      "translate": "advancements.netherex.nether.plant_shroomfruits.title"
+    }
+  },
+  "requirements": [
+    [
+      "plant_shroomfruit",
+      "plant_twisted_shroomfruit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

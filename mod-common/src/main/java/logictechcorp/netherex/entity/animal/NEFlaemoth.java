@@ -210,6 +210,12 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     }
 
     @Override
+    protected void playStepSound(BlockPos pos, BlockState block)
+    {
+
+    }
+
+    @Override
     public AnimatableInstanceCache getAnimatableInstanceCache()
     {
         return animatableInstanceCache;

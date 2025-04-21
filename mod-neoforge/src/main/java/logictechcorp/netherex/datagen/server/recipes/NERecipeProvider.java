@@ -52,7 +52,7 @@ public class NERecipeProvider extends RecipeProvider
     public NERecipeProvider(HolderLookup.Provider registries, RecipeOutput output)
     {
         super(registries, output);
-        this.items = registries.lookupOrThrow(Registries.ITEM);
+        items = registries.lookupOrThrow(Registries.ITEM);
     }
 
     @Override
@@ -132,6 +132,47 @@ public class NERecipeProvider extends RecipeProvider
                 .save(output);
 
         // Items
+        nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, NetherExItems.NETHERITE_NUGGET.get(), RecipeCategory.MISC, Items.NETHERITE_INGOT, "netherite_ingot_from_nuggets", "netherite_ingot");
+
+        Ingredient netheriteMaterial = Ingredient.of(
+                Items.NETHERITE_PICKAXE,
+                Items.NETHERITE_SHOVEL,
+                Items.NETHERITE_AXE,
+                Items.NETHERITE_HOE,
+                Items.NETHERITE_SWORD,
+                Items.NETHERITE_HELMET,
+                Items.NETHERITE_CHESTPLATE,
+                Items.NETHERITE_LEGGINGS,
+                Items.NETHERITE_BOOTS,
+                NetherExItems.NETHERITE_HORSE_ARMOR.get()
+        );
+
+        SimpleCookingRecipeBuilder.smelting(netheriteMaterial, RecipeCategory.MISC, NetherExItems.NETHERITE_NUGGET.get(), 1.0f, 1600)
+                .unlockedBy("has_netherite_pickaxe", has(Items.NETHERITE_PICKAXE))
+                .unlockedBy("has_netherite_shovel", has(Items.NETHERITE_SHOVEL))
+                .unlockedBy("has_netherite_axe", has(Items.NETHERITE_AXE))
+                .unlockedBy("has_netherite_hoe", has(Items.NETHERITE_HOE))
+                .unlockedBy("has_netherite_sword", has(Items.NETHERITE_SWORD))
+                .unlockedBy("has_netherite_helmet", has(Items.NETHERITE_HELMET))
+                .unlockedBy("has_netherite_chestplate", has(Items.NETHERITE_CHESTPLATE))
+                .unlockedBy("has_netherite_leggings", has(Items.NETHERITE_LEGGINGS))
+                .unlockedBy("has_netherite_boots", has(Items.NETHERITE_BOOTS))
+                .unlockedBy("has_netherite_horse_armor", has(NetherExItems.NETHERITE_HORSE_ARMOR.get()))
+                .save(output, getSmeltingRecipeName(NetherExItems.NETHERITE_NUGGET.get()));
+
+        SimpleCookingRecipeBuilder.blasting(netheriteMaterial, RecipeCategory.MISC, NetherExItems.NETHERITE_NUGGET.get(), 1.0f, 800)
+                .unlockedBy("has_netherite_pickaxe", has(Items.NETHERITE_PICKAXE))
+                .unlockedBy("has_netherite_shovel", has(Items.NETHERITE_SHOVEL))
+                .unlockedBy("has_netherite_axe", has(Items.NETHERITE_AXE))
+                .unlockedBy("has_netherite_hoe", has(Items.NETHERITE_HOE))
+                .unlockedBy("has_netherite_sword", has(Items.NETHERITE_SWORD))
+                .unlockedBy("has_netherite_helmet", has(Items.NETHERITE_HELMET))
+                .unlockedBy("has_netherite_chestplate", has(Items.NETHERITE_CHESTPLATE))
+                .unlockedBy("has_netherite_leggings", has(Items.NETHERITE_LEGGINGS))
+                .unlockedBy("has_netherite_boots", has(Items.NETHERITE_BOOTS))
+                .unlockedBy("has_netherite_horse_armor", has(NetherExItems.NETHERITE_HORSE_ARMOR.get()))
+                .save(output, getBlastingRecipeName(NetherExItems.NETHERITE_NUGGET.get()));
+
         shapeless(NetherExItems.WITHER_BONE_MEAL.get(), 3, NetherExItems.WITHER_BONE.get());
         nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, NetherExItems.WITHER_BONE_MEAL.get(), RecipeCategory.BUILDING_BLOCKS, NetherExBlocks.WITHER_BONE_BLOCK.get(), "wither_bone_meal_from_wither_bone_block", "bonemeal");
         cook(NetherExItems.RIBS.get(), NetherExItems.COOKED_RIBS.get());

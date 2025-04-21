@@ -92,12 +92,12 @@ public class NEWitherBoneMealItem extends Item
 
         if (block instanceof NetherrackBlock netherrack)
         {
-            return handleVanillaBonemeal(level, stack, pos, netherrack, state, 0.5);
+            return handleVanillaBonemeal(level, stack, pos, netherrack, state, 0.5d);
         }
 
         if (block instanceof NyliumBlock nylium)
         {
-            return handleVanillaBonemeal(level, stack, pos, nylium, state, 0.5);
+            return handleVanillaBonemeal(level, stack, pos, nylium, state, 0.5d);
         }
 
         if (block instanceof FungusBlock fungus)
@@ -122,7 +122,7 @@ public class NEWitherBoneMealItem extends Item
 
         if (block instanceof GrassBlock || block instanceof MyceliumBlock || block instanceof RootedDirtBlock || state.is(Blocks.PODZOL))
         {
-            return replaceWith(level, stack, pos, Blocks.DIRT, 0.5);
+            return replaceWith(level, stack, pos, Blocks.DIRT, 0.5d);
         }
 
         if (state.is(Blocks.MUDDY_MANGROVE_ROOTS))
@@ -229,7 +229,7 @@ public class NEWitherBoneMealItem extends Item
 
     private static boolean handleVanillaBonemeal(Level level, ItemStack stack, BlockPos pos, BonemealableBlock bonemealableBlock, BlockState state)
     {
-        return handleVanillaBonemeal(level, stack, pos, bonemealableBlock, state, 0);
+        return handleVanillaBonemeal(level, stack, pos, bonemealableBlock, state, 0.0d);
     }
 
     private static boolean handleVanillaBonemeal(Level level, ItemStack stack, BlockPos pos, BonemealableBlock bonemealableBlock, BlockState state, double particleYOffset)

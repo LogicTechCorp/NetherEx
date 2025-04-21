@@ -1,0 +1,32 @@
+{
+  "parent": "netherex:nether/root",
+  "criteria": {
+    "pick_up_hoglin_tusk": {
+      "conditions": {
+        "item": {
+          "items": "netherex:hoglin_tusk"
+        }
+      },
+      "trigger": "minecraft:thrown_item_picked_up_by_player"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.netherex.nether.pick_up_hoglin_tusk.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "netherex:hoglin_tusk"
+    },
+    "title": {
+      "translate": "advancements.netherex.nether.pick_up_hoglin_tusk.title"
+    }
+  },
+  "requirements": [
+    [
+      "pick_up_hoglin_tusk"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
