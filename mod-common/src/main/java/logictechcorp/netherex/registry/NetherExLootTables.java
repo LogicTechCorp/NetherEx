@@ -20,6 +20,7 @@ public class NetherExLootTables
     public static final ResourceKey<LootTable> FLAEMOTH_WARPED = register("entities/flaemoth/warped");
 
     public static final ResourceKey<LootTable> NETHERITE_HORSE_ARMOR_ADDITION = register("chests/netherite_horse_armor_addition");
+    public static final ResourceKey<LootTable> HOGLIN_ADDITIONS = register("entities/hoglin_additions");
 
     private static ResourceKey<LootTable> register(String name)
     {
@@ -37,5 +38,4 @@ public class NetherExLootTables
             throw new IllegalArgumentException(name.location() + " is already a registered loot table!");
         }
     }
-
 }

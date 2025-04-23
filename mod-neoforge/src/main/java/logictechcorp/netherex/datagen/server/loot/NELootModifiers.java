@@ -4,6 +4,7 @@ import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.registry.NetherExLootTables;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
@@ -24,7 +25,12 @@ public class NELootModifiers extends GlobalLootModifierProvider
     {
         add("add_netherite_horse_armor_to_bastion_treasure", new AddTableLootModifier(
                 new LootItemCondition[]{LootTableIdCondition.builder(BuiltInLootTables.BASTION_TREASURE.location()).build()},
-                NetherExLootTables.NETHERITE_HORSE_ARMOR_ADDITION)
-        );
+                NetherExLootTables.NETHERITE_HORSE_ARMOR_ADDITION
+        ));
+
+        add("add_hoglin_additions_to_hoglin", new AddTableLootModifier(
+                new LootItemCondition[]{LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/hoglin")).build()},
+                NetherExLootTables.HOGLIN_ADDITIONS
+        ));
     }
 }

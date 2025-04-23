@@ -1,6 +1,7 @@
 {
   "entries": [
-    "netherex:add_netherite_horse_armor_to_bastion_treasure"
+    "netherex:add_netherite_horse_armor_to_bastion_treasure",
+    "netherex:add_hoglin_additions_to_hoglin"
   ],
   "replace": false
 }
