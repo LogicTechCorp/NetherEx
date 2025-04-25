@@ -76,18 +76,22 @@
       "energy_budget": 0.15
     },
     "minecraft:ghast": {
-      "charge": 0.7,
-      "energy_budget": 0.15
+      "charge": 0.4,
+      "energy_budget": 0.25
     },
     "minecraft:strider": {
       "charge": 0.7,
       "energy_budget": 0.15
     },
     "minecraft:wither_skeleton": {
-      "charge": 0.7,
-      "energy_budget": 0.15
+      "charge": 0.4,
+      "energy_budget": 0.25
     },
     "netherex:spinout": {
+      "charge": 0.4,
+      "energy_budget": 0.25
+    },
+    "netherex:wisp": {
       "charge": 0.7,
       "energy_budget": 0.15
     }
@@ -96,8 +100,8 @@
     "ambient": [
       {
         "type": "netherex:wisp",
-        "maxCount": 2,
-        "minCount": 1,
+        "maxCount": 4,
+        "minCount": 4,
         "weight": 8
       }
     ],
@@ -115,19 +119,19 @@
       {
         "type": "netherex:spinout",
         "maxCount": 4,
-        "minCount": 2,
+        "minCount": 4,
         "weight": 30
       },
       {
         "type": "minecraft:wither_skeleton",
         "maxCount": 3,
-        "minCount": 1,
+        "minCount": 3,
         "weight": 20
       },
       {
         "type": "minecraft:ghast",
-        "maxCount": 2,
-        "minCount": 1,
+        "maxCount": 4,
+        "minCount": 4,
         "weight": 50
       },
       {

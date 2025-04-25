@@ -30,7 +30,7 @@ public class NetherExEntityTypes
     public static final RegistryObject<EntityType<?>, EntityType<NESpinout>> SPINOUT = registerEntityType("spinout", NESpinout::createAttributes, EntityType.Builder.of(NESpinout::new, MobCategory.MONSTER).sized(0.55f, 1.8f).fireImmune());
     public static final RegistryObject<EntityType<?>, EntityType<NEWisp>> WISP = registerEntityType("wisp", NEWisp::createAttributes, EntityType.Builder.of(NEWisp::new, MobCategory.AMBIENT).sized(0.55f, 0.55f).fireImmune());
     public static final RegistryObject<EntityType<?>, EntityType<NESalamander>> SALAMANDER = registerEntityType("salamander", NESalamander::createAttributes, EntityType.Builder.of(NESalamander::new, MobCategory.MONSTER).sized(1.25f, 0.5f).fireImmune());
-    public static final RegistryObject<EntityType<?>, EntityType<NEMogus>> MOGUS = registerEntityType("mogus", NEMogus::createAttributes, EntityType.Builder.of(NEMogus::new, MobCategory.MONSTER).sized(0.5f, 0.9f).fireImmune());
+    public static final RegistryObject<EntityType<?>, EntityType<NEMogus>> MOGUS = registerEntityType("mogus", NEMogus::createAttributes, EntityType.Builder.of(NEMogus::new, MobCategory.AMBIENT).sized(0.5f, 0.9f).fireImmune());
     public static final RegistryObject<EntityType<?>, EntityType<NEFlaemoth>> FLAEMOTH = registerEntityType("flaemoth", NEFlaemoth::createAttributes, EntityType.Builder.of(NEFlaemoth::new, MobCategory.AMBIENT).sized(0.4f, 0.5f).fireImmune());
 
     public static final RegistryObject<EntityType<?>, EntityType<NEAshenArrow>> ASHEN_ARROW = registerEntityType("ashen_arrow", EntityType.Builder.<NEAshenArrow>of(NEAshenArrow::new, MobCategory.MISC).sized(0.5f, 0.5f).clientTrackingRange(4).updateInterval(20));

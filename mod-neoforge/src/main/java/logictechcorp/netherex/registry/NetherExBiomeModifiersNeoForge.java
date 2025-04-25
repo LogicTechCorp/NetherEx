@@ -77,11 +77,11 @@ public class NetherExBiomeModifiersNeoForge
         ));
         context.register(ADD_FLAEMOTHS_BIOME_MODIFIER, new BiomeModifiers.AddSpawnsBiomeModifier(
                 vanillaNetherForestBiomes,
-                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.FLAEMOTH.get(), 15, 1, 4))
+                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.FLAEMOTH.get(), 15, 1, 2))
         ));
         context.register(ADD_WISPS_BIOME_MODIFIER, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.SOUL_SAND_VALLEY)),
-                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.WISP.get(), 15, 1, 4))
+                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.WISP.get(), 15, 1, 2))
         ));
     }
 
