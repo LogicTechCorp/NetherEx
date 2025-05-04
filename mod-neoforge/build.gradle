@@ -61,7 +61,7 @@ sourceSets.main.resources { srcDir project.project(':mod-common').file('src/gene
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = rootProject.findProperty('curseforge_token')
-    debugMode = curseforge_gradle_debug
+    debugMode = false
 
     var mainFile = upload(curseforge_project, tasks.jar)
     mainFile.changelog = rootProject.file(mod_changelog_file)
@@ -76,13 +76,15 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
 
 modrinth {
     token = rootProject.findProperty('modrinth_token').toString()
-    debugMode = minotaur_debug.toBoolean()
+    debugMode = false
 
     projectId = modrinth_project
     versionName = "$mod_name" + ' ' + "$version" + ' - NeoForge'
     changelog = rootProject.file(mod_changelog_file).getText()
     uploadFile = jar
     versionType = 'release'
+    gameVersions = [minecraft_version]
+    loaders = ['neoforge']
     dependencies {
         required.project 'fabric-api'
         required.project 'terrablender'
