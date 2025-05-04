@@ -1,5 +1,23 @@
 ### Version 1.1.2
 
+Added:
+
+- New Advancements
+
+Updated:
+
+- Mob spawning
+- Advancement text and icons
+- Gentle and Rough effects to have swapped functionality
+
+Fixed:
+
+- Hoglin loot drops
+- Mogus spawns causing reduce Nether spawns
+- Flaemoths having step sounds
+- Shroomlights not dropping items
+- Missing Netherite Nugget recipes
+
 ***
 
 ### Version 1.1.1
