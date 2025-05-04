@@ -1,6 +1,10 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id 'multiloader-loader'
     id 'net.neoforged.moddev'
+    id 'net.darkhax.curseforgegradle'
+    id 'com.modrinth.minotaur'
 }
 
 neoForge {
@@ -54,3 +58,35 @@ dependencies {
 }
 
 sourceSets.main.resources { srcDir project.project(':mod-common').file('src/generated/resources/').getAbsolutePath() }
+
+tasks.register('publishCurseForge', TaskPublishCurseForge) {
+    apiToken = rootProject.findProperty('curseforge_token')
+    debugMode = curseforge_gradle_debug
+
+    var mainFile = upload(curseforge_project, tasks.jar)
+    mainFile.changelog = rootProject.file(mod_changelog_file)
+    mainFile.changelogType = 'markdown'
+    mainFile.displayName = "$mod_name" + ' ' + "$version" + ' - NeoForge'
+    mainFile.releaseType = 'release'
+    mainFile.addRequirement('terrablender-neoforge')
+    mainFile.addRequirement('geckolib')
+    mainFile.addRequirement('resourceful-config')
+    mainFile.addModLoader('NeoForge')
+}
+
+modrinth {
+    token = rootProject.findProperty('modrinth_token').toString()
+    debugMode = minotaur_debug.toBoolean()
+
+    projectId = modrinth_project
+    versionName = "$mod_name" + ' ' + "$version" + ' - NeoForge'
+    changelog = rootProject.file(mod_changelog_file).getText()
+    uploadFile = jar
+    versionType = 'release'
+    dependencies {
+        required.project 'fabric-api'
+        required.project 'terrablender'
+        required.project 'geckolib'
+        required.project 'resourceful-config'
+    }
+}

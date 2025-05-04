@@ -115,9 +115,6 @@ public class NetherExBiomes extends OverworldBiomes
 
         BiomeGenerationSettings.Builder biomeGenerationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatureHolderGetter, configuredWorldCarverHolderGetter)
                 .addCarver(Carvers.NETHER_CAVE)
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA)
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_NORMAL)
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_NORMAL)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_MAGMA_HEAVY)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.SPRING_OPEN_HEAVY)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.PATCH_FIRE_HEAVY)
@@ -128,7 +125,10 @@ public class NetherExBiomes extends OverworldBiomes
         addOres(biomeGenerationSettingsBuilder, true);
         biomeGenerationSettingsBuilder
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_FIERY_GOLD)
-                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_FIERY_QUARTZ);
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_FIERY_QUARTZ)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_NORMAL)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_NORMAL);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

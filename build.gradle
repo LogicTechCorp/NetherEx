@@ -6,6 +6,9 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.76' apply false
 
     id 'com.matyrobbrt.mc.registrationutils' version "$regutils_version"
+
+    id 'net.darkhax.curseforgegradle' version "$curseforge_gradle_version" apply(false)
+    id 'com.modrinth.minotaur' version "$minotaur_version" apply(false)
 }
 
 registrationUtils {

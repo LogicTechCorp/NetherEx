@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AbstractFurnaceBlockEntity.class)
-public class NEAbstractFurnaceBlockEntityMixin
+public abstract class NEAbstractFurnaceBlockEntityMixin
 {
     @ModifyReturnValue(
             method = "getTotalCookTime",
