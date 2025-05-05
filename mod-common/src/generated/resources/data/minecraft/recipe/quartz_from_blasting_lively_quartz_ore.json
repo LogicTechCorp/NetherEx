@@ -4,7 +4,9 @@
   "cookingtime": 100,
   "experience": 0.2,
   "group": "quartz",
-  "ingredient": "netherex:lively_quartz_ore",
+  "ingredient": {
+    "item": "netherex:lively_quartz_ore"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:quartz"

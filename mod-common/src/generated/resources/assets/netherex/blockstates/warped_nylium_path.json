@@ -1,21 +1,7 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "netherex:block/warped_nylium_path"
-      },
-      {
-        "model": "netherex:block/warped_nylium_path",
-        "y": 90
-      },
-      {
-        "model": "netherex:block/warped_nylium_path",
-        "y": 180
-      },
-      {
-        "model": "netherex:block/warped_nylium_path",
-        "y": 270
-      }
-    ]
+    "": {
+      "model": "netherex:block/warped_nylium_path"
+    }
   }
 }

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "netherex:ashen_nether_brick_slab"
+    "#": {
+      "item": "netherex:ashen_nether_brick_slab"
+    }
   },
   "pattern": [
     "#",

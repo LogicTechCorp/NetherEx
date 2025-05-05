@@ -2,8 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "minecraft:block/blackstone",
-    "particle": "minecraft:block/blackstone",
-    "side": "netherex:block/blackstone_fumarole",
-    "top": "minecraft:block/blackstone"
+    "side": "minecraft:block/blackstone",
+    "top": "netherex:block/blackstone_fumarole"
   }
 }

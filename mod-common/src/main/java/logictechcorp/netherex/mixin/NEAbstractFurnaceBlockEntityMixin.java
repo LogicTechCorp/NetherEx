@@ -3,7 +3,6 @@ package logictechcorp.netherex.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import logictechcorp.netherex.registry.NetherExBlockEntityTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +15,7 @@ public abstract class NEAbstractFurnaceBlockEntityMixin
             method = "getTotalCookTime",
             at = @At("RETURN")
     )
-    private static int getTotalCookTime(int original, @Local(argsOnly = true) ServerLevel level, @Local(argsOnly = true) AbstractFurnaceBlockEntity furnace)
+    private static int getTotalCookTime(int original, @Local(argsOnly = true) Level level, @Local(argsOnly = true) AbstractFurnaceBlockEntity furnace)
     {
         if (furnace.getType() == NetherExBlockEntityTypes.KILN.get())
         {

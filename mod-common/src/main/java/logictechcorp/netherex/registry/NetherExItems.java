@@ -5,9 +5,6 @@ import logictechcorp.netherex.item.*;
 import logictechcorp.netherex.platform.registration.RegistrationProvider;
 import logictechcorp.netherex.platform.registration.RegistryObject;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -16,9 +13,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.MobBucketItem;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.item.component.Consumable;
-import net.minecraft.world.item.component.Consumables;
-import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.function.Function;
@@ -44,11 +38,11 @@ public class NetherExItems
     public static final RegistryObject<Item, Item> ASH = registerItem("ash");
     public static final RegistryObject<Item, NEAshenArrowItem> ASHEN_ARROW = registerItem("ashen_arrow", NEAshenArrowItem::new, NEItemProperties.ASHEN_ARROW);
 
-    public static final RegistryObject<Item, SpawnEggItem> SPINOUT_SPAWN_EGG = registerItem("spinout_spawn_egg", (properties) -> new SpawnEggItem(NetherExEntityTypes.SPINOUT.get(), properties));
-    public static final RegistryObject<Item, SpawnEggItem> WISP_SPAWN_EGG = registerItem("wisp_spawn_egg", (properties) -> new SpawnEggItem(NetherExEntityTypes.WISP.get(), properties));
-    public static final RegistryObject<Item, SpawnEggItem> SALAMANDER_SPAWN_EGG = registerItem("salamander_spawn_egg", (properties -> new SpawnEggItem(NetherExEntityTypes.SALAMANDER.get(), properties)));
-    public static final RegistryObject<Item, SpawnEggItem> MOGUS_SPAWN_EGG = registerItem("mogus_spawn_egg", (properties) -> new SpawnEggItem(NetherExEntityTypes.MOGUS.get(), properties));
-    public static final RegistryObject<Item, SpawnEggItem> FLAEMOTH_SPAWN_EGG = registerItem("flaemoth_spawn_egg", (properties) -> new SpawnEggItem(NetherExEntityTypes.FLAEMOTH.get(), properties));
+    public static final RegistryObject<Item, SpawnEggItem> SPINOUT_SPAWN_EGG = registerItem("spinout_spawn_egg", (properties) -> new SpawnEggItem(NetherExEntityTypes.SPINOUT.get(), 5651507, 16382457, properties));
+    public static final RegistryObject<Item, SpawnEggItem> WISP_SPAWN_EGG = registerItem("wisp_spawn_egg", (properties) -> new SpawnEggItem(NetherExEntityTypes.WISP.get(), 16777215, 2667468, properties));
+    public static final RegistryObject<Item, SpawnEggItem> SALAMANDER_SPAWN_EGG = registerItem("salamander_spawn_egg", (properties -> new SpawnEggItem(NetherExEntityTypes.SALAMANDER.get(), 15690005, 0, properties)));
+    public static final RegistryObject<Item, SpawnEggItem> MOGUS_SPAWN_EGG = registerItem("mogus_spawn_egg", (properties) -> new SpawnEggItem(NetherExEntityTypes.MOGUS.get(), 10051392, 10489616, properties));
+    public static final RegistryObject<Item, SpawnEggItem> FLAEMOTH_SPAWN_EGG = registerItem("flaemoth_spawn_egg", (properties) -> new SpawnEggItem(NetherExEntityTypes.FLAEMOTH.get(), 13184077, 2399861, properties));
 
     public static void initialize()
     {
@@ -56,10 +50,6 @@ public class NetherExItems
 
     public static <I extends Item> RegistryObject<Item, I> registerItem(String itemName, Function<Item.Properties, I> newItemFunc, Item.Properties itemProperties)
     {
-        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(NetherExConstants.MOD_ID, itemName);
-        ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, resourceLocation);
-        itemProperties.setId(resourceKey);
-
         Supplier<I> itemSupplier = () -> newItemFunc.apply(itemProperties);
         return ITEMS.register(itemName, itemSupplier);
     }
@@ -83,27 +73,19 @@ public class NetherExItems
     {
         public static final Item.Properties NETHERITE_HORSE_ARMOR = new Item.Properties().fireResistant();
         public static final Item.Properties WITHER_BONE_MEAL = new Item.Properties();
-        public static final Item.Properties RIBS = new Item.Properties().food(NEFoods.RIBS, NEConsumables.RIBS);
-        public static final Item.Properties COOKED_RIBS = new Item.Properties().food(NEFoods.COOKED_RIBS, NEConsumables.COOKED_RIBS);
-        public static final Item.Properties SHROOMFRUIT = new Item.Properties().food(NEFoods.SHROOMFRUIT, NEConsumables.SHROOMFRUIT);
-        public static final Item.Properties TWISTED_SHROOMFRUIT = new Item.Properties().food(NEFoods.TWISTED_SHROOMFRUIT, NEConsumables.TWISTED_SHROOMFRUIT);
+        public static final Item.Properties RIBS = new Item.Properties().food(NEFoods.RIBS);
+        public static final Item.Properties COOKED_RIBS = new Item.Properties().food(NEFoods.COOKED_RIBS);
+        public static final Item.Properties SHROOMFRUIT = new Item.Properties().food(NEFoods.SHROOMFRUIT);
+        public static final Item.Properties TWISTED_SHROOMFRUIT = new Item.Properties().food(NEFoods.TWISTED_SHROOMFRUIT);
         public static final Item.Properties STRIDER_BUCKET = new Item.Properties().stacksTo(1);
         public static final Item.Properties ASHEN_ARROW = new Item.Properties();
     }
 
     public static class NEFoods
     {
-        public static final FoodProperties RIBS = new FoodProperties.Builder().nutrition(6).saturationModifier(0.3f).build();
-        public static final FoodProperties COOKED_RIBS = new FoodProperties.Builder().nutrition(11).saturationModifier(0.5f).build();
-        public static final FoodProperties SHROOMFRUIT = new FoodProperties.Builder().nutrition(2).saturationModifier(0.2f).build();
-        public static final FoodProperties TWISTED_SHROOMFRUIT = new FoodProperties.Builder().nutrition(1).saturationModifier(0.2f).build();
-    }
-
-    public static class NEConsumables
-    {
-        public static final Consumable RIBS = Consumables.defaultFood().onConsume((new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 0)))).build();
-        public static final Consumable COOKED_RIBS = Consumables.defaultFood().onConsume((new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600)))).build();
-        public static final Consumable SHROOMFRUIT = Consumables.defaultFood().onConsume((new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.GLOWING, 300)))).build();
-        public static final Consumable TWISTED_SHROOMFRUIT = Consumables.defaultFood().onConsume((new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.GLOWING, 300)))).build();
+        public static final FoodProperties RIBS = new FoodProperties.Builder().nutrition(6).saturationModifier(0.3f).effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 0), 1.0f).build();
+        public static final FoodProperties COOKED_RIBS = new FoodProperties.Builder().nutrition(11).saturationModifier(0.5f).effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600), 1.0f).build();
+        public static final FoodProperties SHROOMFRUIT = new FoodProperties.Builder().nutrition(2).saturationModifier(0.2f).effect(new MobEffectInstance(MobEffects.GLOWING, 300), 1.0f).build();
+        public static final FoodProperties TWISTED_SHROOMFRUIT = new FoodProperties.Builder().nutrition(1).saturationModifier(0.2f).effect(new MobEffectInstance(MobEffects.GLOWING, 300), 1.0f).build();
     }
 }

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "netherex:fiery_nether_bricks"
+    "#": {
+      "item": "netherex:fiery_nether_bricks"
+    }
   },
   "pattern": [
     "###",

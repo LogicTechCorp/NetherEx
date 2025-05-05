@@ -2,7 +2,7 @@ package logictechcorp.netherex.entity.monster;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -38,7 +38,7 @@ public class NESpinout extends Monster implements Enemy, GeoEntity
                 .build();
     }
 
-    public static boolean checkSpinoutSpawnRules(EntityType<NESpinout> entityType, LevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random)
+    public static boolean checkSpinoutSpawnRules(EntityType<NESpinout> entityType, LevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random)
     {
         return !level.getBlockState(pos.below()).is(Blocks.NETHER_WART_BLOCK);
     }

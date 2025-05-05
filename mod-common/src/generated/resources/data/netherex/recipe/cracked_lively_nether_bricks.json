@@ -3,7 +3,9 @@
   "category": "blocks",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": "netherex:lively_nether_bricks",
+  "ingredient": {
+    "item": "netherex:lively_nether_bricks"
+  },
   "result": {
     "count": 1,
     "id": "netherex:cracked_lively_nether_bricks"

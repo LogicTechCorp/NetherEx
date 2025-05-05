@@ -14,7 +14,8 @@
     "NEFungusBlockMixin",
     "NEHorseMixin",
     "NEShovelItemAccessor",
-    "NEStriderMixin"
+    "NEStriderMixin",
+    "NETextureSlotInvoker"
   ],
   "client": [
     "client.NEEntityRenderersMixin"

@@ -7,9 +7,6 @@ import logictechcorp.netherex.platform.registration.RegistrationProvider;
 import logictechcorp.netherex.platform.registration.RegistryObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
@@ -165,10 +162,6 @@ public class NetherExBlocks
 
     private static <B extends Block> RegistryObject<Block, B> registerBlock(String blockName, Function<Block.Properties, B> newBlockFunc, Block.Properties blockProperties)
     {
-        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(NetherExConstants.MOD_ID, blockName);
-        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, resourceLocation);
-        blockProperties.setId(resourceKey);
-
         Supplier<B> blockSupplier = () -> newBlockFunc.apply(blockProperties);
         return BLOCKS.register(blockName, blockSupplier);
     }
@@ -224,11 +217,7 @@ public class NetherExBlocks
 
     public static <I extends Item> RegistryObject<Item, I> registerItemBlock(String itemName, Function<Item.Properties, I> newItemFunc)
     {
-        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(NetherExConstants.MOD_ID, itemName);
-        ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, resourceLocation);
         Item.Properties itemProperties = new Item.Properties();
-        itemProperties.setId(resourceKey);
-
         Supplier<I> itemSupplier = () -> newItemFunc.apply(itemProperties);
         return ITEM_BLOCKS.register(itemName, itemSupplier);
     }

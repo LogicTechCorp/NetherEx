@@ -31,10 +31,10 @@ public class NetherExMogusVariants
     public static Holder<NEMogusVariant> getBiomeSpawnVariant(RegistryAccess registryAccess, RandomSource randomSource)
     {
         SimpleWeightedRandomList.Builder<Holder.Reference<NEMogusVariant>> spawnVariantsBuilder = new SimpleWeightedRandomList.Builder<>();
-        Registry<NEMogusVariant> registry = registryAccess.lookupOrThrow(NetherExRegistries.Keys.MOGUS_VARIANT);
-        registry.listElements().forEach(mogusVariantRef -> spawnVariantsBuilder.add(mogusVariantRef, mogusVariantRef.value().spawnWeight()));
+        Registry<NEMogusVariant> registry = registryAccess.registryOrThrow(NetherExRegistries.Keys.MOGUS_VARIANT);
+        registry.holders().forEach(mogusVariantRef -> spawnVariantsBuilder.add(mogusVariantRef, mogusVariantRef.value().spawnWeight()));
         Optional<Holder.Reference<NEMogusVariant>> key = spawnVariantsBuilder.build().getRandomValue(randomSource);
-        return key.orElseGet(() -> registry.get(BROWN).orElseThrow());
+        return key.orElseGet(() -> registry.getHolder(BROWN).orElseThrow());
     }
 
     private static void register(BootstrapContext<NEMogusVariant> context, ResourceKey<NEMogusVariant> Key, String name, int spawnWeight)

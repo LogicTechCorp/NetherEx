@@ -31,10 +31,10 @@ public class NetherExSalamanderVariants
     public static Holder<NESalamanderVariant> getRandomSpawnVariant(RegistryAccess registryAccess, RandomSource randomSource)
     {
         SimpleWeightedRandomList.Builder<Holder.Reference<NESalamanderVariant>> spawnVariantsBuilder = new SimpleWeightedRandomList.Builder<>();
-        Registry<NESalamanderVariant> registry = registryAccess.lookupOrThrow(NetherExRegistries.Keys.SALAMANDER_VARIANT);
-        registry.listElements().forEach(salamanderVariantRef -> spawnVariantsBuilder.add(salamanderVariantRef, salamanderVariantRef.value().spawnWeight()));
+        Registry<NESalamanderVariant> registry = registryAccess.registryOrThrow(NetherExRegistries.Keys.SALAMANDER_VARIANT);
+        registry.holders().forEach(salamanderVariantRef -> spawnVariantsBuilder.add(salamanderVariantRef, salamanderVariantRef.value().spawnWeight()));
         Optional<Holder.Reference<NESalamanderVariant>> key = spawnVariantsBuilder.build().getRandomValue(randomSource);
-        return key.orElseGet(() -> registry.get(ORANGE).orElseThrow());
+        return key.orElseGet(() -> registry.getHolder(ORANGE).orElseThrow());
     }
 
     private static void register(BootstrapContext<NESalamanderVariant> context, ResourceKey<NESalamanderVariant> Key, String name, int spawnWeight)

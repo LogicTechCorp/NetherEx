@@ -4,7 +4,9 @@
   "cookingtime": 100,
   "experience": 1.0,
   "group": "gold_ingot",
-  "ingredient": "netherex:fiery_gold_ore",
+  "ingredient": {
+    "item": "netherex:fiery_gold_ore"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:gold_ingot"

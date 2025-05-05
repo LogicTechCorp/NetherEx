@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "minecraft:fire_charge"
+    "#": {
+      "item": "minecraft:fire_charge"
+    }
   },
   "pattern": [
     "##",

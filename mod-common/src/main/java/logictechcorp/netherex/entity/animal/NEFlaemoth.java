@@ -62,7 +62,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
 
     public static AttributeSupplier createAttributes()
     {
-        return Animal.createAnimalAttributes()
+        return Animal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0d)
                 .add(Attributes.FLYING_SPEED, 0.6d)
                 .add(Attributes.MOVEMENT_SPEED, 0.3d)
@@ -71,7 +71,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
                 .build();
     }
 
-    public static boolean checkFlaemothSpawnRules(EntityType<NEFlaemoth> entityType, LevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random)
+    public static boolean checkFlaemothSpawnRules(EntityType<NEFlaemoth> entityType, LevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random)
     {
         return true;
     }
@@ -80,8 +80,8 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         super.defineSynchedData(builder);
-        Registry<NEFlaemothVariant> registry = registryAccess().lookupOrThrow(NetherExRegistries.Keys.FLAEMOTH_VARIANT);
-        builder.define(VARIANT_ID, registry.get(NetherExFlaemothVariants.CRIMSON).or(registry::getAny).orElseThrow());
+        Registry<NEFlaemothVariant> registry = registryAccess().registryOrThrow(NetherExRegistries.Keys.FLAEMOTH_VARIANT);
+        builder.define(VARIANT_ID, registry.getHolder(NetherExFlaemothVariants.CRIMSON).or(registry::getAny).orElseThrow());
     }
 
     @Override
@@ -138,16 +138,16 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnGroupData)
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnReason, @Nullable SpawnGroupData spawnGroupData)
     {
         spawnGroupData = super.finalizeSpawn(levelAccessor, difficultyInstance, spawnReason, spawnGroupData);
 
-        if (spawnReason != EntitySpawnReason.BREEDING)
+        if (spawnReason != MobSpawnType.BREEDING)
         {
             Holder<Biome> biome = levelAccessor.getBiome(blockPosition());
             Holder<NEFlaemothVariant> flaemothVariantHolder;
 
-            if (spawnReason == EntitySpawnReason.NATURAL)
+            if (spawnReason == MobSpawnType.NATURAL)
             {
                 flaemothVariantHolder = NetherExFlaemothVariants.getBiomeSpawnVariant(registryAccess(), biome, random);
             }
@@ -180,7 +180,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     }
 
     @Override
-    protected void customServerAiStep(ServerLevel level)
+    protected void customServerAiStep()
     {
         if (isInWaterOrBubble())
         {
@@ -193,7 +193,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
 
         if (underWaterTicks > 20)
         {
-            hurtServer(level, damageSources().drown(), 1.0F);
+            hurt(damageSources().drown(), 1.0F);
         }
     }
 
@@ -225,7 +225,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob otherParent)
     {
-        NEFlaemoth flaemoth = NetherExEntityTypes.FLAEMOTH.get().create(serverLevel, EntitySpawnReason.BREEDING);
+        NEFlaemoth flaemoth = NetherExEntityTypes.FLAEMOTH.get().create(serverLevel);
 
         if (flaemoth != null)
         {

@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "minecraft:arrow",
-    "netherex:ash"
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "item": "netherex:ash"
+    }
   ],
   "result": {
     "count": 1,

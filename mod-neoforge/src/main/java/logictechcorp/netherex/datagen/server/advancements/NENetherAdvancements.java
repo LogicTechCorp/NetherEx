@@ -10,12 +10,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -81,7 +79,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         false,
                         false
                 )
-                .addCriterion("kill_spinout", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entities, NetherExEntityTypes.SPINOUT.get())))
+                .addCriterion("kill_spinout", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(NetherExEntityTypes.SPINOUT.get())))
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/kill_spinout");
 
         Advancement.Builder.advancement().parent(enterRuthlessSandsBiome)
@@ -95,7 +93,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         false,
                         false
                 )
-                .addCriterion("kill_wisp", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entities, NetherExEntityTypes.WISP.get())))
+                .addCriterion("kill_wisp", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(NetherExEntityTypes.WISP.get())))
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/kill_wisp");
 
         // Torrid Wasteland
@@ -124,7 +122,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         false,
                         false
                 )
-                .addCriterion("kill_salamander", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entities, NetherExEntityTypes.SALAMANDER.get())))
+                .addCriterion("kill_salamander", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(NetherExEntityTypes.SALAMANDER.get())))
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/kill_salamander");
 
         Advancement.Builder.advancement().parent(enterTorridWastelandBiome)
@@ -138,7 +136,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         false,
                         false
                 )
-                .addCriterion("tame_salamander", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(entities, NetherExEntityTypes.SALAMANDER.get())))
+                .addCriterion("tame_salamander", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(NetherExEntityTypes.SALAMANDER.get())))
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/tame_salamander");
 
         // Fungi Forest
@@ -167,7 +165,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         false,
                         false
                 )
-                .addCriterion("kill_mogus", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entities, NetherExEntityTypes.MOGUS.get())))
+                .addCriterion("kill_mogus", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(NetherExEntityTypes.MOGUS.get())))
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/kill_mogus");
 
         // Shroomlights
@@ -183,12 +181,12 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         false
                 )
                 .addCriterion("shear_shroomlight", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-                        LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, Blocks.SHROOMLIGHT)),
-                        ItemPredicate.Builder.item().of(items, Items.SHEARS)
+                        LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(Blocks.SHROOMLIGHT)),
+                        ItemPredicate.Builder.item().of(Items.SHEARS)
                 ))
                 .addCriterion("shear_twisted_shroomlight", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-                        LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, NetherExBlocks.TWISTED_SHROOMLIGHT.get())),
-                        ItemPredicate.Builder.item().of(items, Items.SHEARS)
+                        LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(NetherExBlocks.TWISTED_SHROOMLIGHT.get())),
+                        ItemPredicate.Builder.item().of(Items.SHEARS)
                 ))
                 .requirements(AdvancementRequirements.Strategy.OR)
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/shear_shroomlights");
@@ -220,8 +218,8 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         false,
                         false
                 )
-                .addCriterion("consume_shroomfruit", ConsumeItemTrigger.TriggerInstance.usedItem(items, NetherExItems.SHROOMFRUIT.get()))
-                .addCriterion("consume_twisted_shroomfruit", ConsumeItemTrigger.TriggerInstance.usedItem(items, NetherExItems.TWISTED_SHROOMFRUIT.get()))
+                .addCriterion("consume_shroomfruit", ConsumeItemTrigger.TriggerInstance.usedItem(NetherExItems.SHROOMFRUIT.get()))
+                .addCriterion("consume_twisted_shroomfruit", ConsumeItemTrigger.TriggerInstance.usedItem(NetherExItems.TWISTED_SHROOMFRUIT.get()))
                 .requirements(AdvancementRequirements.Strategy.OR)
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/consume_shroomfruits");
 
@@ -239,7 +237,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                 )
                 .addCriterion("pick_up_hoglin_tusk", PickedUpItemTrigger.TriggerInstance.thrownItemPickedUpByPlayer(
                         Optional.empty(),
-                        Optional.of(ItemPredicate.Builder.item().of(items, NetherExItems.HOGLIN_TUSK.get()).build()),
+                        Optional.of(ItemPredicate.Builder.item().of(NetherExItems.HOGLIN_TUSK.get()).build()),
                         Optional.empty()
                 ))
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/pick_up_hoglin_tusk");
@@ -284,7 +282,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         false,
                         false
                 )
-                .addCriterion("kill_flaemoth", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entities, NetherExEntityTypes.FLAEMOTH.get())))
+                .addCriterion("kill_flaemoth", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(NetherExEntityTypes.FLAEMOTH.get())))
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/kill_flaemoth");
 
         Advancement.Builder.advancement().parent(netherExRoot)
@@ -302,9 +300,9 @@ public class NENetherAdvancements implements AdvancementSubProvider
                 .save(consumer, NetherExConstants.MOD_ID + ":nether/craft_kiln");
     }
 
-    protected static ResourceKey<Recipe<?>> getRecipeKey(ItemLike itemLike)
+    protected static ResourceLocation getRecipeKey(ItemLike itemLike)
     {
-        return ResourceKey.create(Registries.RECIPE, NetherExConstants.resource(getItemName(itemLike)));
+        return NetherExConstants.resource(getItemName(itemLike));
     }
 
     protected static String getItemName(ItemLike itemLike)

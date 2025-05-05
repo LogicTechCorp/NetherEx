@@ -99,17 +99,17 @@ public class NELanguageProviderEN_US extends LanguageProvider
             String typeName = netherrackType.getSerializedName();
             String bricksName = typeName + "_nether_bricks";
 
-            Block blockNetherrack = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_netherrack"));
-            Block blockQuartzOre = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_quartz_ore"));
-            Block blockGoldOre = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_gold_ore"));
-            Block blockNetherrackPath = BuiltInRegistries.BLOCK.getValue(modLoc(typeName + "_netherrack_path"));
-            Block blockNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc(bricksName));
-            Block blockCrackedNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc("cracked_" + bricksName));
-            Block blockChiseledNetherBricks = BuiltInRegistries.BLOCK.getValue(modLoc("chiseled_" + bricksName));
-            Block blockPolishedNetherrack = BuiltInRegistries.BLOCK.getValue(modLoc("polished_" + typeName + "_netherrack"));
-            Block blockChiseledPolishedNetherrack = BuiltInRegistries.BLOCK.getValue(modLoc("chiseled_polished_" + typeName + "_netherrack"));
+            Block blockNetherrack = BuiltInRegistries.BLOCK.get(modLoc(typeName + "_netherrack"));
+            Block blockQuartzOre = BuiltInRegistries.BLOCK.get(modLoc(typeName + "_quartz_ore"));
+            Block blockGoldOre = BuiltInRegistries.BLOCK.get(modLoc(typeName + "_gold_ore"));
+            Block blockNetherrackPath = BuiltInRegistries.BLOCK.get(modLoc(typeName + "_netherrack_path"));
+            Block blockNetherBricks = BuiltInRegistries.BLOCK.get(modLoc(bricksName));
+            Block blockCrackedNetherBricks = BuiltInRegistries.BLOCK.get(modLoc("cracked_" + bricksName));
+            Block blockChiseledNetherBricks = BuiltInRegistries.BLOCK.get(modLoc("chiseled_" + bricksName));
+            Block blockPolishedNetherrack = BuiltInRegistries.BLOCK.get(modLoc("polished_" + typeName + "_netherrack"));
+            Block blockChiseledPolishedNetherrack = BuiltInRegistries.BLOCK.get(modLoc("chiseled_polished_" + typeName + "_netherrack"));
 
-            Item itemNetherBrick = BuiltInRegistries.ITEM.getValue(modLoc(typeName + "_nether_brick"));
+            Item itemNetherBrick = BuiltInRegistries.ITEM.get(modLoc(typeName + "_nether_brick"));
 
             String typeDisplayName = typeName.substring(0, 1).toUpperCase() + typeName.substring(1);
 
@@ -238,23 +238,7 @@ public class NELanguageProviderEN_US extends LanguageProvider
             });
         });
     }
-
-    @Override
-    public void add(Block key, String name)
-    {
-        add(key.getDescriptionId(), name);
-
-        if (!key.getDescriptionId().contains("minecraft"))
-        {
-            Item item = BuiltInRegistries.ITEM.getValue(BuiltInRegistries.BLOCK.getKey(key));
-
-            if (item != Items.AIR)
-            {
-                addItem(() -> item, name);
-            }
-        }
-    }
-
+    
     private void addBlockWithDecorative(Block baseBlock, String baseBlockDisplayName, boolean isBaseBlockNamePlural)
     {
         String baseBlockName = name(baseBlock);
@@ -264,11 +248,11 @@ public class NELanguageProviderEN_US extends LanguageProvider
             baseBlockName = baseBlockName.substring(0, baseBlockName.length() - 1);
         }
 
-        Block baseBlockFence = BuiltInRegistries.BLOCK.getValue(modLoc(baseBlockName + "_fence"));
-        Block baseBlockFenceGate = BuiltInRegistries.BLOCK.getValue(modLoc(baseBlockName + "_fence_gate"));
-        Block baseBlockSlab = BuiltInRegistries.BLOCK.getValue(modLoc(baseBlockName + "_slab"));
-        Block baseBlockStairs = BuiltInRegistries.BLOCK.getValue(modLoc(baseBlockName + "_stairs"));
-        Block baseBlockWall = BuiltInRegistries.BLOCK.getValue(modLoc(baseBlockName + "_wall"));
+        Block baseBlockFence = BuiltInRegistries.BLOCK.get(modLoc(baseBlockName + "_fence"));
+        Block baseBlockFenceGate = BuiltInRegistries.BLOCK.get(modLoc(baseBlockName + "_fence_gate"));
+        Block baseBlockSlab = BuiltInRegistries.BLOCK.get(modLoc(baseBlockName + "_slab"));
+        Block baseBlockStairs = BuiltInRegistries.BLOCK.get(modLoc(baseBlockName + "_stairs"));
+        Block baseBlockWall = BuiltInRegistries.BLOCK.get(modLoc(baseBlockName + "_wall"));
 
         String decorativeBlockDisplayName = baseBlockDisplayName;
 

@@ -64,7 +64,7 @@ public class NetherExBiomes extends OverworldBiomes
                 .addMobCharge(EntityType.ENDERMAN, 0.7d, 0.15d);
 
         BiomeGenerationSettings.Builder biomeGenerationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatureHolderGetter, configuredWorldCarverHolderGetter)
-                .addCarver(Carvers.NETHER_CAVE)
+                .addCarver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, NetherExFeaturePlacements.THORNSTALK)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA)
                 .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, NetherPlacements.BASALT_PILLAR)
@@ -114,7 +114,7 @@ public class NetherExBiomes extends OverworldBiomes
                 .addMobCharge(EntityType.STRIDER, 0.7d, 0.15d);
 
         BiomeGenerationSettings.Builder biomeGenerationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatureHolderGetter, configuredWorldCarverHolderGetter)
-                .addCarver(Carvers.NETHER_CAVE)
+                .addCarver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_MAGMA_HEAVY)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.SPRING_OPEN_HEAVY)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.PATCH_FIRE_HEAVY)
@@ -161,7 +161,7 @@ public class NetherExBiomes extends OverworldBiomes
                 .addMobCharge(EntityType.STRIDER, 0.7d, 0.15d);
 
         BiomeGenerationSettings.Builder biomeGenerationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatureHolderGetter, configuredWorldCarverHolderGetter)
-                .addCarver(Carvers.NETHER_CAVE)
+                .addCarver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE)
                 .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, NetherExFeaturePlacements.HUGE_ELDER_MUSHROOMS)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.GLOWSTONE_EXTRA)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.GLOWSTONE);

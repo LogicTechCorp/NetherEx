@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "netherex:block/twisted_shroomstem"
+    "layer0": "netherex:item/twisted_shroomfruit"
   }
 }

@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.redstone.Orientation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +20,7 @@ public class NEBlockBehaviourMixin
             method = "neighborChanged",
             at = @At("HEAD")
     )
-    private void netherex$neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, Orientation orientation, boolean causedByPiston, CallbackInfo callback)
+    private void netherex$neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston, CallbackInfo callback)
     {
         Block block = state.getBlock();
 
@@ -36,7 +35,7 @@ public class NEBlockBehaviourMixin
 
                     if (checkState.is(NetherExBlockTags.OBSIDIAN_HEATER))
                     {
-                        level.neighborChanged(checkState, checkPos, block, null, causedByPiston);
+                        level.neighborChanged(checkState, checkPos, block, neighborPos, movedByPiston);
                     }
                 }
             }

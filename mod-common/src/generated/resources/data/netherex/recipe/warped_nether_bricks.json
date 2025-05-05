@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "minecraft:nether_bricks",
-    "&": "netherex:warped_wart"
+    "#": {
+      "item": "minecraft:nether_bricks"
+    },
+    "&": {
+      "item": "netherex:warped_wart"
+    }
   },
   "pattern": [
     "#&",

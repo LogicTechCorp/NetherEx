@@ -4,10 +4,9 @@ import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.entity.projectile.NEAshenArrow;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.state.ArrowRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-public class NEAshenArrowRenderer extends ArrowRenderer<NEAshenArrow, ArrowRenderState>
+public class NEAshenArrowRenderer extends ArrowRenderer<NEAshenArrow>
 {
     private static final ResourceLocation TEXTURE = NetherExConstants.resource("textures/entity/projectiles/ashen_arrow.png");
 
@@ -17,13 +16,7 @@ public class NEAshenArrowRenderer extends ArrowRenderer<NEAshenArrow, ArrowRende
     }
 
     @Override
-    public ArrowRenderState createRenderState()
-    {
-        return new ArrowRenderState();
-    }
-
-    @Override
-    protected ResourceLocation getTextureLocation(ArrowRenderState arrowRenderState)
+    public ResourceLocation getTextureLocation(NEAshenArrow neAshenArrow)
     {
         return TEXTURE;
     }

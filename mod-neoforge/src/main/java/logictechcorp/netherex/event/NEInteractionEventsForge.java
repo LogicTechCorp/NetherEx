@@ -7,7 +7,7 @@ import logictechcorp.netherex.registry.NetherExItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -28,7 +28,7 @@ public class NEInteractionEventsForge
 
         if (level.isClientSide)
         {
-            event.setCancellationResult(InteractionResult.PASS);
+            event.setCancellationResult(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
             event.setCanceled(true);
             return;
         }
@@ -79,7 +79,7 @@ public class NEInteractionEventsForge
             return;
         }
 
-        event.setCancellationResult(InteractionResult.SUCCESS_SERVER);
+        event.setCancellationResult(ItemInteractionResult.SUCCESS);
         event.setCanceled(true);
     }
 }

@@ -1,7 +1,7 @@
 package logictechcorp.netherex.block;
 
-import logictechcorp.netherex.registry.NetherExItems;
 import com.mojang.serialization.MapCodec;
+import logictechcorp.netherex.registry.NetherExItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +27,7 @@ public class NEShroomstemBlock extends NEAbstractShroomstemBlock
     }
 
     @Override
-    protected ItemStack getCloneItemStack(LevelReader levelReader, BlockPos pos, BlockState state, boolean p_388788_)
+    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos pos, BlockState state)
     {
         return new ItemStack(NetherExItems.SHROOMFRUIT.get());
     }

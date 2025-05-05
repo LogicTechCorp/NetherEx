@@ -124,7 +124,7 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
     {
         int mushroomPosY = mushroomPos.getY();
 
-        if (mushroomPosY < level.getMinY() || mushroomPosY + stemHeight + 1 > level.getMaxY())
+        if (mushroomPosY < level.getMinBuildHeight() || mushroomPosY + stemHeight + 1 > level.getMaxBuildHeight())
         {
             return false;
         }

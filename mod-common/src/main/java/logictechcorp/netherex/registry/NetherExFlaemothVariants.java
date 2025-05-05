@@ -35,19 +35,19 @@ public class NetherExFlaemothVariants
     public static Holder<NEFlaemothVariant> getBiomeSpawnVariant(RegistryAccess registryAccess, Holder<Biome> biome, RandomSource randomSource)
     {
         SimpleWeightedRandomList.Builder<Holder.Reference<NEFlaemothVariant>> spawnVariantsBuilder = new SimpleWeightedRandomList.Builder<>();
-        Registry<NEFlaemothVariant> registry = registryAccess.lookupOrThrow(NetherExRegistries.Keys.FLAEMOTH_VARIANT);
-        registry.listElements().filter(flaemoth -> flaemoth.value().spawnBiomes().contains(biome)).forEach(flaemothVariantRef -> spawnVariantsBuilder.add(flaemothVariantRef, flaemothVariantRef.value().spawnWeight()));
+        Registry<NEFlaemothVariant> registry = registryAccess.registryOrThrow(NetherExRegistries.Keys.FLAEMOTH_VARIANT);
+        registry.holders().filter(flaemoth -> flaemoth.value().spawnBiomes().contains(biome)).forEach(flaemothVariantRef -> spawnVariantsBuilder.add(flaemothVariantRef, flaemothVariantRef.value().spawnWeight()));
         Optional<Holder.Reference<NEFlaemothVariant>> key = spawnVariantsBuilder.build().getRandomValue(randomSource);
-        return key.orElseGet(() -> registry.get(CRIMSON).orElseThrow());
+        return key.orElseGet(() -> registry.getHolder(CRIMSON).orElseThrow());
     }
 
     public static Holder<NEFlaemothVariant> getRandomSpawnVariant(RegistryAccess registryAccess, RandomSource randomSource)
     {
         SimpleWeightedRandomList.Builder<Holder.Reference<NEFlaemothVariant>> spawnVariantsBuilder = new SimpleWeightedRandomList.Builder<>();
-        Registry<NEFlaemothVariant> registry = registryAccess.lookupOrThrow(NetherExRegistries.Keys.FLAEMOTH_VARIANT);
-        registry.listElements().forEach(flaemothVariantRef -> spawnVariantsBuilder.add(flaemothVariantRef, flaemothVariantRef.value().spawnWeight()));
+        Registry<NEFlaemothVariant> registry = registryAccess.registryOrThrow(NetherExRegistries.Keys.FLAEMOTH_VARIANT);
+        registry.holders().forEach(flaemothVariantRef -> spawnVariantsBuilder.add(flaemothVariantRef, flaemothVariantRef.value().spawnWeight()));
         Optional<Holder.Reference<NEFlaemothVariant>> key = spawnVariantsBuilder.build().getRandomValue(randomSource);
-        return key.orElseGet(() -> registry.get(CRIMSON).orElseThrow());
+        return key.orElseGet(() -> registry.getHolder(CRIMSON).orElseThrow());
     }
 
     private static void register(BootstrapContext<NEFlaemothVariant> context, ResourceKey<NEFlaemothVariant> Key, String name, ResourceKey<Biome> spawnBiomes, int spawnWeight)

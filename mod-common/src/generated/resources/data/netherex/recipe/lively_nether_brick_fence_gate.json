@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": "netherex:lively_nether_brick",
-    "W": "netherex:lively_nether_bricks"
+    "#": {
+      "item": "netherex:lively_nether_brick"
+    },
+    "W": {
+      "item": "netherex:lively_nether_bricks"
+    }
   },
   "pattern": [
     "#W#",

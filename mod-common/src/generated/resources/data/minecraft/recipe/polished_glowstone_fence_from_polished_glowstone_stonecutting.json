@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "netherex:polished_glowstone",
+  "ingredient": {
+    "item": "netherex:polished_glowstone"
+  },
   "result": {
     "count": 1,
     "id": "netherex:polished_glowstone_fence"

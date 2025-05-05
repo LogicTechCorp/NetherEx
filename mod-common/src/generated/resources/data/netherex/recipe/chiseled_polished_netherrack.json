@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "netherex:polished_netherrack_slab"
+    "#": {
+      "item": "netherex:polished_netherrack_slab"
+    }
   },
   "pattern": [
     "#",

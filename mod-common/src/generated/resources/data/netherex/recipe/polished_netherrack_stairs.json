@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "netherex:polished_netherrack"
+    "#": {
+      "item": "netherex:polished_netherrack"
+    }
   },
   "pattern": [
     "#  ",

@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:nether_bricks",
-    "X": "minecraft:furnace"
+    "#": {
+      "item": "minecraft:nether_bricks"
+    },
+    "X": {
+      "item": "minecraft:furnace"
+    }
   },
   "pattern": [
     "###",

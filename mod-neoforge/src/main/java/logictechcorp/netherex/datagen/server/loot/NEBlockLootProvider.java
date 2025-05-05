@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -109,19 +110,18 @@ public class NEBlockLootProvider extends BlockLootSubProvider
     @Override
     protected void add(Block block, LootTable.Builder builder)
     {
-        block.getLootTable().ifPresent(lootTableResourceKey ->
+        ResourceKey<LootTable> lootTableResourceKey = block.getLootTable();
+
+        if (!map.containsKey(lootTableResourceKey))
         {
-            if (!map.containsKey(lootTableResourceKey))
-            {
-                super.add(block, builder);
-            }
-        });
+            super.add(block, builder);
+        }
     }
 
     @Override
     protected void dropSelf(Block block)
     {
-        Item item = BuiltInRegistries.ITEM.getValue(BuiltInRegistries.BLOCK.getKey(block));
+        Item item = BuiltInRegistries.ITEM.get(BuiltInRegistries.BLOCK.getKey(block));
 
         if (item != Items.AIR)
         {

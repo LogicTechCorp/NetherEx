@@ -11,8 +11,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -59,14 +59,14 @@ public class NEGlowingObsidianBlock extends Block
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource)
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos)
     {
-        if (!hasHeater(levelReader, pos))
+        if (!hasHeater(level, pos))
         {
-            tickAccess.scheduleTick(pos, this, 0);
+            level.scheduleTick(pos, this, 0);
         }
 
-        return super.updateShape(state, levelReader, tickAccess, pos, direction, neighborPos, neighborState, randomSource);
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     public static boolean hasHeater(LevelReader levelReader, BlockPos pos)

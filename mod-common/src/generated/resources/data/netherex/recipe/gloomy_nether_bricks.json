@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "netherex:gloomy_nether_brick"
+    "#": {
+      "item": "netherex:gloomy_nether_brick"
+    }
   },
   "pattern": [
     "##",

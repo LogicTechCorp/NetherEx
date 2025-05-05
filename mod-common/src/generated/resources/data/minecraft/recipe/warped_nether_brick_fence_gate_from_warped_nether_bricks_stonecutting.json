@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "netherex:warped_nether_bricks",
+  "ingredient": {
+    "item": "netherex:warped_nether_bricks"
+  },
   "result": {
     "count": 1,
     "id": "netherex:warped_nether_brick_fence_gate"

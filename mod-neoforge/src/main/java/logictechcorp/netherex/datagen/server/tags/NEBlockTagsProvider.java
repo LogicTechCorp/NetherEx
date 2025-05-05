@@ -8,14 +8,15 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class NEBlockTagsProvider extends BlockTagsProvider
 {
-    public NEBlockTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider)
+    public NEBlockTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper)
     {
-        super(packOutput, lookupProvider, NetherExConstants.MOD_ID);
+        super(packOutput, lookupProvider, NetherExConstants.MOD_ID, existingFileHelper);
     }
 
     @Override

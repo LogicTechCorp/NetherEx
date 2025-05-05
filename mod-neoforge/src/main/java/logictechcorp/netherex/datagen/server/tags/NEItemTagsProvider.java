@@ -10,14 +10,15 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class NEItemTagsProvider extends ItemTagsProvider
 {
-    public NEItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider)
+    public NEItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper)
     {
-        super(packOutput, lookupProvider, blockTagProvider, NetherExConstants.MOD_ID);
+        super(packOutput, lookupProvider, blockTagProvider, NetherExConstants.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class NEItemTagsProvider extends ItemTagsProvider
 
         tag(NetherExItemTags.SALAMANDER_FOOD)
                 .add(Items.MAGMA_CREAM);
-        
+
         tag(NetherExItemTags.MOGUS_FOOD)
                 .add(Items.BROWN_MUSHROOM)
                 .add(Items.RED_MUSHROOM)

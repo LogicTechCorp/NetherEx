@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "minecraft:crimson_roots"
+    "#": {
+      "item": "minecraft:crimson_roots"
+    }
   },
   "pattern": [
     "##",

@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "netherite_ingot",
   "key": {
-    "#": "netherex:netherite_nugget"
+    "#": {
+      "item": "netherex:netherite_nugget"
+    }
   },
   "pattern": [
     "###",

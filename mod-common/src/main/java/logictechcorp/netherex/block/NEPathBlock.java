@@ -9,8 +9,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -47,14 +47,14 @@ public class NEPathBlock extends Block
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource)
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos)
     {
-        if (direction == Direction.UP && !state.canSurvive(levelReader, pos))
+        if (direction == Direction.UP && !state.canSurvive(level, pos))
         {
-            tickAccess.scheduleTick(pos, this, 1);
+            level.scheduleTick(pos, this, 1);
         }
 
-        return super.updateShape(state, levelReader, tickAccess, pos, direction, neighborPos, neighborState, randomSource);
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     @Override

@@ -59,7 +59,7 @@ public class NEBoomstoneBlock extends Block
     }
 
     @Override
-    public void wasExploded(ServerLevel level, BlockPos pos, Explosion explosion)
+    public void wasExploded(Level level, BlockPos pos, Explosion explosion)
     {
         BlockState state = level.getBlockState(pos);
         setUnstable(level, state, pos);

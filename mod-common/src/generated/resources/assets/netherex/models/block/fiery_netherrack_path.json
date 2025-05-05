@@ -3,7 +3,7 @@
   "textures": {
     "bottom": "netherex:block/fiery_netherrack",
     "particle": "netherex:block/fiery_netherrack_path",
-    "side": "netherex:block/fiery_netherrack_path_side",
+    "side": "netherex:block/fiery_netherrack",
     "top": "netherex:block/fiery_netherrack_path"
   }
 }

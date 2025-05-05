@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "netherex:wither_bone_meal"
+    "#": {
+      "item": "netherex:wither_bone_meal"
+    }
   },
   "pattern": [
     "###",

@@ -15,6 +15,6 @@ public class NEBlockEntityHelperNeoForge implements NEBlockEntityHelper
     @Override
     public <E extends BlockEntity> BlockEntityType<E> createBlockEntityType(BiFunction<BlockPos, BlockState, E> createBlockEntityFunc, Block... blocks)
     {
-        return new BlockEntityType<>(createBlockEntityFunc::apply, blocks);
+        return BlockEntityType.Builder.of(createBlockEntityFunc::apply, blocks).build(null);
     }
 }

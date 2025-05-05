@@ -28,7 +28,7 @@ dependencies {
 
     compileOnly 'com.github.glitchfiend:TerraBlender-common:' + minecraft_version + '-' + terrablender_version
     compileOnly "software.bernie.geckolib:geckolib-common-${minecraft_version}:${geckolib_version}"
-    compileOnly "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-${minecraft_version}:$resourcefulconfig_version"
+    compileOnly "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-$resourcefulconfig_minecraft_version:$resourcefulconfig_version"
 }
 
 configurations {

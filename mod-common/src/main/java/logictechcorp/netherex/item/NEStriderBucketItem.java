@@ -3,7 +3,7 @@ package logictechcorp.netherex.item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +32,6 @@ public class NEStriderBucketItem extends MobBucketItem
 
     protected void spawnStrider(ServerLevel serverLevel, ItemStack bucketStack, BlockPos pos)
     {
-        EntityType.STRIDER.spawn(serverLevel, bucketStack, null, pos, EntitySpawnReason.BUCKET, true, false);
+        EntityType.STRIDER.spawn(serverLevel, bucketStack, null, pos, MobSpawnType.BUCKET, true, false);
     }
 }

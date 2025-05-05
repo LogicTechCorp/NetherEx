@@ -34,7 +34,7 @@ public class NEAshenArrow extends AbstractArrow
     {
         super.tick();
 
-        if (level().isClientSide() && !isInGround())
+        if (level().isClientSide() && !inGround)
         {
             level().addParticle(ParticleTypes.SMOKE, getX(), getY(), getZ(), 0.0d, 0.0d, 0.0d);
         }

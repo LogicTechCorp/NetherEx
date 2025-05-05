@@ -19,7 +19,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     modImplementation "com.github.glitchfiend:TerraBlender-fabric:${minecraft_version}-${terrablender_version}"
     modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
-    modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-${minecraft_version}:$resourcefulconfig_version"
+    modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$resourcefulconfig_minecraft_version:$resourcefulconfig_version"
 }
 
 loom {

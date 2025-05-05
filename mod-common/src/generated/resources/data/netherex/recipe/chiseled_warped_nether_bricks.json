@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "netherex:warped_nether_brick_slab"
+    "#": {
+      "item": "netherex:warped_nether_brick_slab"
+    }
   },
   "pattern": [
     "#",

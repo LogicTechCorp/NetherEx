@@ -11,8 +11,6 @@ import logictechcorp.netherex.platform.NEEntityHelper;
 import logictechcorp.netherex.platform.registration.RegistrationProvider;
 import logictechcorp.netherex.platform.registration.RegistryObject;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -51,18 +49,13 @@ public class NetherExEntityTypes
 
     private static <E extends Entity> RegistryObject<EntityType<?>, EntityType<E>> registerEntityType(String name, EntityType.Builder<E> builder)
     {
-        return ENTITY_TYPES.register(name, () -> builder.build(createKey(name)));
+        return ENTITY_TYPES.register(name, () -> builder.build(name));
     }
 
     private static <E extends LivingEntity> RegistryObject<EntityType<?>, EntityType<E>> registerEntityType(String name, Supplier<AttributeSupplier> attributeSupplierSupplier, EntityType.Builder<E> builder)
     {
-        RegistryObject<EntityType<?>, EntityType<E>> entityType = ENTITY_TYPES.register(name, () -> builder.build(createKey(name)));
+        RegistryObject<EntityType<?>, EntityType<E>> entityType = ENTITY_TYPES.register(name, () -> builder.build(name));
         ENTITY_ATTRIBUTES.put(entityType::get, attributeSupplierSupplier);
         return entityType;
-    }
-
-    private static ResourceKey<EntityType<?>> createKey(String name)
-    {
-        return ResourceKey.create(Registries.ENTITY_TYPE, NetherExConstants.resource(name));
     }
 }

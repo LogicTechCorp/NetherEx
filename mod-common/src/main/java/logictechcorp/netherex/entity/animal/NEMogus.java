@@ -52,13 +52,13 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
 
     public static AttributeSupplier createAttributes()
     {
-        return Animal.createAnimalAttributes()
+        return Animal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4.0d)
                 .add(Attributes.MOVEMENT_SPEED, 0.35d)
                 .build();
     }
 
-    public static boolean checkMogusSpawnRules(EntityType<NEMogus> entityType, LevelAccessor level, EntitySpawnReason entitySpawnReason, BlockPos pos, RandomSource random)
+    public static boolean checkMogusSpawnRules(EntityType<NEMogus> entityType, LevelAccessor level, MobSpawnType MobSpawnType, BlockPos pos, RandomSource random)
     {
         return true;
     }
@@ -67,8 +67,8 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         super.defineSynchedData(builder);
-        Registry<NEMogusVariant> registry = registryAccess().lookupOrThrow(NetherExRegistries.Keys.MOGUS_VARIANT);
-        builder.define(VARIANT_ID, registry.get(NetherExMogusVariants.BROWN).or(registry::getAny).orElseThrow());
+        Registry<NEMogusVariant> registry = registryAccess().registryOrThrow(NetherExRegistries.Keys.MOGUS_VARIANT);
+        builder.define(VARIANT_ID, registry.getHolder(NetherExMogusVariants.BROWN).or(registry::getAny).orElseThrow());
     }
 
     @Override
@@ -114,9 +114,9 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, EntitySpawnReason entitySpawnReason, @Nullable SpawnGroupData spawnGroupData)
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType MobSpawnType, @Nullable SpawnGroupData spawnGroupData)
     {
-        spawnGroupData = super.finalizeSpawn(levelAccessor, difficultyInstance, entitySpawnReason, spawnGroupData);
+        spawnGroupData = super.finalizeSpawn(levelAccessor, difficultyInstance, MobSpawnType, spawnGroupData);
 
         Holder<NEMogusVariant> mogusVariant = NetherExMogusVariants.getBiomeSpawnVariant(registryAccess(), random);
         setVariant(mogusVariant);
@@ -162,7 +162,7 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob otherParent)
     {
-        NEMogus mogus = NetherExEntityTypes.MOGUS.get().create(serverLevel, EntitySpawnReason.BREEDING);
+        NEMogus mogus = NetherExEntityTypes.MOGUS.get().create(serverLevel);
 
         if (mogus != null)
         {

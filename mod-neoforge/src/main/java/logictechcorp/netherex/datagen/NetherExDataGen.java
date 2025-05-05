@@ -2,8 +2,8 @@ package logictechcorp.netherex.datagen;
 
 import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.datagen.client.language.NELanguageProviderEN_US;
-import logictechcorp.netherex.datagen.client.model.NEEquipmentAssetProvider;
-import logictechcorp.netherex.datagen.client.model.NEModelProvider;
+import logictechcorp.netherex.datagen.client.model.NEBlockModelProvider;
+import logictechcorp.netherex.datagen.client.model.NEItemModelProvider;
 import logictechcorp.netherex.datagen.server.NEDataPackProvider;
 import logictechcorp.netherex.datagen.server.advancements.NEAdvancements;
 import logictechcorp.netherex.datagen.server.loot.NELootModifiers;
@@ -17,6 +17,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
@@ -25,23 +26,26 @@ import java.util.concurrent.CompletableFuture;
 public class NetherExDataGen
 {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent.Client event)
+    public static void gatherData(GatherDataEvent event)
     {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> registries = event.createProvider(NEDataPackProvider::new).getRegistryProvider();
 
         // Server
         event.addProvider(new NELootTableProvider(packOutput, registries));
         event.createProvider(NELootModifiers::new);
-        event.createProvider(NERecipeProvider.Runner::new);
-        event.createProvider(NEBiomeTagsProvider::new);
-        event.createBlockAndItemTags(NEBlockTagsProvider::new, NEItemTagsProvider::new);
+        event.createProvider(NERecipeProvider::new);
+        event.addProvider(new NEBiomeTagsProvider(packOutput, registries, existingFileHelper));
+        NEBlockTagsProvider blockTagsProvider = new NEBlockTagsProvider(packOutput, registries, existingFileHelper);
+        event.addProvider(blockTagsProvider);
+        event.addProvider(new NEItemTagsProvider(packOutput, registries, blockTagsProvider.contentsGetter(), existingFileHelper));
         event.addProvider(NEAdvancements.create(packOutput, registries));
 
         // Client
-        event.createProvider(NEModelProvider::new);
+        event.addProvider(new NEBlockModelProvider(packOutput, existingFileHelper));
+        event.addProvider(new NEItemModelProvider(packOutput, existingFileHelper));
         event.createProvider(NELanguageProviderEN_US::new);
-        event.createProvider(NEEquipmentAssetProvider::new);
     }
 }

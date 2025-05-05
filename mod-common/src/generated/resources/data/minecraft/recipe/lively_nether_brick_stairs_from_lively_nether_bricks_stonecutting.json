@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "netherex:lively_nether_bricks",
+  "ingredient": {
+    "item": "netherex:lively_nether_bricks"
+  },
   "result": {
     "count": 1,
     "id": "netherex:lively_nether_brick_stairs"

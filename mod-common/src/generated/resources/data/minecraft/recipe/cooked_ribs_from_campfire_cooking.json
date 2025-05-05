@@ -3,7 +3,9 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": "netherex:ribs",
+  "ingredient": {
+    "item": "netherex:ribs"
+  },
   "result": {
     "count": 1,
     "id": "netherex:cooked_ribs"

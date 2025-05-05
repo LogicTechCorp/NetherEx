@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:nether_brick",
-    "W": "netherex:polished_glowstone"
+    "#": {
+      "item": "minecraft:nether_brick"
+    },
+    "W": {
+      "item": "netherex:polished_glowstone"
+    }
   },
   "pattern": [
     "W#W",

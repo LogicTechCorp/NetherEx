@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "netherex:gloomy_nether_brick",
-    "W": "netherex:gloomy_nether_bricks"
+    "#": {
+      "item": "netherex:gloomy_nether_brick"
+    },
+    "W": {
+      "item": "netherex:gloomy_nether_bricks"
+    }
   },
   "pattern": [
     "W#W",

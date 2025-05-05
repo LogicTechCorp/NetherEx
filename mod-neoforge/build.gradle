@@ -41,7 +41,7 @@ neoForge {
 
         data {
             programArguments.addAll(dataArgs)
-            clientData()
+            data()
         }
     }
     mods {
@@ -54,7 +54,7 @@ neoForge {
 dependencies {
     implementation 'com.github.glitchfiend:TerraBlender-neoforge:' + minecraft_version + '-' + terrablender_version
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
-    implementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-neoforge-${minecraft_version}:$resourcefulconfig_version"
+    implementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-neoforge-$resourcefulconfig_minecraft_version:$resourcefulconfig_version"
 }
 
 sourceSets.main.resources { srcDir project.project(':mod-common').file('src/generated/resources/').getAbsolutePath() }

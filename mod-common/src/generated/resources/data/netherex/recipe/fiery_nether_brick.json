@@ -3,7 +3,9 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": "netherex:fiery_netherrack",
+  "ingredient": {
+    "item": "netherex:fiery_netherrack"
+  },
   "result": {
     "count": 1,
     "id": "netherex:fiery_nether_brick"

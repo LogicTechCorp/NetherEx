@@ -24,7 +24,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.Creeper;
@@ -48,10 +47,11 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 public class NESalamander extends TamableAnimal implements NeutralMob, VariantHolder<Holder<NESalamanderVariant>>, GeoEntity
 {
-    private static final TargetingConditions.Selector PREY_SELECTOR = (livingEntity, serverLevel) ->
+    private static final Predicate<LivingEntity> PREY_SELECTOR = (livingEntity) ->
     {
         EntityType<?> entityType = livingEntity.getType();
         return entityType == EntityType.SPIDER || entityType == EntityType.BEE || entityType == EntityType.SILVERFISH || entityType == EntityType.SLIME;
@@ -75,7 +75,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
 
     public static AttributeSupplier createAttributes()
     {
-        return TamableAnimal.createAnimalAttributes()
+        return TamableAnimal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0d)
                 .add(Attributes.ATTACK_DAMAGE, 3.0d)
                 .add(Attributes.ATTACK_SPEED, 3.0d)
@@ -83,7 +83,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
                 .build();
     }
 
-    public static boolean checkSalamanderSpawnRules(EntityType<NESalamander> entityType, LevelAccessor level, EntitySpawnReason entitySpawnReason, BlockPos pos, RandomSource random)
+    public static boolean checkSalamanderSpawnRules(EntityType<NESalamander> entityType, LevelAccessor level, MobSpawnType MobSpawnType, BlockPos pos, RandomSource random)
     {
         return true;
     }
@@ -92,8 +92,8 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         super.defineSynchedData(builder);
-        Registry<NESalamanderVariant> registry = registryAccess().lookupOrThrow(NetherExRegistries.Keys.SALAMANDER_VARIANT);
-        builder.define(VARIANT_ID, registry.get(NetherExSalamanderVariants.ORANGE).or(registry::getAny).orElseThrow());
+        Registry<NESalamanderVariant> registry = registryAccess().registryOrThrow(NetherExRegistries.Keys.SALAMANDER_VARIANT);
+        builder.define(VARIANT_ID, registry.getHolder(NetherExSalamanderVariants.ORANGE).or(registry::getAny).orElseThrow());
         builder.define(REMAINING_ANGER_TIME, 0);
     }
 
@@ -172,7 +172,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, EntitySpawnReason spawnReason, SpawnGroupData spawnGroupData)
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnReason, SpawnGroupData spawnGroupData)
     {
         Holder<NESalamanderVariant> salamanderVariant = NetherExSalamanderVariants.getRandomSpawnVariant(registryAccess(), random);
         setVariant(salamanderVariant);
@@ -227,7 +227,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
                     jumping = false;
                     navigation.stop();
                     setTarget(null);
-                    return InteractionResult.SUCCESS.withoutItem();
+                    return InteractionResult.SUCCESS_NO_ITEM_USED;
                 }
                 else
                 {
@@ -240,7 +240,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
         {
             heldStack.consume(1, player);
             tryToTame(player);
-            return InteractionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS;
         }
         else
         {
@@ -249,9 +249,9 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     }
 
     @Override
-    public boolean hurtServer(ServerLevel serverLevel, DamageSource damageSource, float amount)
+    public boolean hurt(DamageSource damageSource, float amount)
     {
-        if (isInvulnerableTo(serverLevel, damageSource))
+        if (isInvulnerableTo(damageSource))
         {
             return false;
         }
@@ -266,7 +266,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
                 amount = (amount + 1.0f) / 2.0f;
             }
 
-            return super.hurtServer(serverLevel, damageSource, amount);
+            return super.hurt(damageSource, amount);
         }
     }
 
@@ -376,7 +376,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob otherParent)
     {
-        NESalamander salamander = NetherExEntityTypes.SALAMANDER.get().create(serverLevel, EntitySpawnReason.BREEDING);
+        NESalamander salamander = NetherExEntityTypes.SALAMANDER.get().create(serverLevel);
 
         if (salamander != null)
         {

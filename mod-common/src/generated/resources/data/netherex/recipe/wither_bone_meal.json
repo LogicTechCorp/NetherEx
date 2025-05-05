@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "netherex:wither_bone"
+    {
+      "item": "netherex:wither_bone"
+    }
   ],
   "result": {
     "count": 3,

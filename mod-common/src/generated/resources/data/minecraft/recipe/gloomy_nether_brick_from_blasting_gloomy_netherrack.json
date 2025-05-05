@@ -4,7 +4,9 @@
   "cookingtime": 100,
   "experience": 0.1,
   "group": "gloomy_nether_brick",
-  "ingredient": "netherex:gloomy_netherrack",
+  "ingredient": {
+    "item": "netherex:gloomy_netherrack"
+  },
   "result": {
     "count": 1,
     "id": "netherex:gloomy_nether_brick"

@@ -41,27 +41,24 @@ public class NELootEventsFabric
                     builder.withPool(singularLoot(NetherExItems.NETHERITE_HORSE_ARMOR.get()));
                 }
 
-                EntityType.HOGLIN.getDefaultLootTable().ifPresent(defaultLootTable ->
+                if (lootTableKey == EntityType.HOGLIN.getDefaultLootTable())
                 {
-                    if (lootTableKey == defaultLootTable)
-                    {
-                        builder.withPool(LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
-                                .add(LootItem.lootTableItem(NetherExItems.RIBS.get())
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
-                                        .apply(SmeltItemFunction.smelted().when(shouldSmeltLoot(registries)))
-                                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
-                                )
-                        );
-                        builder.withPool(LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
-                                .add(LootItem.lootTableItem(NetherExItems.HOGLIN_TUSK.get())
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
-                                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
-                                )
-                        );
-                    }
-                });
+                    builder.withPool(LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(LootItem.lootTableItem(NetherExItems.RIBS.get())
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+                                    .apply(SmeltItemFunction.smelted().when(shouldSmeltLoot(registries)))
+                                    .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
+                            )
+                    );
+                    builder.withPool(LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(LootItem.lootTableItem(NetherExItems.HOGLIN_TUSK.get())
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                                    .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
+                            )
+                    );
+                }
             }
         });
     }

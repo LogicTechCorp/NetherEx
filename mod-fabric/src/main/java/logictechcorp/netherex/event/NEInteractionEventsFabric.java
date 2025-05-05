@@ -75,7 +75,7 @@ public class NEInteractionEventsFabric
                 return InteractionResult.PASS;
             }
 
-            return InteractionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS;
         });
     }
 }

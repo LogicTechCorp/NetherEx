@@ -9,8 +9,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -85,12 +85,11 @@ public class NEWisp extends PathfinderMob implements NeutralMob, FlyingAnimal, G
         };
         flyingPathNavigation.setCanOpenDoors(false);
         flyingPathNavigation.setCanFloat(false);
-        flyingPathNavigation.setRequiredPathLength(16.0f);
+        flyingPathNavigation.setCanPassDoors(true);
         return flyingPathNavigation;
     }
 
-
-    public static boolean checkWispSpawnRules(EntityType<NEWisp> entityType, LevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random)
+    public static boolean checkWispSpawnRules(EntityType<NEWisp> entityType, LevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random)
     {
         return true;
     }

@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "bonemeal",
   "ingredients": [
-    "netherex:wither_bone_block"
+    {
+      "item": "netherex:wither_bone_block"
+    }
   ],
   "result": {
     "count": 9,
