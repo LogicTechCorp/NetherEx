@@ -44,7 +44,7 @@ public class NetherExEntityTypes
         NEEntityHelper.INSTANCE.registerSpawnPlacement(WISP, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NEWisp::checkWispSpawnRules);
         NEEntityHelper.INSTANCE.registerSpawnPlacement(SALAMANDER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NESalamander::checkSalamanderSpawnRules);
         NEEntityHelper.INSTANCE.registerSpawnPlacement(MOGUS, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NEMogus::checkMogusSpawnRules);
-        NEEntityHelper.INSTANCE.registerSpawnPlacement(FLAEMOTH, SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NEFlaemoth::checkFlaemothSpawnRules);
+        NEEntityHelper.INSTANCE.registerSpawnPlacement(FLAEMOTH, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NEFlaemoth::checkFlaemothSpawnRules);
     }
 
     private static <E extends Entity> RegistryObject<EntityType<?>, EntityType<E>> registerEntityType(String name, EntityType.Builder<E> builder)
