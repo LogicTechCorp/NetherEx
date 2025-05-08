@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "netherex:ruthless_sands",
-    "netherex:torrid_wasteland",
-    "netherex:fungi_forest"
+    "netherex:ruthless_sands"
   ]
 }
