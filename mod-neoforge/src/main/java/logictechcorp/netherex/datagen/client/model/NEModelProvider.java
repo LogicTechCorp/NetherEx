@@ -16,7 +16,7 @@ public class NEModelProvider extends ModelProvider
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels)
     {
-        new NEBlockModelGenerator(blockModels).registerModels();
+        new NEBlockModelProvider(blockModels).registerModels();
         new NEItemModelProvider(itemModels).registerModels();
     }
 }

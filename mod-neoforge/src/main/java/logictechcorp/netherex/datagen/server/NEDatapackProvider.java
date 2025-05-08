@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class NEDataPackProvider extends DatapackBuiltinEntriesProvider
+public class NEDatapackProvider extends DatapackBuiltinEntriesProvider
 {
     private static RegistrySetBuilder getRegistrySetBuilder()
     {
@@ -25,7 +25,7 @@ public class NEDataPackProvider extends DatapackBuiltinEntriesProvider
         return registrySetBuilder;
     }
 
-    public NEDataPackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
+    public NEDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
     {
         super(output, registries, getRegistrySetBuilder(), Set.of(NetherExConstants.MOD_ID));
     }

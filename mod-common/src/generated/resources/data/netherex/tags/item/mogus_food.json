@@ -3,6 +3,7 @@
     "minecraft:brown_mushroom",
     "minecraft:red_mushroom",
     "netherex:brown_elder_mushroom",
-    "netherex:red_elder_mushroom"
+    "netherex:red_elder_mushroom",
+    "#c:mushrooms"
   ]
 }

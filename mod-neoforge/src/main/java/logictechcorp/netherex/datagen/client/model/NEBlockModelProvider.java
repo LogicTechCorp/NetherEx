@@ -18,11 +18,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 
-public class NEBlockModelGenerator
+public class NEBlockModelProvider
 {
     private final BlockModelGenerators blockModels;
 
-    public NEBlockModelGenerator(BlockModelGenerators inBlockModels)
+    public NEBlockModelProvider(BlockModelGenerators inBlockModels)
     {
         blockModels = inBlockModels;
     }

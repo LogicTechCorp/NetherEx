@@ -4,7 +4,7 @@ import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.datagen.client.language.NELanguageProviderEN_US;
 import logictechcorp.netherex.datagen.client.model.NEEquipmentAssetProvider;
 import logictechcorp.netherex.datagen.client.model.NEModelProvider;
-import logictechcorp.netherex.datagen.server.NEDataPackProvider;
+import logictechcorp.netherex.datagen.server.NEDatapackProvider;
 import logictechcorp.netherex.datagen.server.advancements.NEAdvancements;
 import logictechcorp.netherex.datagen.server.loot.NELootModifiers;
 import logictechcorp.netherex.datagen.server.loot.NELootTableProvider;
@@ -29,13 +29,13 @@ public class NetherExDataGen
     {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> registries = event.createProvider(NEDataPackProvider::new).getRegistryProvider();
+        CompletableFuture<HolderLookup.Provider> registries = event.createProvider(NEDatapackProvider::new).getRegistryProvider();
 
         // Server
         event.addProvider(new NELootTableProvider(packOutput, registries));
         event.createProvider(NELootModifiers::new);
         event.createProvider(NERecipeProvider.Runner::new);
-        event.createProvider(NEBiomeTagsProvider::new);
+        event.addProvider(new NEBiomeTagsProvider(packOutput, registries));
         event.createBlockAndItemTags(NEBlockTagsProvider::new, NEItemTagsProvider::new);
         event.addProvider(NEAdvancements.create(packOutput, registries));
 

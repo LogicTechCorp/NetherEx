@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "netherex:spinout",
+    "netherex:wisp",
+    "netherex:salamander",
+    "netherex:mogus",
+    "netherex:flaemoth"
+  ]
+}
