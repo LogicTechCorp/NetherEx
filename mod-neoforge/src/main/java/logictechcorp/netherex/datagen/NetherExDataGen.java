@@ -4,7 +4,7 @@ import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.datagen.client.language.NELanguageProviderEN_US;
 import logictechcorp.netherex.datagen.client.model.NEBlockModelProvider;
 import logictechcorp.netherex.datagen.client.model.NEItemModelProvider;
-import logictechcorp.netherex.datagen.server.NEDataPackProvider;
+import logictechcorp.netherex.datagen.server.NEDatapackProvider;
 import logictechcorp.netherex.datagen.server.advancements.NEAdvancements;
 import logictechcorp.netherex.datagen.server.loot.NELootModifiers;
 import logictechcorp.netherex.datagen.server.loot.NELootTableProvider;
@@ -31,7 +31,7 @@ public class NetherExDataGen
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        CompletableFuture<HolderLookup.Provider> registries = event.createProvider(NEDataPackProvider::new).getRegistryProvider();
+        CompletableFuture<HolderLookup.Provider> registries = event.createProvider(NEDatapackProvider::new).getRegistryProvider();
 
         // Server
         event.addProvider(new NELootTableProvider(packOutput, registries));

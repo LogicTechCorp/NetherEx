@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "#netherex:ruthless_sands",
-      "required": false
-    }
+    "netherex:ruthless_sands"
   ]
 }

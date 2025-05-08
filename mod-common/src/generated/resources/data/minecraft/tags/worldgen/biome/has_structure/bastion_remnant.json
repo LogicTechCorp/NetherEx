@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "#netherex:ruthless_sands",
-      "required": false
-    },
-    {
-      "id": "#netherex:torrid_wasteland",
-      "required": false
-    },
-    {
-      "id": "#netherex:fungi_forest",
-      "required": false
-    }
+    "netherex:ruthless_sands",
+    "netherex:torrid_wasteland",
+    "netherex:fungi_forest"
   ]
 }
