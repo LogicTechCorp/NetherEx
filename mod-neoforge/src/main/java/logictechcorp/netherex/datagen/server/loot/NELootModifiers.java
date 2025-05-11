@@ -28,6 +28,11 @@ public class NELootModifiers extends GlobalLootModifierProvider
                 NetherExLootTables.NETHERITE_HORSE_ARMOR_ADDITION
         ));
 
+        add("add_tracker_compass_to_bastion_other", new AddTableLootModifier(
+                new LootItemCondition[]{LootTableIdCondition.builder(BuiltInLootTables.BASTION_OTHER.location()).build()},
+                NetherExLootTables.FORTRESS_TRACKER_COMPASS_ADDITION
+        ));
+
         add("add_hoglin_additions_to_hoglin", new AddTableLootModifier(
                 new LootItemCondition[]{LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/hoglin")).build()},
                 NetherExLootTables.HOGLIN_ADDITIONS

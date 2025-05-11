@@ -7,6 +7,7 @@
   "mixins": [
     "NEAbstractFurnaceBlockEntityMixin",
     "NEBlockBehaviourMixin",
+    "NECompassItemMixin",
     "NECoralBlockAccessor",
     "NECoralFanBlockAccessor",
     "NECoralPlantBlockAccessor",
@@ -18,7 +19,8 @@
     "NETextureSlotInvoker"
   ],
   "client": [
-    "client.NEEntityRenderersMixin"
+    "client.NEEntityRenderersMixin",
+    "client.NEItemPropertiesMixin"
   ],
   "server": [],
   "injectors": {

@@ -1,0 +1,155 @@
+package logictechcorp.netherex.world.level.storage.loot.functions;
+
+import com.google.common.collect.ImmutableSet;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import logictechcorp.netherex.NetherExConstants;
+import logictechcorp.netherex.item.component.NEGlobalPosTracker;
+import logictechcorp.netherex.registry.NetherExDataComponents;
+import logictechcorp.netherex.registry.NetherExLootFunctions;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.*;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemLore;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+public class CompassGlobalPosTrackerFunction extends LootItemConditionalFunction
+{
+    public static final MapCodec<CompassGlobalPosTrackerFunction> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            CompassGlobalPosTrackerFunction.commonFields(instance).and(instance
+                            .group(
+                                    Structure.CODEC.fieldOf("structure")
+                                            .forGetter(function -> function.structure),
+                                    Codec.INT.optionalFieldOf("search_radius", 50)
+                                            .forGetter(explorationMapFunction -> explorationMapFunction.searchRadius),
+                                    Codec.BOOL.optionalFieldOf("skip_existing_chunks", true)
+                                            .forGetter(explorationMapFunction -> explorationMapFunction.skipKnownStructures)
+                            )
+                    )
+                    .apply(instance, CompassGlobalPosTrackerFunction::new));
+
+    private final Holder<Structure> structure;
+    private final int searchRadius;
+    private final boolean skipKnownStructures;
+
+    public CompassGlobalPosTrackerFunction(List<LootItemCondition> conditions, Holder<Structure> inStructure, int inSearchRadius, boolean inSkipKnownStructures)
+    {
+        super(conditions);
+        structure = inStructure;
+        searchRadius = inSearchRadius;
+        skipKnownStructures = inSkipKnownStructures;
+    }
+
+    public static CompassGlobalPosTrackerFunction.Builder makeCompassGlobalPosTracker()
+    {
+        return new CompassGlobalPosTrackerFunction.Builder();
+    }
+
+    @Override
+    protected ItemStack run(ItemStack stack, LootContext context)
+    {
+        if (!stack.is(Items.COMPASS))
+        {
+            return stack;
+        }
+
+        Vec3 vec3 = context.getParamOrNull(LootContextParams.ORIGIN);
+
+        if (vec3 != null)
+        {
+            ServerLevel level = context.getLevel();
+            Registry<Structure> structures = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
+            Optional<HolderSet<Structure>> mappedStructure = structure.unwrapKey().flatMap(structures::getHolder).map(HolderSet::direct);
+
+            if (mappedStructure.isPresent())
+            {
+                Pair<BlockPos, Holder<Structure>> foundStructure = level
+                        .getChunkSource()
+                        .getGenerator()
+                        .findNearestMapStructure(level, mappedStructure.get(), BlockPos.containing(vec3), searchRadius, skipKnownStructures);
+
+                if (foundStructure != null)
+                {
+                    BlockPos structurePos = foundStructure.getFirst();
+                    ItemStack compassStack = new ItemStack(Items.COMPASS);
+                    compassStack.set(NetherExDataComponents.GLOBAL_POS_TRACKER.get(), new NEGlobalPosTracker(Optional.of(GlobalPos.of(level.dimension(), structurePos))));
+                    compassStack.set(DataComponents.LORE, new ItemLore(List.of(
+                            Component.translatable("item." + NetherExConstants.MOD_ID + ".tracker_compass.lore.fortress", structurePos.toShortString())
+                                    .withStyle(ChatFormatting.RED, ChatFormatting.ITALIC)
+                    )));
+                    return compassStack;
+                }
+            }
+        }
+
+        return stack;
+    }
+
+    @Override
+    public Set<LootContextParam<?>> getReferencedContextParams()
+    {
+        return ImmutableSet.of(LootContextParams.ORIGIN);
+    }
+
+    @Override
+    public LootItemFunctionType<? extends LootItemConditionalFunction> getType()
+    {
+        return NetherExLootFunctions.COMPASS_LODESTONE_FUNCTION.get();
+    }
+
+    public static class Builder extends LootItemConditionalFunction.Builder<CompassGlobalPosTrackerFunction.Builder>
+    {
+        private Holder<Structure> structure;
+        private int searchRadius;
+        private boolean skipKnownStructures;
+
+        public Builder structure(Holder<Structure> inStructure)
+        {
+            structure = inStructure;
+            return this;
+        }
+
+        public Builder searchRadius(int inSearchRadius)
+        {
+            searchRadius = inSearchRadius;
+            return this;
+        }
+
+        public Builder skipKnownStructures(boolean inSkipKnownStructures)
+        {
+            skipKnownStructures = inSkipKnownStructures;
+            return this;
+        }
+
+        @Override
+        public LootItemFunction build()
+        {
+            return new CompassGlobalPosTrackerFunction(getConditions(), structure, searchRadius, skipKnownStructures);
+        }
+
+        @Override
+        protected CompassGlobalPosTrackerFunction.Builder getThis()
+        {
+            return this;
+        }
+    }
+}

@@ -24,6 +24,8 @@ public class NetherEx
 
     private static void initializeContent()
     {
+        NetherExDataComponents.initialize();
+        NetherExLootFunctions.initialize();
         NetherExFeatures.initialize();
         NetherExFeatureConfigs.initialize();
         NetherExFeaturePlacements.initialize();
