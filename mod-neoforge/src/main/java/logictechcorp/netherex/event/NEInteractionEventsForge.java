@@ -28,8 +28,6 @@ public class NEInteractionEventsForge
 
         if (level.isClientSide)
         {
-            event.setCancellationResult(InteractionResult.PASS);
-            event.setCanceled(true);
             return;
         }
 
