@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "netherex:compass_global_pos_tracker_function",
+              "skip_existing_chunks": false,
+              "structure": "minecraft:fortress"
+            }
+          ],
+          "name": "minecraft:compass"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "netherex:chests/fortress_tracker_compass_addition"
+}

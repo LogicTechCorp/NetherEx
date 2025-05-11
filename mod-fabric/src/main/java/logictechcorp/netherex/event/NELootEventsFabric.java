@@ -1,14 +1,18 @@
 package logictechcorp.netherex.event;
 
 import logictechcorp.netherex.registry.NetherExItems;
+import logictechcorp.netherex.world.level.storage.loot.functions.CompassGlobalPosTrackerFunction;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -36,10 +40,7 @@ public class NELootEventsFabric
         {
             if (lootTableSource.isBuiltin())
             {
-                if (lootTableKey == BuiltInLootTables.BASTION_TREASURE)
-                {
-                    builder.withPool(singularLoot(NetherExItems.NETHERITE_HORSE_ARMOR.get()));
-                }
+                HolderLookup.RegistryLookup<Structure> structures = registries.lookupOrThrow(Registries.STRUCTURE);
 
                 EntityType.HOGLIN.getDefaultLootTable().ifPresent(defaultLootTable ->
                 {
@@ -62,6 +63,20 @@ public class NELootEventsFabric
                         );
                     }
                 });
+
+                if (lootTableKey == BuiltInLootTables.BASTION_OTHER)
+                {
+                    builder.withPool(LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0f))
+                            .add(LootItem.lootTableItem(Items.COMPASS)
+                                    .apply(CompassGlobalPosTrackerFunction.makeCompassGlobalPosTracker()
+                                            .structure(structures.get(BuiltinStructures.FORTRESS).get())
+                                            .searchRadius(50)
+                                            .skipKnownStructures(false)
+                                    )
+                            )
+                    );
+                }
             }
         });
     }

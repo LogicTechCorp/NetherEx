@@ -196,6 +196,9 @@ public class NELanguageProviderEN_US extends LanguageProvider
         add(NetherExItems.MOGUS_SPAWN_EGG.get(), "Mogus Spawn Egg");
         add(NetherExItems.FLAEMOTH_SPAWN_EGG.get(), "Flaemoth Spawn Egg");
 
+        add("item." + NetherExConstants.MOD_ID + ".tracker_compass", "Tracker Compass");
+        add("item." + NetherExConstants.MOD_ID + ".tracker_compass.lore.fortress", "Tracking Fortress at %s");
+
         // Entities
         add(NetherExEntityTypes.SPINOUT.get(), "Spinout");
         add(NetherExEntityTypes.SALAMANDER.get(), "Salamander");
