@@ -28,8 +28,6 @@ public class NEInteractionEventsForge
 
         if (level.isClientSide)
         {
-            event.setCancellationResult(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
-            event.setCanceled(true);
             return;
         }
 
