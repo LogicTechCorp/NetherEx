@@ -93,7 +93,7 @@ public class CompassGlobalPosTrackerFunction extends LootItemConditionalFunction
                     ItemStack compassStack = new ItemStack(Items.COMPASS);
                     compassStack.set(NetherExDataComponents.GLOBAL_POS_TRACKER.get(), new NEGlobalPosTracker(Optional.of(GlobalPos.of(level.dimension(), structurePos))));
                     compassStack.set(DataComponents.LORE, new ItemLore(List.of(
-                            Component.translatable("item." + NetherExConstants.MOD_ID + ".tracker_compass.lore.fortress", structurePos.toShortString())
+                            Component.translatable("item." + NetherExConstants.MOD_ID + ".tracker_compass.lore.fortress")
                                     .withStyle(ChatFormatting.RED, ChatFormatting.ITALIC)
                     )));
                     return compassStack;
