@@ -12,7 +12,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -24,8 +23,7 @@ public class NECompassItemMixin
             method = "useOn",
             at = @At("HEAD")
     )
-    @Unique
-    public void netherEx$useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> callback)
+    public void useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> callback)
     {
         Level level = context.getLevel();
         BlockPos clickedPos = context.getClickedPos();
@@ -40,16 +38,14 @@ public class NECompassItemMixin
         }
     }
 
-    @Unique
     @WrapMethod(method = "isFoil")
-    public boolean netherEx$isFoil(ItemStack stack, Operation<Boolean> original)
+    public boolean isFoil(ItemStack stack, Operation<Boolean> original)
     {
         return stack.has(NetherExDataComponents.GLOBAL_POS_TRACKER.get()) || original.call(stack);
     }
 
-    @Unique
     @WrapMethod(method = "getDescriptionId")
-    public String netherEx$getDescriptionId(ItemStack stack, Operation<String> original)
+    public String getDescriptionId(ItemStack stack, Operation<String> original)
     {
         return stack.has(NetherExDataComponents.GLOBAL_POS_TRACKER.get()) ? "item." + NetherExConstants.MOD_ID + ".tracker_compass" : original.call(stack);
     }
