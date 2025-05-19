@@ -9,7 +9,6 @@ import net.minecraft.core.GlobalPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(targets = "net/minecraft/client/renderer/item/properties/numeric/CompassAngleState$CompassTarget$1")
 public abstract class NECompassTargetMixin
@@ -17,8 +16,7 @@ public abstract class NECompassTargetMixin
     @WrapMethod(
             method = "get(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/core/GlobalPos;"
     )
-    @Unique
-    private GlobalPos netherEx$get(ClientLevel level, ItemStack stack, Entity entity, Operation<GlobalPos> original)
+    private GlobalPos get(ClientLevel level, ItemStack stack, Entity entity, Operation<GlobalPos> original)
     {
         NEGlobalPosTracker globalPosTracker = stack.get(NetherExDataComponents.GLOBAL_POS_TRACKER.get());
 
