@@ -30,7 +30,7 @@ public class NELootModifiers extends GlobalLootModifierProvider
 
         add("add_tracker_compass_to_bastion_other", new AddTableLootModifier(
                 new LootItemCondition[]{LootTableIdCondition.builder(BuiltInLootTables.BASTION_OTHER.location()).build()},
-                NetherExLootTables.FORTRESS_TRACKER_COMPASS_ADDITION
+                NetherExLootTables.FORTRESS_COMPASS_STRUCTURE_TRACKER_ADDITION
         ));
 
         add("add_hoglin_additions_to_hoglin", new AddTableLootModifier(

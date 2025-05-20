@@ -5,19 +5,15 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import logictechcorp.netherex.NetherExConstants;
-import logictechcorp.netherex.item.component.NEGlobalPosTracker;
+import logictechcorp.netherex.item.component.NEStructureTracker;
 import logictechcorp.netherex.registry.NetherExDataComponents;
 import logictechcorp.netherex.registry.NetherExLootFunctions;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.*;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
@@ -32,10 +28,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public class CompassGlobalPosTrackerFunction extends LootItemConditionalFunction
+public class NECompassStructureTrackerFunction extends LootItemConditionalFunction
 {
-    public static final MapCodec<CompassGlobalPosTrackerFunction> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            CompassGlobalPosTrackerFunction.commonFields(instance).and(instance
+    public static final MapCodec<NECompassStructureTrackerFunction> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            NECompassStructureTrackerFunction.commonFields(instance).and(instance
                             .group(
                                     Structure.CODEC.fieldOf("structure")
                                             .forGetter(function -> function.structure),
@@ -45,13 +41,14 @@ public class CompassGlobalPosTrackerFunction extends LootItemConditionalFunction
                                             .forGetter(explorationMapFunction -> explorationMapFunction.skipKnownStructures)
                             )
                     )
-                    .apply(instance, CompassGlobalPosTrackerFunction::new));
+                    .apply(instance, NECompassStructureTrackerFunction::new)
+    );
 
     private final Holder<Structure> structure;
     private final int searchRadius;
     private final boolean skipKnownStructures;
 
-    public CompassGlobalPosTrackerFunction(List<LootItemCondition> conditions, Holder<Structure> inStructure, int inSearchRadius, boolean inSkipKnownStructures)
+    public NECompassStructureTrackerFunction(List<LootItemCondition> conditions, Holder<Structure> inStructure, int inSearchRadius, boolean inSkipKnownStructures)
     {
         super(conditions);
         structure = inStructure;
@@ -59,9 +56,9 @@ public class CompassGlobalPosTrackerFunction extends LootItemConditionalFunction
         skipKnownStructures = inSkipKnownStructures;
     }
 
-    public static CompassGlobalPosTrackerFunction.Builder makeCompassGlobalPosTracker()
+    public static NECompassStructureTrackerFunction.Builder makeCompassGlobalPosTracker()
     {
-        return new CompassGlobalPosTrackerFunction.Builder();
+        return new NECompassStructureTrackerFunction.Builder();
     }
 
     @Override
@@ -78,26 +75,28 @@ public class CompassGlobalPosTrackerFunction extends LootItemConditionalFunction
         {
             ServerLevel level = context.getLevel();
             Registry<Structure> structures = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
-            Optional<HolderSet<Structure>> mappedStructure = structure.unwrapKey().flatMap(structures::getHolder).map(HolderSet::direct);
+            Optional<ResourceKey<Structure>> structureResourceKey = structure.unwrapKey();
 
-            if (mappedStructure.isPresent())
+            if (structureResourceKey.isPresent())
             {
-                Pair<BlockPos, Holder<Structure>> foundStructure = level
-                        .getChunkSource()
-                        .getGenerator()
-                        .findNearestMapStructure(level, mappedStructure.get(), BlockPos.containing(vec3), searchRadius, skipKnownStructures);
+                Optional<HolderSet<Structure>> mappedStructure = structureResourceKey.flatMap(structures::getHolder).map(HolderSet::direct);
 
-                if (foundStructure != null)
+                if (mappedStructure.isPresent())
                 {
-                    BlockPos structurePos = foundStructure.getFirst();
-                    ItemStack compassStack = new ItemStack(Items.COMPASS);
-                    compassStack.set(NetherExDataComponents.GLOBAL_POS_TRACKER.get(), new NEGlobalPosTracker(Optional.of(GlobalPos.of(level.dimension(), structurePos))));
-                    compassStack.set(DataComponents.LORE, new ItemLore(List.of(
-                            Component.translatable("item." + NetherExConstants.MOD_ID + ".tracker_compass.lore.fortress")
-                                    .withStyle(ChatFormatting.RED, ChatFormatting.ITALIC)
-                    )));
-                    return compassStack;
+                    Pair<BlockPos, Holder<Structure>> foundStructure = level
+                            .getChunkSource()
+                            .getGenerator()
+                            .findNearestMapStructure(level, mappedStructure.get(), BlockPos.containing(vec3), searchRadius, skipKnownStructures);
+
+                    if (foundStructure != null)
+                    {
+                        BlockPos structurePos = foundStructure.getFirst().atY(64);
+                        ItemStack compassStack = new ItemStack(Items.COMPASS);
+                        compassStack.set(NetherExDataComponents.STRUCTURE_TRACKER.get(), new NEStructureTracker(structureResourceKey.get(), GlobalPos.of(level.dimension(), structurePos)));
+                        return compassStack;
+                    }
                 }
+
             }
         }
 
@@ -113,10 +112,10 @@ public class CompassGlobalPosTrackerFunction extends LootItemConditionalFunction
     @Override
     public LootItemFunctionType<? extends LootItemConditionalFunction> getType()
     {
-        return NetherExLootFunctions.COMPASS_LODESTONE_FUNCTION.get();
+        return NetherExLootFunctions.COMPASS_STRUCTURE_TRACKER_FUNCTION.get();
     }
 
-    public static class Builder extends LootItemConditionalFunction.Builder<CompassGlobalPosTrackerFunction.Builder>
+    public static class Builder extends LootItemConditionalFunction.Builder<NECompassStructureTrackerFunction.Builder>
     {
         private Holder<Structure> structure;
         private int searchRadius;
@@ -143,11 +142,11 @@ public class CompassGlobalPosTrackerFunction extends LootItemConditionalFunction
         @Override
         public LootItemFunction build()
         {
-            return new CompassGlobalPosTrackerFunction(getConditions(), structure, searchRadius, skipKnownStructures);
+            return new NECompassStructureTrackerFunction(getConditions(), structure, searchRadius, skipKnownStructures);
         }
 
         @Override
-        protected CompassGlobalPosTrackerFunction.Builder getThis()
+        protected NECompassStructureTrackerFunction.Builder getThis()
         {
             return this;
         }

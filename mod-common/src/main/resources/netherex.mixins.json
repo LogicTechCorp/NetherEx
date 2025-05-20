@@ -12,6 +12,7 @@
     "NECoralFanBlockAccessor",
     "NECoralPlantBlockAccessor",
     "NECropBlockAccessor",
+    "NEFortressCastleEntranceMixin",
     "NEFungusBlockMixin",
     "NEHorseMixin",
     "NEShovelItemAccessor",

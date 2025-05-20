@@ -20,7 +20,7 @@ public class NetherExLootTables
     public static final ResourceKey<LootTable> FLAEMOTH_WARPED = register("entities/flaemoth/warped");
 
     public static final ResourceKey<LootTable> NETHERITE_HORSE_ARMOR_ADDITION = register("chests/netherite_horse_armor_addition");
-    public static final ResourceKey<LootTable> FORTRESS_TRACKER_COMPASS_ADDITION = register("chests/fortress_tracker_compass_addition");
+    public static final ResourceKey<LootTable> FORTRESS_COMPASS_STRUCTURE_TRACKER_ADDITION = register("chests/fortress_compass_structure_tracker_addition");
     public static final ResourceKey<LootTable> HOGLIN_ADDITIONS = register("entities/hoglin_additions");
 
     private static ResourceKey<LootTable> register(String name)

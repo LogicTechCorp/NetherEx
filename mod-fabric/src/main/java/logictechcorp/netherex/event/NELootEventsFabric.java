@@ -1,7 +1,7 @@
 package logictechcorp.netherex.event;
 
 import logictechcorp.netherex.registry.NetherExItems;
-import logictechcorp.netherex.world.level.storage.loot.functions.CompassGlobalPosTrackerFunction;
+import logictechcorp.netherex.world.level.storage.loot.functions.NECompassStructureTrackerFunction;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
@@ -66,7 +66,7 @@ public class NELootEventsFabric
                     builder.withPool(LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1.0f))
                             .add(LootItem.lootTableItem(Items.COMPASS)
-                                    .apply(CompassGlobalPosTrackerFunction.makeCompassGlobalPosTracker()
+                                    .apply(NECompassStructureTrackerFunction.makeCompassGlobalPosTracker()
                                             .structure(structures.get(BuiltinStructures.FORTRESS).get())
                                             .searchRadius(50)
                                             .skipKnownStructures(false)
