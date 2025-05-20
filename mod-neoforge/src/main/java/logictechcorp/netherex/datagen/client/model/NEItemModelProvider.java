@@ -63,7 +63,7 @@ public class NEItemModelProvider
                 .accept(
                         item,
                         ItemModelUtils.conditional(
-                                ItemModelUtils.hasComponent(NetherExDataComponents.GLOBAL_POS_TRACKER.get()),
+                                ItemModelUtils.hasComponent(NetherExDataComponents.STRUCTURE_TRACKER.get()),
                                 ItemModelUtils.rangeSelect(new CompassAngle(true, CompassAngleState.CompassTarget.NONE), 32.0f, list),
                                 ItemModelUtils.conditional(
                                         ItemModelUtils.hasComponent(DataComponents.LODESTONE_TRACKER),

@@ -1,7 +1,7 @@
 package logictechcorp.netherex.registry;
 
 import logictechcorp.netherex.NetherExConstants;
-import logictechcorp.netherex.item.component.NEGlobalPosTracker;
+import logictechcorp.netherex.item.component.NEStructureTracker;
 import logictechcorp.netherex.platform.registration.RegistrationProvider;
 import logictechcorp.netherex.platform.registration.RegistryObject;
 import net.minecraft.core.component.DataComponentType;
@@ -13,7 +13,7 @@ public class NetherExDataComponents
 {
     public static final RegistrationProvider<DataComponentType<?>> DATA_COMPONENT_TYPES = RegistrationProvider.get(BuiltInRegistries.DATA_COMPONENT_TYPE, NetherExConstants.MOD_ID);
 
-    public static final RegistryObject<DataComponentType<?>, DataComponentType<NEGlobalPosTracker>> GLOBAL_POS_TRACKER = register("global_pos_tracker", (builder) -> builder.persistent(NEGlobalPosTracker.CODEC));
+    public static final RegistryObject<DataComponentType<?>, DataComponentType<NEStructureTracker>> STRUCTURE_TRACKER = register("structure_tracker", (builder) -> builder.persistent(NEStructureTracker.CODEC));
 
     public static void initialize()
     {

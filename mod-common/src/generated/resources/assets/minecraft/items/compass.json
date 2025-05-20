@@ -1,7 +1,7 @@
 {
   "model": {
     "type": "minecraft:condition",
-    "component": "netherex:global_pos_tracker",
+    "component": "netherex:structure_tracker",
     "on_false": {
       "type": "minecraft:condition",
       "component": "minecraft:lodestone_tracker",

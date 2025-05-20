@@ -8,7 +8,7 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "netherex:compass_global_pos_tracker_function",
+              "function": "netherex:compass_structure_tracker_function",
               "skip_existing_chunks": false,
               "structure": "minecraft:fortress"
             }
@@ -19,5 +19,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "netherex:chests/fortress_tracker_compass_addition"
+  "random_sequence": "netherex:chests/fortress_compass_structure_tracker_addition"
 }

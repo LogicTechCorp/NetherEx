@@ -2,7 +2,7 @@ package logictechcorp.netherex.mixin.client;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import logictechcorp.netherex.item.component.NEGlobalPosTracker;
+import logictechcorp.netherex.item.component.NEStructureTracker;
 import logictechcorp.netherex.registry.NetherExDataComponents;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.GlobalPos;
@@ -18,11 +18,11 @@ public abstract class NECompassTargetMixin
     )
     private GlobalPos get(ClientLevel level, ItemStack stack, Entity entity, Operation<GlobalPos> original)
     {
-        NEGlobalPosTracker globalPosTracker = stack.get(NetherExDataComponents.GLOBAL_POS_TRACKER.get());
+        NEStructureTracker structureTracker = stack.get(NetherExDataComponents.STRUCTURE_TRACKER.get());
 
-        if (globalPosTracker != null)
+        if (structureTracker != null)
         {
-            return globalPosTracker.target().orElse(null);
+            return structureTracker.target();
         }
 
         return original.call(level, stack, entity);
