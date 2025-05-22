@@ -41,13 +41,13 @@ public class NECompassItemMixin
     )
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int itemSlot, boolean isSelected, CallbackInfo callback)
     {
-        if (level instanceof ServerLevel serverLevel)
+        if (level instanceof ServerLevel serverLevel && serverLevel.getGameTime() % 20 == 0)
         {
             NEStructureTracker structureTracker = stack.get(NetherExDataComponents.STRUCTURE_TRACKER.get());
 
             if (structureTracker != null)
             {
-                HolderLookup.RegistryLookup<Structure> structures = level.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+                HolderLookup.RegistryLookup<Structure> structures = serverLevel.registryAccess().lookupOrThrow(Registries.STRUCTURE);
                 Holder<Structure> structure = structures.getOrThrow(structureTracker.structure());
                 GlobalPos globalPos = structureTracker.target();
 
@@ -61,10 +61,10 @@ public class NECompassItemMixin
                         {
                             if (structurePiece instanceof NEStructureLodestoneMarker lodestoneMarker && lodestoneMarker.getStructureLodestonePos() != null)
                             {
-                                HolderLookup.RegistryLookup<PoiType> pois = level.registryAccess().lookupOrThrow(Registries.POINT_OF_INTEREST_TYPE);
+                                HolderLookup.RegistryLookup<PoiType> pois = serverLevel.registryAccess().lookupOrThrow(Registries.POINT_OF_INTEREST_TYPE);
                                 serverLevel.getPoiManager().add(lodestoneMarker.getStructureLodestonePos(), pois.getOrThrow(PoiTypes.LODESTONE));
 
-                                LodestoneTracker lodestoneTracker = new LodestoneTracker(Optional.of(GlobalPos.of(level.dimension(), lodestoneMarker.getStructureLodestonePos())), true);
+                                LodestoneTracker lodestoneTracker = new LodestoneTracker(Optional.of(GlobalPos.of(serverLevel.dimension(), lodestoneMarker.getStructureLodestonePos())), true);
                                 stack.set(DataComponents.LODESTONE_TRACKER, lodestoneTracker);
                                 stack.remove(NetherExDataComponents.STRUCTURE_TRACKER.get());
                             }
