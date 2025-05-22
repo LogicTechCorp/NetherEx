@@ -66,7 +66,7 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     var mainFile = upload(curseforge_project, tasks.jar)
     mainFile.changelog = rootProject.file(mod_changelog_file)
     mainFile.changelogType = 'markdown'
-    mainFile.displayName = "$mod_name" + ' ' + "$version" + ' - NeoForge'
+    mainFile.displayName = "${mod_name} ${version} - NeoForge ${minecraft_version}"
     mainFile.releaseType = 'release'
     mainFile.addRequirement('terrablender-neoforge')
     mainFile.addRequirement('geckolib')
@@ -79,7 +79,7 @@ modrinth {
     debugMode = false
 
     projectId = modrinth_project
-    versionName = "$mod_name" + ' ' + "$version" + ' - NeoForge'
+    versionName = "${mod_name} ${version} - NeoForge ${minecraft_version}"
     changelog = rootProject.file(mod_changelog_file).getText()
     uploadFile = jar
     versionType = 'release'

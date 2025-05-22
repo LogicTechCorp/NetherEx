@@ -59,7 +59,7 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     var mainFile = upload(curseforge_project, tasks.remapJar)
     mainFile.changelog = rootProject.file(mod_changelog_file)
     mainFile.changelogType = 'markdown'
-    mainFile.displayName = "$mod_name" + ' ' + "$version" + ' - Fabric'
+    mainFile.displayName = "${mod_name} ${version} - Fabric ${minecraft_version}"
     mainFile.releaseType = 'release'
     mainFile.addRequirement('fabric-api')
     mainFile.addRequirement('terrablender-fabric')
@@ -73,7 +73,7 @@ modrinth {
     debugMode = false
 
     projectId = modrinth_project
-    versionName = "$mod_name" + ' ' + "$version" + ' - Fabric'
+    versionName = "${mod_name} ${version} - Fabric ${minecraft_version}"
     changelog = rootProject.file(mod_changelog_file).getText()
     uploadFile = remapJar
     versionType = 'release'
