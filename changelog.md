@@ -1,3 +1,24 @@
+### Version 1.2.0
+
+Added:
+
+- Nether Weather support
+- Nether Fortress tracking Compass to Bastion Remnant chest loot
+
+Updated:
+
+- Block, Item, and Biome tags
+
+Fixed:
+
+- Player arm not swinging when placing blocks
+
+Other:
+
+- Backported to 1.21.1
+
+***
+
 ### Version 1.1.2
 
 Added:
