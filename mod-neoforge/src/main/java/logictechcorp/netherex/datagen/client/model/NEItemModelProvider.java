@@ -2,21 +2,12 @@ package logictechcorp.netherex.datagen.client.model;
 
 import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.block.state.properties.NENetherrackType;
-import logictechcorp.netherex.registry.NetherExDataComponents;
 import logictechcorp.netherex.registry.NetherExItems;
 import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.renderer.item.RangeSelectItemModel;
-import net.minecraft.client.renderer.item.properties.numeric.CompassAngle;
-import net.minecraft.client.renderer.item.properties.numeric.CompassAngleState;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-
-import java.util.List;
 
 public class NEItemModelProvider
 {
@@ -52,29 +43,6 @@ public class NEItemModelProvider
         spawnEgg(NetherExItems.SALAMANDER_SPAWN_EGG.get(), 15690005, 0);
         spawnEgg(NetherExItems.MOGUS_SPAWN_EGG.get(), 10051392, 10489616);
         spawnEgg(NetherExItems.FLAEMOTH_SPAWN_EGG.get(), 13184077, 2399861);
-
-        generateStandardCompassItem(Items.COMPASS);
-    }
-
-    public void generateStandardCompassItem(Item item)
-    {
-        List<RangeSelectItemModel.Entry> list = itemModels.createCompassModels(item);
-        itemModels.itemModelOutput
-                .accept(
-                        item,
-                        ItemModelUtils.conditional(
-                                ItemModelUtils.hasComponent(NetherExDataComponents.STRUCTURE_TRACKER.get()),
-                                ItemModelUtils.rangeSelect(new CompassAngle(true, CompassAngleState.CompassTarget.NONE), 32.0f, list),
-                                ItemModelUtils.conditional(
-                                        ItemModelUtils.hasComponent(DataComponents.LODESTONE_TRACKER),
-                                        ItemModelUtils.rangeSelect(new CompassAngle(true, CompassAngleState.CompassTarget.LODESTONE), 32.0f, list),
-                                        ItemModelUtils.inOverworld(
-                                                ItemModelUtils.rangeSelect(new CompassAngle(true, CompassAngleState.CompassTarget.SPAWN), 32.0f, list),
-                                                ItemModelUtils.rangeSelect(new CompassAngle(true, CompassAngleState.CompassTarget.NONE), 32.0f, list)
-                                        )
-                                )
-                        )
-                );
     }
 
     private void basicItem(Item item)

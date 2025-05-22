@@ -19,7 +19,7 @@
     "NEStriderMixin"
   ],
   "client": [
-    "client.NECompassTargetMixin",
+    "client.NECompassAngleStateMixin",
     "client.NEEntityRenderersMixin"
   ],
   "server": [],
