@@ -1,3 +1,11 @@
+### Version 1.2.1
+
+Fixed:
+
+- Biomes having incorrect tags
+
+***
+
 ### Version 1.2.0
 
 Added:

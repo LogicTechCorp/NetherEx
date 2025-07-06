@@ -26,12 +26,6 @@ public class NEBiomeTagsProvider extends BiomeTagsProvider
                 .add(NetherExBiomes.TORRID_WASTELAND)
                 .add(NetherExBiomes.FUNGI_FOREST);
 
-        tag(Tags.Biomes.IS_MUSHROOM)
-                .add(NetherExBiomes.FUNGI_FOREST);
-
-        tag(Tags.Biomes.IS_HOT)
-                .add(NetherExBiomes.TORRID_WASTELAND);
-
         tag(Tags.Biomes.IS_HOT_NETHER)
                 .add(NetherExBiomes.TORRID_WASTELAND);
 
