@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class NEChestLootProvider implements LootTableSubProvider
@@ -40,6 +42,9 @@ public class NEChestLootProvider implements LootTableSubProvider
                                 .structure(structures.get(BuiltinStructures.FORTRESS).get())
                                 .searchRadius(50)
                                 .skipKnownStructures(false)
+                                .replacementStructures(Map.of(
+                                        "betterfortresses", createStructureKey("betterfortresses", "fortress")
+                                ))
                         )
                 )
         ));
@@ -48,5 +53,10 @@ public class NEChestLootProvider implements LootTableSubProvider
     private LootTable.Builder singularLoot(ItemLike item)
     {
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(item)));
+    }
+
+    private static ResourceKey<Structure> createStructureKey(String modId, String name)
+    {
+        return ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(modId, name));
     }
 }

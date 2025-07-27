@@ -1,3 +1,12 @@
+### Version 1.2.2
+
+Fixed:
+
+- A crash when fertilizing Fungus Blocks.
+- A crash when YUNG's Better Nether Fortresses is installed.
+
+***
+
 ### Version 1.2.1
 
 Fixed:

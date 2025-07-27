@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import logictechcorp.netherex.item.component.NEStructureTracker;
+import logictechcorp.netherex.platform.NEPlatformHelper;
 import logictechcorp.netherex.registry.NetherExDataComponents;
 import logictechcorp.netherex.registry.NetherExLootFunctions;
 import net.minecraft.core.*;
@@ -25,20 +26,25 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
 public class NECompassStructureTrackerFunction extends LootItemConditionalFunction
 {
+    private static final Codec<Map<String, ResourceKey<Structure>>> MAP_CODEC = Codec.unboundedMap(Codec.STRING, ResourceKey.codec(Registries.STRUCTURE));
+
     public static final MapCodec<NECompassStructureTrackerFunction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             NECompassStructureTrackerFunction.commonFields(instance).and(instance
                             .group(
                                     Structure.CODEC.fieldOf("structure")
                                             .forGetter(function -> function.structure),
                                     Codec.INT.optionalFieldOf("search_radius", 50)
-                                            .forGetter(explorationMapFunction -> explorationMapFunction.searchRadius),
+                                            .forGetter(function -> function.searchRadius),
                                     Codec.BOOL.optionalFieldOf("skip_existing_chunks", true)
-                                            .forGetter(explorationMapFunction -> explorationMapFunction.skipKnownStructures)
+                                            .forGetter(function -> function.skipKnownStructures),
+                                    MAP_CODEC.optionalFieldOf("replacement_structures", Map.of())
+                                            .forGetter(function -> function.replacementStructures)
                             )
                     )
                     .apply(instance, NECompassStructureTrackerFunction::new)
@@ -47,13 +53,15 @@ public class NECompassStructureTrackerFunction extends LootItemConditionalFuncti
     private final Holder<Structure> structure;
     private final int searchRadius;
     private final boolean skipKnownStructures;
+    private final Map<String, ResourceKey<Structure>> replacementStructures;
 
-    public NECompassStructureTrackerFunction(List<LootItemCondition> conditions, Holder<Structure> inStructure, int inSearchRadius, boolean inSkipKnownStructures)
+    public NECompassStructureTrackerFunction(List<LootItemCondition> conditions, Holder<Structure> inStructure, int inSearchRadius, boolean inSkipKnownStructures, Map<String, ResourceKey<Structure>> inReplacementStructures)
     {
         super(conditions);
         structure = inStructure;
         searchRadius = inSearchRadius;
         skipKnownStructures = inSkipKnownStructures;
+        replacementStructures = inReplacementStructures;
     }
 
     public static NECompassStructureTrackerFunction.Builder makeCompassGlobalPosTracker()
@@ -75,11 +83,22 @@ public class NECompassStructureTrackerFunction extends LootItemConditionalFuncti
         {
             ServerLevel level = context.getLevel();
             Registry<Structure> structures = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
-            Optional<ResourceKey<Structure>> structureResourceKey = structure.unwrapKey();
+            Optional<ResourceKey<Structure>> originalStructureResourceKey = structure.unwrapKey();
 
-            if (structureResourceKey.isPresent())
+            if (originalStructureResourceKey.isPresent())
             {
-                Optional<HolderSet<Structure>> mappedStructure = structureResourceKey.flatMap(structures::getHolder).map(HolderSet::direct);
+                ResourceKey<Structure> finalStructureResourceKey = originalStructureResourceKey.get();
+
+                for (Map.Entry<String, ResourceKey<Structure>> entry : replacementStructures.entrySet())
+                {
+                    if (NEPlatformHelper.INSTANCE.isModLoaded(entry.getKey()))
+                    {
+                        finalStructureResourceKey = entry.getValue();
+                        break;
+                    }
+                }
+
+                Optional<HolderSet<Structure>> mappedStructure = structures.getHolder(finalStructureResourceKey).map(HolderSet::direct);
 
                 if (mappedStructure.isPresent())
                 {
@@ -92,11 +111,10 @@ public class NECompassStructureTrackerFunction extends LootItemConditionalFuncti
                     {
                         BlockPos structurePos = foundStructure.getFirst().atY(64);
                         ItemStack compassStack = new ItemStack(Items.COMPASS);
-                        compassStack.set(NetherExDataComponents.STRUCTURE_TRACKER.get(), new NEStructureTracker(structureResourceKey.get(), GlobalPos.of(level.dimension(), structurePos)));
+                        compassStack.set(NetherExDataComponents.STRUCTURE_TRACKER.get(), new NEStructureTracker(finalStructureResourceKey, GlobalPos.of(level.dimension(), structurePos)));
                         return compassStack;
                     }
                 }
-
             }
         }
 
@@ -120,6 +138,7 @@ public class NECompassStructureTrackerFunction extends LootItemConditionalFuncti
         private Holder<Structure> structure;
         private int searchRadius;
         private boolean skipKnownStructures;
+        private Map<String, ResourceKey<Structure>> replacementStructures = Map.of();
 
         public Builder structure(Holder<Structure> inStructure)
         {
@@ -139,10 +158,16 @@ public class NECompassStructureTrackerFunction extends LootItemConditionalFuncti
             return this;
         }
 
+        public Builder replacementStructures(Map<String, ResourceKey<Structure>> inReplacementStructures)
+        {
+            replacementStructures = inReplacementStructures;
+            return this;
+        }
+
         @Override
         public LootItemFunction build()
         {
-            return new NECompassStructureTrackerFunction(getConditions(), structure, searchRadius, skipKnownStructures);
+            return new NECompassStructureTrackerFunction(getConditions(), structure, searchRadius, skipKnownStructures, replacementStructures);
         }
 
         @Override

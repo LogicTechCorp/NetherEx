@@ -9,6 +9,9 @@
           "functions": [
             {
               "function": "netherex:compass_structure_tracker_function",
+              "replacement_structures": {
+                "betterfortresses": "betterfortresses:fortress"
+              },
               "skip_existing_chunks": false,
               "structure": "minecraft:fortress"
             }
