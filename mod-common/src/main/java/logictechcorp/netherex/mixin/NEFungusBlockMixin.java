@@ -35,7 +35,5 @@ public abstract class NEFungusBlockMixin extends BushBlock implements Bonemealab
         {
             callback.setReturnValue(level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(NetherExFeatureConfigs.TWISTED_WARPED_FUNGUS_PLANTED));
         }
-
-        callback.cancel();
     }
 }
