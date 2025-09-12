@@ -45,24 +45,25 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
     protected int stemThickness;
     protected int capHeight;
     protected int capRadius;
-    protected List<MushroomPiece> mushroomPieces = new ArrayList<>();
 
     public NEBigMushroomFeature(Codec<NEBigMushroomFeatureConfiguration> codec)
     {
         super(codec);
     }
 
-    protected void createMushroom(RandomSource random)
+    protected List<MushroomPiece> createMushroom(RandomSource random)
     {
-        mushroomPieces.clear();
         randomizeMushroom(random);
-        createStem();
-        createCap();
+
+        List<MushroomPiece> mushroomPieces = new ArrayList<>();
+        createStem(mushroomPieces);
+        createCap(mushroomPieces);
+        return mushroomPieces;
     }
 
     protected abstract void randomizeMushroom(RandomSource random);
 
-    protected void createStem()
+    protected void createStem(List<MushroomPiece> mushroomPieces)
     {
         for (int y = 0; y < stemHeight; y++)
         {
@@ -84,9 +85,9 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
         }
     }
 
-    protected abstract void createCap();
+    protected abstract void createCap(List<MushroomPiece> mushroomPieces);
 
-    protected void placeMushroom(LevelAccessor level, BlockPos mushroomPos, BlockPos.MutableBlockPos mutablePos, NEBigMushroomFeatureConfiguration config)
+    protected void placeMushroom(LevelAccessor level, BlockPos mushroomPos, BlockPos.MutableBlockPos mutablePos, List<MushroomPiece> mushroomPieces, NEBigMushroomFeatureConfiguration config)
     {
         RandomSource random = level.getRandom();
 
@@ -107,20 +108,19 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
         NEBigMushroomFeatureConfiguration config = context.config();
         RandomSource random = level.getRandom();
 
-        createMushroom(random);
-
+        List<MushroomPiece> mushroomPieces = createMushroom(random);
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
-        if (!canGrow(level, mushroomPos, mutablePos, config))
+        if (!canGrow(level, mushroomPos, mutablePos, mushroomPieces, config))
         {
             return false;
         }
 
-        placeMushroom(level, mushroomPos, mutablePos, config);
+        placeMushroom(level, mushroomPos, mutablePos, mushroomPieces, config);
         return true;
     }
 
-    private boolean canGrow(LevelAccessor level, BlockPos mushroomPos, BlockPos.MutableBlockPos mutablePos, NEBigMushroomFeatureConfiguration config)
+    private boolean canGrow(LevelAccessor level, BlockPos mushroomPos, BlockPos.MutableBlockPos mutablePos, List<MushroomPiece> mushroomPieces, NEBigMushroomFeatureConfiguration config)
     {
         int mushroomPosY = mushroomPos.getY();
 
