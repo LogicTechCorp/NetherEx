@@ -1,3 +1,12 @@
+### Version 1.2.3
+
+Fixed:
+
+- A crash when using Concurrent Chunk Management Engine (C2ME)
+- Netherrack Paths dropping Gloomy Netherrack instead of their respective Netherrack types
+
+***
+
 ### Version 1.2.2
 
 Fixed:

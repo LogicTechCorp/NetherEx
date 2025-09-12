@@ -79,8 +79,8 @@ public class NEBlockLootProvider extends BlockLootSubProvider
         dropOther(NetherExBlocks.TWISTED_SHROOMSTEM.get(), NetherExItems.TWISTED_SHROOMFRUIT.get());
 
         dropOther(NetherExBlocks.GLOOMY_NETHERRACK_PATH.get(), NetherExBlocks.GLOOMY_NETHERRACK.get());
-        dropOther(NetherExBlocks.FIERY_NETHERRACK_PATH.get(), NetherExBlocks.GLOOMY_NETHERRACK.get());
-        dropOther(NetherExBlocks.LIVELY_NETHERRACK_PATH.get(), NetherExBlocks.GLOOMY_NETHERRACK.get());
+        dropOther(NetherExBlocks.FIERY_NETHERRACK_PATH.get(), NetherExBlocks.FIERY_NETHERRACK.get());
+        dropOther(NetherExBlocks.LIVELY_NETHERRACK_PATH.get(), NetherExBlocks.LIVELY_NETHERRACK.get());
         dropOther(NetherExBlocks.CRIMSON_NYLIUM_PATH.get(), Blocks.CRIMSON_NYLIUM);
         dropOther(NetherExBlocks.WARPED_NYLIUM_PATH.get(), Blocks.WARPED_NYLIUM);
 

@@ -27,6 +27,8 @@ import logictechcorp.netherex.world.level.levelgen.feature.config.NEBigMushroomF
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
 
+import java.util.List;
+
 public class NEBigRedElderMushroomFeature extends NEBigMushroomFeature
 {
     public NEBigRedElderMushroomFeature(Codec<NEBigMushroomFeatureConfiguration> codec)
@@ -48,7 +50,7 @@ public class NEBigRedElderMushroomFeature extends NEBigMushroomFeature
     }
 
     @Override
-    protected void createCap()
+    protected void createCap(List<MushroomPiece> mushroomPieces)
     {
         boolean thickStem = stemThickness == 2;
         int adjustedCapRadius = capRadius + (thickStem ? 1 : 0);
