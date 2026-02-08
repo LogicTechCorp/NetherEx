@@ -24,18 +24,19 @@ public class NEBlockTagsProvider extends BlockTagsProvider
     {
         tag(BlockTags.MUSHROOM_GROW_BLOCK)
                 .add(NetherExBlocks.ELDER_NYLIUM.get());
-        tag(NetherExBlockTags.NETHERRACK)
-                .add(Blocks.NETHERRACK)
+        tag(NetherExBlockTags.NETHERRACKS)
                 .add(NetherExBlocks.GLOOMY_NETHERRACK.get())
                 .add(NetherExBlocks.FIERY_NETHERRACK.get())
                 .add(NetherExBlocks.LIVELY_NETHERRACK.get());
-        tag(Tags.Blocks.NETHERRACKS)
-                .addTag(NetherExBlockTags.NETHERRACK);
         tag(BlockTags.INFINIBURN_OVERWORLD)
                 .add(NetherExBlocks.GLOOMY_NETHERRACK.get())
                 .add(NetherExBlocks.FIERY_NETHERRACK.get())
                 .add(NetherExBlocks.LIVELY_NETHERRACK.get());
         tag(BlockTags.BASE_STONE_NETHER)
+                .add(NetherExBlocks.GLOOMY_NETHERRACK.get())
+                .add(NetherExBlocks.FIERY_NETHERRACK.get())
+                .add(NetherExBlocks.LIVELY_NETHERRACK.get());
+        tag(Tags.Blocks.ORE_BEARING_GROUND_NETHERRACK)
                 .add(NetherExBlocks.GLOOMY_NETHERRACK.get())
                 .add(NetherExBlocks.FIERY_NETHERRACK.get())
                 .add(NetherExBlocks.LIVELY_NETHERRACK.get());
@@ -64,6 +65,13 @@ public class NEBlockTagsProvider extends BlockTagsProvider
                 .add(NetherExBlocks.FIERY_GOLD_ORE.get())
                 .add(NetherExBlocks.LIVELY_GOLD_ORE.get());
         tag(Tags.Blocks.ORES_QUARTZ)
+                .add(NetherExBlocks.GLOOMY_QUARTZ_ORE.get())
+                .add(NetherExBlocks.FIERY_QUARTZ_ORE.get())
+                .add(NetherExBlocks.LIVELY_QUARTZ_ORE.get());
+        tag(Tags.Blocks.ORES_IN_GROUND_NETHERRACK)
+                .add(NetherExBlocks.GLOOMY_GOLD_ORE.get())
+                .add(NetherExBlocks.FIERY_GOLD_ORE.get())
+                .add(NetherExBlocks.LIVELY_GOLD_ORE.get())
                 .add(NetherExBlocks.GLOOMY_QUARTZ_ORE.get())
                 .add(NetherExBlocks.FIERY_QUARTZ_ORE.get())
                 .add(NetherExBlocks.LIVELY_QUARTZ_ORE.get());

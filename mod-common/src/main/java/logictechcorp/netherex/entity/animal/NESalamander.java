@@ -400,7 +400,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     @Override
     public float getWalkTargetValue(BlockPos pos, LevelReader level)
     {
-        return level.getBlockState(pos.below()).is(NetherExBlockTags.NETHERRACK) ? 10.0f : 0.0f;
+        return level.getBlockState(pos.below()).is(NetherExBlockTags.NETHERRACKS) ? 10.0f : 0.0f;
     }
 
     @Override
