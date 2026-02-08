@@ -10,6 +10,6 @@
         "falling": "true"
       }
     },
-    "valid_blocks": "#netherex:netherrack"
+    "valid_blocks": "#c:netherracks"
   }
 }

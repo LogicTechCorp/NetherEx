@@ -67,7 +67,7 @@ public class NetherExFeatureConfigs
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context)
     {
-        FeatureUtils.register(context, PATCH_FIRE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.FIRE)), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesTag(Direction.DOWN.getNormal(), NetherExBlockTags.NETHERRACK)))));
+        FeatureUtils.register(context, PATCH_FIRE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.FIRE)), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesTag(Direction.DOWN.getNormal(), NetherExBlockTags.NETHERRACKS)))));
 
         RuleTest gloomyNetherrackRuleTest = new BlockMatchTest(NetherExBlocks.GLOOMY_NETHERRACK.get());
         register(context, ORE_GLOOMY_QUARTZ, Feature.ORE, new OreConfiguration(gloomyNetherrackRuleTest, NetherExBlocks.GLOOMY_QUARTZ_ORE.get().defaultBlockState(), 14));
@@ -81,7 +81,7 @@ public class NetherExFeatureConfigs
         register(context, ORE_LIVELY_QUARTZ, Feature.ORE, new OreConfiguration(livelyNetherrackRuleTest, NetherExBlocks.LIVELY_QUARTZ_ORE.get().defaultBlockState(), 14));
         register(context, ORE_LIVELY_GOLD, Feature.ORE, new OreConfiguration(livelyNetherrackRuleTest, NetherExBlocks.LIVELY_GOLD_ORE.get().defaultBlockState(), 10));
 
-        RuleTest netherrackRuleTest = new TagMatchTest(NetherExBlockTags.NETHERRACK);
+        RuleTest netherrackRuleTest = new TagMatchTest(NetherExBlockTags.NETHERRACKS);
         RuleTest netherBaseStoneRuleTest = new TagMatchTest(BlockTags.BASE_STONE_NETHER);
         register(context, ORE_ANCIENT_DEBRIS_SMALL, Feature.SCATTERED_ORE, new OreConfiguration(netherBaseStoneRuleTest, Blocks.ANCIENT_DEBRIS.defaultBlockState(), 2, 1.0f));
         register(context, ORE_ANCIENT_DEBRIS_LARGE, Feature.SCATTERED_ORE, new OreConfiguration(netherrackRuleTest, Blocks.ANCIENT_DEBRIS.defaultBlockState(), 3, 1.0f));
@@ -91,7 +91,7 @@ public class NetherExFeatureConfigs
         register(context, ORE_BLACKSTONE, Feature.ORE, new OreConfiguration(netherrackRuleTest, Blocks.BLACKSTONE.defaultBlockState(), 33));
         register(context, ORE_BOOMSTONE, Feature.ORE, new OreConfiguration(netherrackRuleTest, NetherExBlocks.BOOMSTONE.get().defaultBlockState(), 4, 1.0f));
 
-        HolderSet<Block> netherrackHolder = context.lookup(BuiltInRegistries.BLOCK.key()).getOrThrow(NetherExBlockTags.NETHERRACK);
+        HolderSet<Block> netherrackHolder = context.lookup(BuiltInRegistries.BLOCK.key()).getOrThrow(NetherExBlockTags.NETHERRACKS);
         register(context, SPRING_OPEN, Feature.SPRING, new SpringConfiguration(Fluids.LAVA.defaultFluidState(), false, 4, 1, netherrackHolder));
         register(context, GLOWSTONE_BLOB, NetherExFeatures.GLOWSTONE_BLOB.get());
 

@@ -1,3 +1,13 @@
+### Version 1.2.4
+
+Added:
+
+- New block and item tags
+
+Fixed:
+
+- Wisp name not being in the translation file
+
 ### Version 1.2.3
 
 Fixed:

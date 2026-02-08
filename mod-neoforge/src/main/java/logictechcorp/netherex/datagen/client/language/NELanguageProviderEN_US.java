@@ -198,6 +198,7 @@ public class NELanguageProviderEN_US extends LanguageProvider
 
         // Entities
         add(NetherExEntityTypes.SPINOUT.get(), "Spinout");
+        add(NetherExEntityTypes.WISP.get(), "Wisp");
         add(NetherExEntityTypes.SALAMANDER.get(), "Salamander");
         add(NetherExEntityTypes.MOGUS.get(), "Mogus");
         add(NetherExEntityTypes.FLAEMOTH.get(), "Flaemoth");
