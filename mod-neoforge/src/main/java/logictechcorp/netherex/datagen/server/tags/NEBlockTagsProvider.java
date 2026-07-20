@@ -22,7 +22,7 @@ public class NEBlockTagsProvider extends BlockTagsProvider
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider)
     {
-        tag(BlockTags.MUSHROOM_GROW_BLOCK)
+        tag(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT)
                 .add(NetherExBlocks.ELDER_NYLIUM.get());
         tag(NetherExBlockTags.NETHERRACKS)
                 .add(NetherExBlocks.GLOOMY_NETHERRACK.get())

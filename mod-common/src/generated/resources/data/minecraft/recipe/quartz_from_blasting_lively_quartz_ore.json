@@ -6,7 +6,6 @@
   "group": "quartz",
   "ingredient": "netherex:lively_quartz_ore",
   "result": {
-    "count": 1,
     "id": "minecraft:quartz"
   }
 }

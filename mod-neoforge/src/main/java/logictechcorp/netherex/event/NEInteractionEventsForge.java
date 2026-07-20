@@ -26,7 +26,7 @@ public class NEInteractionEventsForge
     {
         Level level = event.getLevel();
 
-        if (level.isClientSide)
+        if (level.isClientSide())
         {
             return;
         }

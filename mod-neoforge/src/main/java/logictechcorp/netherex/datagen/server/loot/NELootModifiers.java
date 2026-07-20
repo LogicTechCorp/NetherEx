@@ -4,7 +4,7 @@ import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.registry.NetherExLootTables;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
@@ -24,18 +24,18 @@ public class NELootModifiers extends GlobalLootModifierProvider
     protected void start()
     {
         add("add_netherite_horse_armor_to_bastion_treasure", new AddTableLootModifier(
-                new LootItemCondition[]{LootTableIdCondition.builder(BuiltInLootTables.BASTION_TREASURE.location()).build()},
-                NetherExLootTables.NETHERITE_HORSE_ARMOR_ADDITION
+                new LootItemCondition[]{LootTableIdCondition.builder(BuiltInLootTables.BASTION_TREASURE.identifier()).build()},
+                0, NetherExLootTables.NETHERITE_HORSE_ARMOR_ADDITION
         ));
 
         add("add_tracker_compass_to_bastion_other", new AddTableLootModifier(
-                new LootItemCondition[]{LootTableIdCondition.builder(BuiltInLootTables.BASTION_OTHER.location()).build()},
-                NetherExLootTables.FORTRESS_COMPASS_STRUCTURE_TRACKER_ADDITION
+                new LootItemCondition[]{LootTableIdCondition.builder(BuiltInLootTables.BASTION_OTHER.identifier()).build()},
+                0, NetherExLootTables.FORTRESS_COMPASS_STRUCTURE_TRACKER_ADDITION
         ));
 
         add("add_hoglin_additions_to_hoglin", new AddTableLootModifier(
-                new LootItemCondition[]{LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/hoglin")).build()},
-                NetherExLootTables.HOGLIN_ADDITIONS
+                new LootItemCondition[]{LootTableIdCondition.builder(Identifier.withDefaultNamespace("entities/hoglin")).build()},
+                0, NetherExLootTables.HOGLIN_ADDITIONS
         ));
     }
 }

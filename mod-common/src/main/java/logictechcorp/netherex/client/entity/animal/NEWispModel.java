@@ -1,22 +1,23 @@
 package logictechcorp.netherex.client.entity.animal;
 
+import com.geckolib.model.DefaultedEntityGeoModel;
+import com.geckolib.renderer.base.GeoRenderState;
 import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.entity.monster.NEWisp;
-import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
+import net.minecraft.resources.Identifier;
 
 public class NEWispModel extends DefaultedEntityGeoModel<NEWisp>
 {
-    private static final ResourceLocation TEXTURE = NetherExConstants.resource("textures/entity/wisp/wisp.png");
+    private static final Identifier TEXTURE = NetherExConstants.identifier("textures/entity/wisp/wisp.png");
 
     public NEWispModel()
     {
-        super(NetherExConstants.resource("wisp"));
+        super(NetherExConstants.identifier("wisp"));
     }
 
+
     @Override
-    public ResourceLocation getTextureResource(NEWisp animatable, GeoRenderer<NEWisp> renderer)
+    public Identifier getTextureResource(GeoRenderState renderState)
     {
         return TEXTURE;
     }

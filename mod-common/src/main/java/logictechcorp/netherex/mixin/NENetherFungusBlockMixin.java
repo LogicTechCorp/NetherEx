@@ -6,8 +6,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.FungusBlock;
+import net.minecraft.world.level.block.NetherFungusBlock;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,10 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
-@Mixin(FungusBlock.class)
-public abstract class NEFungusBlockMixin extends BushBlock implements BonemealableBlock
+@Mixin(NetherFungusBlock.class)
+public abstract class NENetherFungusBlockMixin extends VegetationBlock implements BonemealableBlock
 {
-    protected NEFungusBlockMixin(Properties properties)
+    protected NENetherFungusBlockMixin(Properties properties)
     {
         super(properties);
     }

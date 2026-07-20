@@ -83,7 +83,7 @@ public class NetherExBiomeModifiersFabric
 
     private static void addFeature(String name, Predicate<BiomeSelectionContext> biomeSelector, GenerationStep.Decoration step, Set<ResourceKey<PlacedFeature>> placedFeatures)
     {
-        BiomeModifications.create(NetherExConstants.resource(name)).add(ModificationPhase.ADDITIONS, biomeSelector, context ->
+        BiomeModifications.create(NetherExConstants.identifier(name)).add(ModificationPhase.ADDITIONS, biomeSelector, context ->
         {
             placedFeatures.forEach(placedFeature -> context.getGenerationSettings().addFeature(step, placedFeature));
         });
@@ -91,7 +91,7 @@ public class NetherExBiomeModifiersFabric
 
     private static void removeFeature(String name, Predicate<BiomeSelectionContext> biomeSelector, Set<ResourceKey<PlacedFeature>> placedFeatures)
     {
-        BiomeModifications.create(NetherExConstants.resource(name)).add(ModificationPhase.REMOVALS, biomeSelector, context ->
+        BiomeModifications.create(NetherExConstants.identifier(name)).add(ModificationPhase.REMOVALS, biomeSelector, context ->
         {
             placedFeatures.forEach(placedFeature -> context.getGenerationSettings().removeFeature(placedFeature));
         });

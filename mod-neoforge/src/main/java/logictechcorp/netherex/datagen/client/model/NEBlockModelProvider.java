@@ -1,18 +1,20 @@
 package logictechcorp.netherex.datagen.client.model;
 
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.block.state.properties.NENetherrackType;
 import logictechcorp.netherex.registry.NetherExBlocks;
 import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.blockstates.*;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -59,9 +61,9 @@ public class NEBlockModelProvider
         crossNotTinted(NetherExBlocks.BROWN_ELDER_MUSHROOM.get());
         crossNotTinted(NetherExBlocks.RED_ELDER_MUSHROOM.get());
 
-        ResourceLocation fleshTexture = modBlockLoc("elder_mushroom_flesh");
-        TextureMapping fleshTextureMapping = new TextureMapping().put(TextureSlot.TEXTURE, fleshTexture);
-        ResourceLocation fleshModel = ModelTemplates.SINGLE_FACE.create(fleshTexture, fleshTextureMapping, blockModels.modelOutput);
+        Identifier fleshTexture = modBlockLoc("elder_mushroom_flesh");
+        TextureMapping fleshTextureMapping = new TextureMapping().put(TextureSlot.TEXTURE, new Material(fleshTexture));
+        Identifier fleshModel = ModelTemplates.SINGLE_FACE.create(fleshTexture, fleshTextureMapping, blockModels.modelOutput);
         mushroomBlock(NetherExBlocks.BROWN_ELDER_MUSHROOM_BLOCK.get(), modBlockLoc("brown_elder_mushroom_cap"), fleshModel);
         mushroomBlock(NetherExBlocks.RED_ELDER_MUSHROOM_BLOCK.get(), modBlockLoc("red_elder_mushroom_cap"), fleshModel);
         mushroomBlock(NetherExBlocks.ELDER_MUSHROOM_STEM.get(), modBlockLoc("elder_mushroom_stem"), fleshModel);
@@ -135,47 +137,47 @@ public class NEBlockModelProvider
                 .wall(baseBlockWall);
     }
 
-    private void cubeTopBottom(Block block, ResourceLocation topTexture, ResourceLocation sideTexture, ResourceLocation bottomTexture)
+    private void cubeTopBottom(Block block, Identifier topTexture, Identifier sideTexture, Identifier bottomTexture)
     {
         TextureMapping textureMapping = new TextureMapping()
-                .put(TextureSlot.TOP, topTexture)
-                .put(TextureSlot.SIDE, sideTexture)
-                .put(TextureSlot.BOTTOM, bottomTexture)
+                .put(TextureSlot.TOP, new Material(topTexture))
+                .put(TextureSlot.SIDE, new Material(sideTexture))
+                .put(TextureSlot.BOTTOM, new Material(bottomTexture))
                 .copyForced(TextureSlot.TOP, TextureSlot.PARTICLE);
-        ResourceLocation modelLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(block, textureMapping, blockModels.modelOutput);
-        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, modelLocation)));
+        Identifier modelLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(block, textureMapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(modelLocation)));
     }
 
-    private void slabLike(Block block, ResourceLocation topTexture, ResourceLocation sideTexture, ResourceLocation bottomTexture)
+    private void slabLike(Block block, Identifier topTexture, Identifier sideTexture, Identifier bottomTexture)
     {
         TextureMapping textureMapping = new TextureMapping()
-                .put(TextureSlot.TOP, topTexture)
-                .put(TextureSlot.BOTTOM, sideTexture)
-                .put(TextureSlot.SIDE, bottomTexture)
+                .put(TextureSlot.TOP, new Material(topTexture))
+                .put(TextureSlot.BOTTOM, new Material(sideTexture))
+                .put(TextureSlot.SIDE, new Material(bottomTexture))
                 .copyForced(TextureSlot.TOP, TextureSlot.PARTICLE);
-        ResourceLocation modelLocation = ModelTemplates.SLAB_BOTTOM.create(block, textureMapping, blockModels.modelOutput);
-        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, modelLocation)));
+        Identifier modelLocation = ModelTemplates.SLAB_BOTTOM.create(block, textureMapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(modelLocation)));
     }
 
-    private void path(Block block, ResourceLocation topTexture, ResourceLocation sideTexture, ResourceLocation bottomTexture)
+    private void path(Block block, Identifier topTexture, Identifier sideTexture, Identifier bottomTexture)
     {
         TextureMapping textureMapping = new TextureMapping()
-                .put(TextureSlot.TOP, topTexture)
-                .put(TextureSlot.SIDE, sideTexture)
-                .put(TextureSlot.BOTTOM, bottomTexture)
+                .put(TextureSlot.TOP, new Material(topTexture))
+                .put(TextureSlot.SIDE, new Material(sideTexture))
+                .put(TextureSlot.BOTTOM, new Material(bottomTexture))
                 .copyForced(TextureSlot.TOP, TextureSlot.PARTICLE);
-        ResourceLocation modelLocation = NEModelTemplates.PATH.create(block, textureMapping, blockModels.modelOutput);
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createRotatedVariant(block, modelLocation));
+        Identifier modelLocation = NEModelTemplates.PATH.create(block, textureMapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, BlockModelGenerators.createRotatedVariants(BlockModelGenerators.plainModel(modelLocation))));
     }
 
-    private void thatch(Block block, ResourceLocation thatch, ResourceLocation thatchExtrudes)
+    private void thatch(Block block, Identifier thatch, Identifier thatchExtrudes)
     {
         TextureMapping textureMapping = new TextureMapping()
-                .put(NETextureSlots.THATCH, thatch)
-                .put(NETextureSlots.THATCH_EXTRUDES, thatchExtrudes)
+                .put(NETextureSlots.THATCH, new Material(thatch))
+                .put(NETextureSlots.THATCH_EXTRUDES, new Material(thatchExtrudes))
                 .copyForced(NETextureSlots.THATCH, TextureSlot.PARTICLE);
-        ResourceLocation modelLocation = NEModelTemplates.THATCH.create(block, textureMapping, blockModels.modelOutput);
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, modelLocation));
+        Identifier modelLocation = NEModelTemplates.THATCH.create(block, textureMapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(modelLocation)));
     }
 
     private void crossNotTinted(Block block)
@@ -183,112 +185,48 @@ public class NEBlockModelProvider
         blockModels.registerSimpleFlatItemModel(block);
 
         TextureMapping textureMapping = BlockModelGenerators.PlantType.NOT_TINTED.getTextureMapping(block);
-        ResourceLocation modelLocation = NEModelTemplates.CROSS_NOT_TINTED.create(block, textureMapping, blockModels.modelOutput);
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, modelLocation));
+        Identifier modelLocation = NEModelTemplates.CROSS_NOT_TINTED.create(block, textureMapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(modelLocation)));
     }
 
     private void doublePlant(Block block)
     {
         blockModels.registerSimpleFlatItemModel(block, "_top");
 
-        ResourceLocation topModelLocation = blockModels.createSuffixedVariant(block, "_top", NEModelTemplates.CROSS_NOT_TINTED, TextureMapping::cross);
-        ResourceLocation bottomModelLocation = blockModels.createSuffixedVariant(block, "_bottom", NEModelTemplates.CROSS_NOT_TINTED, TextureMapping::cross);
-        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
-                .with(PropertyDispatch.property(BlockStateProperties.DOUBLE_BLOCK_HALF)
-                        .select(DoubleBlockHalf.LOWER, Variant.variant().with(VariantProperties.MODEL, bottomModelLocation))
-                        .select(DoubleBlockHalf.UPPER, Variant.variant().with(VariantProperties.MODEL, topModelLocation))));
+        Identifier topModelLocation = blockModels.createSuffixedVariant(block, "_top", NEModelTemplates.CROSS_NOT_TINTED, TextureMapping::cross);
+        Identifier bottomModelLocation = blockModels.createSuffixedVariant(block, "_bottom", NEModelTemplates.CROSS_NOT_TINTED, TextureMapping::cross);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(PropertyDispatch.initial(BlockStateProperties.DOUBLE_BLOCK_HALF)
+                        .select(DoubleBlockHalf.LOWER, BlockModelGenerators.plainVariant(bottomModelLocation))
+                        .select(DoubleBlockHalf.UPPER, BlockModelGenerators.plainVariant(topModelLocation))));
     }
 
-    private void mushroomBlock(Block block, ResourceLocation capTexture, ResourceLocation fleshModel)
+    private void mushroomBlock(Block block, Identifier capTexture, Identifier fleshModel)
     {
-        ResourceLocation blockModel = ModelTemplates.SINGLE_FACE.create(block, TextureMapping.defaultTexture(capTexture), blockModels.modelOutput);
+        MultiVariant skin = BlockModelGenerators.plainVariant(ModelTemplates.SINGLE_FACE.create(block, TextureMapping.defaultTexture(new Material(capTexture)), blockModels.modelOutput));
+        MultiVariant skinless = BlockModelGenerators.plainVariant(fleshModel);
 
-        blockModels.blockStateOutput
-                .accept(MultiPartGenerator.multiPart(block)
-                        .with(Condition.condition().term(BlockStateProperties.NORTH, true), Variant.variant().with(VariantProperties.MODEL, blockModel))
-                        .with(Condition.condition().term(BlockStateProperties.EAST, true),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, blockModel)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                        .with(VariantProperties.UV_LOCK, true)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.SOUTH, true),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, blockModel)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                        .with(VariantProperties.UV_LOCK, true)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.WEST, true),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, blockModel)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                        .with(VariantProperties.UV_LOCK, true)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.UP, true),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, blockModel)
-                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270)
-                                        .with(VariantProperties.UV_LOCK, true)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.DOWN, true),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, blockModel)
-                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
-                                        .with(VariantProperties.UV_LOCK, true)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.NORTH, false), Variant.variant().with(VariantProperties.MODEL, fleshModel))
-                        .with(Condition.condition().term(BlockStateProperties.EAST, false),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, fleshModel)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                        .with(VariantProperties.UV_LOCK, false)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.SOUTH, false),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, fleshModel)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                        .with(VariantProperties.UV_LOCK, false)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.WEST, false),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, fleshModel)
-                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                        .with(VariantProperties.UV_LOCK, false)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.UP, false),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, fleshModel)
-                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270)
-                                        .with(VariantProperties.UV_LOCK, false)
-                        )
-                        .with(Condition.condition().term(BlockStateProperties.DOWN, false),
-                                Variant.variant()
-                                        .with(VariantProperties.MODEL, fleshModel)
-                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
-                                        .with(VariantProperties.UV_LOCK, false)
-                        )
-                );
-        blockModels.registerSimpleItemModel(block, TexturedModel.CUBE
-                .updateTexture(textureMapping -> textureMapping.put(TextureSlot.ALL, capTexture))
-                .createWithSuffix(block, "_inventory", blockModels.modelOutput)
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.NORTH, true), skin)
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.EAST, true), skin.with(BlockModelGenerators.Y_ROT_90).with(BlockModelGenerators.UV_LOCK))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.SOUTH, true), skin.with(BlockModelGenerators.Y_ROT_180).with(BlockModelGenerators.UV_LOCK))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.WEST, true), skin.with(BlockModelGenerators.Y_ROT_270).with(BlockModelGenerators.UV_LOCK))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.UP, true), skin.with(BlockModelGenerators.X_ROT_270).with(BlockModelGenerators.UV_LOCK))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.DOWN, true), skin.with(BlockModelGenerators.X_ROT_90).with(BlockModelGenerators.UV_LOCK))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.NORTH, false), skinless)
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.EAST, false), skinless.with(BlockModelGenerators.Y_ROT_90))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.SOUTH, false), skinless.with(BlockModelGenerators.Y_ROT_180))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.WEST, false), skinless.with(BlockModelGenerators.Y_ROT_270))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.UP, false), skinless.with(BlockModelGenerators.X_ROT_270))
+                .with(BlockModelGenerators.condition().term(BlockStateProperties.DOWN, false), skinless.with(BlockModelGenerators.X_ROT_90))
         );
+
+        blockModels.registerSimpleItemModel(block, TexturedModel.CUBE.updateTexture(textureMapping -> textureMapping.put(TextureSlot.ALL, new Material(capTexture))).createWithSuffix(block, "_inventory", blockModels.modelOutput));
     }
 
     private void warpedWart()
     {
-        Block warpedWart = NetherExBlocks.WARPED_WART.get();
-        int[] ages = {0, 1, 1, 2};
-        Int2ObjectMap<ResourceLocation> objectMap = new Int2ObjectOpenHashMap<>();
-        PropertyDispatch propertyDispatch = PropertyDispatch.property(BlockStateProperties.AGE_3).generate((index) ->
-        {
-            int age = ages[index];
-            ResourceLocation resourcelocation = objectMap.computeIfAbsent(age, (unused) ->
-                    blockModels.createSuffixedVariant(warpedWart, "_stage" + age, NEModelTemplates.WARPED_WART, resourceLocation ->
-                            new TextureMapping().put(NETextureSlots.WARPED_WART, resourceLocation)));
-            return Variant.variant().with(VariantProperties.MODEL, resourcelocation);
-        });
-        blockModels.registerSimpleFlatItemModel(warpedWart.asItem());
-        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(warpedWart).with(propertyDispatch));
+        blockModels.createCropBlock(NetherExBlocks.WARPED_WART.get(), BlockStateProperties.AGE_3, 0, 1, 1, 2);
     }
 
     private String name(Block block)
@@ -296,32 +234,32 @@ public class NEBlockModelProvider
         return BuiltInRegistries.BLOCK.getKey(block).getPath();
     }
 
-    ResourceLocation modLoc(String modelPath)
+    Identifier modLoc(String modelPath)
     {
-        return NetherExConstants.resource(modelPath);
+        return NetherExConstants.identifier(modelPath);
     }
 
-    ResourceLocation mcLoc(String modelPath)
+    Identifier mcLoc(String modelPath)
     {
-        return ResourceLocation.withDefaultNamespace(modelPath);
+        return Identifier.withDefaultNamespace(modelPath);
     }
 
-    private ResourceLocation mcBlockLoc(String name)
+    private Identifier mcBlockLoc(String name)
     {
         return mcLoc(name).withPrefix("block/");
     }
 
-    private ResourceLocation mcItemLoc(String name)
+    private Identifier mcItemLoc(String name)
     {
         return mcLoc(name).withPrefix("item/");
     }
 
-    private ResourceLocation modBlockLoc(String name)
+    private Identifier modBlockLoc(String name)
     {
         return modLoc(name).withPrefix("block/");
     }
 
-    private ResourceLocation modItemLoc(String name)
+    private Identifier modItemLoc(String name)
     {
         return modLoc(name).withPrefix("item/");
     }

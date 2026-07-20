@@ -6,7 +6,6 @@
   "group": "nether_brick",
   "ingredient": "minecraft:netherrack",
   "result": {
-    "count": 1,
     "id": "minecraft:nether_brick"
   }
 }

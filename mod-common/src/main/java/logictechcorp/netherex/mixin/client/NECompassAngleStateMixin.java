@@ -7,7 +7,7 @@ import logictechcorp.netherex.registry.NetherExDataComponents;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.numeric.CompassAngleState;
 import net.minecraft.core.GlobalPos;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,10 +19,10 @@ public abstract class NECompassAngleStateMixin
             method = "calculate",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/item/properties/numeric/CompassAngleState$CompassTarget;get(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/core/GlobalPos;"
+                    target = "Lnet/minecraft/client/renderer/item/properties/numeric/CompassAngleState$CompassTarget;get(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/ItemOwner;)Lnet/minecraft/core/GlobalPos;"
             )
     )
-    private GlobalPos getGlobalPos(CompassAngleState.CompassTarget instance, ClientLevel clientLevel, ItemStack stack, Entity entity, Operation<GlobalPos> original)
+    private GlobalPos getGlobalPos(CompassAngleState.CompassTarget instance, ClientLevel clientLevel, ItemStack stack, ItemOwner itemOwner, Operation<GlobalPos> original)
     {
         NEStructureTracker structureTracker = stack.get(NetherExDataComponents.STRUCTURE_TRACKER.get());
 
@@ -31,6 +31,6 @@ public abstract class NECompassAngleStateMixin
             return structureTracker.target();
         }
 
-        return original.call(instance, clientLevel, stack, entity);
+        return original.call(instance, clientLevel, stack, itemOwner);
     }
 }

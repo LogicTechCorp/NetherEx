@@ -17,7 +17,7 @@ public class NENetherRegion extends Region
 {
     public NENetherRegion()
     {
-        super(NetherExConstants.resource("nether"), RegionType.NETHER, NetherExTerraBlenderConfig.terraBlenderRegionWeight);
+        super(NetherExConstants.identifier("nether"), RegionType.NETHER, NetherExTerraBlenderConfig.terraBlenderRegionWeight);
     }
 
     @Override

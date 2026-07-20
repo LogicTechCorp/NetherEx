@@ -8,28 +8,28 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
-public record NEMogusVariant(ResourceLocation texture, ResourceLocation lootTable, int spawnWeight)
+public record NEMogusVariant(Identifier texture, Identifier lootTable, int spawnWeight)
 {
     public static final Codec<NEMogusVariant> ELEMENT_CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                            ResourceLocation.CODEC.fieldOf("texture").forGetter(NEMogusVariant::texture),
-                            ResourceLocation.CODEC.fieldOf("loot_table").forGetter(NEMogusVariant::lootTable),
+                            Identifier.CODEC.fieldOf("texture").forGetter(NEMogusVariant::texture),
+                            Identifier.CODEC.fieldOf("loot_table").forGetter(NEMogusVariant::lootTable),
                             Codec.INT.fieldOf("spawn_weight").forGetter(NEMogusVariant::spawnWeight)
                     )
                     .apply(instance, NEMogusVariant::new)
     );
     public static final Codec<NEMogusVariant> NETWORK_CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                            ResourceLocation.CODEC.fieldOf("texture").forGetter(NEMogusVariant::texture)
+                            Identifier.CODEC.fieldOf("texture").forGetter(NEMogusVariant::texture)
                     )
-                    .apply(instance, (texture) -> new NEMogusVariant(texture, NetherExConstants.resource("empty"), 0))
+                    .apply(instance, (texture) -> new NEMogusVariant(texture, NetherExConstants.identifier("empty"), 0))
     );
     public static final StreamCodec<RegistryFriendlyByteBuf, NEMogusVariant> DATA_STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC,
+            Identifier.STREAM_CODEC,
             NEMogusVariant::texture,
-            ResourceLocation.STREAM_CODEC,
+            Identifier.STREAM_CODEC,
             NEMogusVariant::lootTable,
             ByteBufCodecs.INT,
             NEMogusVariant::spawnWeight,

@@ -3,7 +3,7 @@ package logictechcorp.netherex.mixin;
 import logictechcorp.netherex.world.level.levelgen.structure.NEStructureLodestoneMarker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureManager;
@@ -20,8 +20,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Optional;
 
 @Mixin(NetherFortressPieces.CastleEntrance.class)
 public abstract class NEFortressCastleEntranceMixin extends StructurePiece implements NEStructureLodestoneMarker
@@ -49,7 +47,7 @@ public abstract class NEFortressCastleEntranceMixin extends StructurePiece imple
     {
         if (netherEx$lodestonePos != null)
         {
-            compoundTag.put("netherEx$lodestonePos", NbtUtils.writeBlockPos(netherEx$lodestonePos));
+            compoundTag.put("netherEx$lodestonePos", BlockPos.CODEC.encode(netherEx$lodestonePos, NbtOps.INSTANCE, NbtOps.INSTANCE.empty()).getOrThrow());
         }
     }
 
@@ -58,8 +56,7 @@ public abstract class NEFortressCastleEntranceMixin extends StructurePiece imple
     {
         if (compoundTag.contains("netherEx$lodestonePos"))
         {
-            Optional<BlockPos> pos = NbtUtils.readBlockPos(compoundTag, "netherEx$lodestonePos");
-            pos.ifPresent(blockPos -> netherEx$lodestonePos = blockPos);
+            netherEx$lodestonePos = BlockPos.CODEC.decode(NbtOps.INSTANCE, compoundTag.get("netherEx$lodestonePos")).getOrThrow().getFirst();
         }
     }
 

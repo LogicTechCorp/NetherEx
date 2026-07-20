@@ -22,7 +22,6 @@
       "translate": "advancements.netherex.nether.kill_flaemoth.description"
     },
     "icon": {
-      "count": 1,
       "id": "netherex:flaemoth_spawn_egg"
     },
     "title": {

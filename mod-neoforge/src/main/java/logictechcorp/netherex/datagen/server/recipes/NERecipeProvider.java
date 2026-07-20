@@ -10,12 +10,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmokingRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -73,11 +73,11 @@ public class NERecipeProvider extends RecipeProvider
             Item itemNetherBrick = BuiltInRegistries.ITEM.getValue(modLoc(typeName + "_nether_brick"));
 
             smeltingResultFromBase(itemNetherBrick, blockNetherrack);
-            oreSmelting(List.of(blockQuartzOre), RecipeCategory.MISC, Items.QUARTZ, 0.2F, 200, "quartz");
-            oreBlasting(List.of(blockQuartzOre), RecipeCategory.MISC, Items.QUARTZ, 0.2F, 100, "quartz");
-            oreSmelting(List.of(blockGoldOre), RecipeCategory.MISC, Items.GOLD_INGOT, 1.0F, 200, "gold_ingot");
-            oreBlasting(List.of(blockGoldOre), RecipeCategory.MISC, Items.GOLD_INGOT, 1.0F, 100, "gold_ingot");
-            oreBlasting(List.of(blockNetherrack), RecipeCategory.MISC, itemNetherBrick, 0.1F, 100, typeName + "_nether_brick");
+            oreSmelting(List.of(blockQuartzOre), RecipeCategory.MISC, CookingBookCategory.MISC, Items.QUARTZ, 0.2F, 200, "quartz");
+            oreBlasting(List.of(blockQuartzOre), RecipeCategory.MISC, CookingBookCategory.MISC, Items.QUARTZ, 0.2F, 100, "quartz");
+            oreSmelting(List.of(blockGoldOre), RecipeCategory.MISC, CookingBookCategory.MISC, Items.GOLD_INGOT, 1.0F, 200, "gold_ingot");
+            oreBlasting(List.of(blockGoldOre), RecipeCategory.MISC, CookingBookCategory.MISC, Items.GOLD_INGOT, 1.0F, 100, "gold_ingot");
+            oreBlasting(List.of(blockNetherrack), RecipeCategory.MISC, CookingBookCategory.MISC, itemNetherBrick, 0.1F, 100, typeName + "_nether_brick");
             twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, blockNetherBricks, itemNetherBrick);
             smeltingResultFromBase(blockCrackedNetherBricks, blockNetherBricks);
             chiseled(RecipeCategory.BUILDING_BLOCKS, blockChiseledNetherBricks, blockNetherBricksSlab);
@@ -85,7 +85,7 @@ public class NERecipeProvider extends RecipeProvider
             decorativeForBlock(blockNetherBricks, itemNetherBrick, true, true);
         }
 
-        oreBlasting(List.of(Blocks.NETHERRACK), RecipeCategory.MISC, Items.NETHER_BRICK, 0.1F, 100, "nether_brick");
+        oreBlasting(List.of(Blocks.NETHERRACK), RecipeCategory.MISC, CookingBookCategory.MISC, Items.NETHER_BRICK, 0.1F, 100, "nether_brick");
         polished(RecipeCategory.DECORATIONS, NetherExBlocks.POLISHED_NETHERRACK.get(), Blocks.NETHERRACK);
         stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, NetherExBlocks.POLISHED_NETHERRACK.get(), Blocks.NETHERRACK);
         decorativeForBlock(NetherExBlocks.POLISHED_NETHERRACK.get(), Items.NETHER_BRICK, true, false);
@@ -143,11 +143,10 @@ public class NERecipeProvider extends RecipeProvider
                 Items.NETHERITE_HELMET,
                 Items.NETHERITE_CHESTPLATE,
                 Items.NETHERITE_LEGGINGS,
-                Items.NETHERITE_BOOTS,
-                NetherExItems.NETHERITE_HORSE_ARMOR.get()
+                Items.NETHERITE_BOOTS
         );
 
-        SimpleCookingRecipeBuilder.smelting(netheriteMaterial, RecipeCategory.MISC, NetherExItems.NETHERITE_NUGGET.get(), 1.0f, 1600)
+        SimpleCookingRecipeBuilder.smelting(netheriteMaterial, RecipeCategory.MISC, CookingBookCategory.MISC, NetherExItems.NETHERITE_NUGGET.get(), 1.0f, 1600)
                 .unlockedBy("has_netherite_pickaxe", has(Items.NETHERITE_PICKAXE))
                 .unlockedBy("has_netherite_shovel", has(Items.NETHERITE_SHOVEL))
                 .unlockedBy("has_netherite_axe", has(Items.NETHERITE_AXE))
@@ -157,10 +156,9 @@ public class NERecipeProvider extends RecipeProvider
                 .unlockedBy("has_netherite_chestplate", has(Items.NETHERITE_CHESTPLATE))
                 .unlockedBy("has_netherite_leggings", has(Items.NETHERITE_LEGGINGS))
                 .unlockedBy("has_netherite_boots", has(Items.NETHERITE_BOOTS))
-                .unlockedBy("has_netherite_horse_armor", has(NetherExItems.NETHERITE_HORSE_ARMOR.get()))
                 .save(output, getSmeltingRecipeName(NetherExItems.NETHERITE_NUGGET.get()));
 
-        SimpleCookingRecipeBuilder.blasting(netheriteMaterial, RecipeCategory.MISC, NetherExItems.NETHERITE_NUGGET.get(), 1.0f, 800)
+        SimpleCookingRecipeBuilder.blasting(netheriteMaterial, RecipeCategory.MISC, CookingBookCategory.MISC, NetherExItems.NETHERITE_NUGGET.get(), 1.0f, 800)
                 .unlockedBy("has_netherite_pickaxe", has(Items.NETHERITE_PICKAXE))
                 .unlockedBy("has_netherite_shovel", has(Items.NETHERITE_SHOVEL))
                 .unlockedBy("has_netherite_axe", has(Items.NETHERITE_AXE))
@@ -170,7 +168,6 @@ public class NERecipeProvider extends RecipeProvider
                 .unlockedBy("has_netherite_chestplate", has(Items.NETHERITE_CHESTPLATE))
                 .unlockedBy("has_netherite_leggings", has(Items.NETHERITE_LEGGINGS))
                 .unlockedBy("has_netherite_boots", has(Items.NETHERITE_BOOTS))
-                .unlockedBy("has_netherite_horse_armor", has(NetherExItems.NETHERITE_HORSE_ARMOR.get()))
                 .save(output, getBlastingRecipeName(NetherExItems.NETHERITE_NUGGET.get()));
 
         shapeless(NetherExItems.WITHER_BONE_MEAL.get(), 3, NetherExItems.WITHER_BONE.get());
@@ -201,11 +198,11 @@ public class NERecipeProvider extends RecipeProvider
 
     protected void cook(ItemLike foodItem, ItemLike cookedFoodItem)
     {
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(foodItem), RecipeCategory.FOOD, cookedFoodItem, 0.35f, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(foodItem), RecipeCategory.FOOD, CookingBookCategory.FOOD, cookedFoodItem, 0.35f, 200)
                 .unlockedBy(getHasName(foodItem), has(foodItem))
                 .save(output);
-        simpleCookingRecipe("smoking", RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new, 100, foodItem, cookedFoodItem, 0.35f);
-        simpleCookingRecipe("campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new, 600, foodItem, cookedFoodItem, 0.35f);
+        simpleCookingRecipe("smoking", SmokingRecipe::new, 100, foodItem, cookedFoodItem, 0.35f);
+        simpleCookingRecipe("campfire_cooking", CampfireCookingRecipe::new, 600, foodItem, cookedFoodItem, 0.35f);
     }
 
     protected void decorativeForBlock(Block baseBlock, Item fenceBarItem, boolean addStoneCuttingRecipes, boolean isBaseBlockNamePlural)
@@ -293,8 +290,8 @@ public class NERecipeProvider extends RecipeProvider
         return BuiltInRegistries.BLOCK.getKey(block).getPath();
     }
 
-    public ResourceLocation modLoc(String name)
+    public Identifier modLoc(String name)
     {
-        return NetherExConstants.resource(name);
+        return NetherExConstants.identifier(name);
     }
 }

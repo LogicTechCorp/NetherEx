@@ -63,6 +63,6 @@ public class NetherExEntityTypes
 
     private static ResourceKey<EntityType<?>> createKey(String name)
     {
-        return ResourceKey.create(Registries.ENTITY_TYPE, NetherExConstants.resource(name));
+        return ResourceKey.create(Registries.ENTITY_TYPE, NetherExConstants.identifier(name));
     }
 }

@@ -1,42 +1,46 @@
 package logictechcorp.netherex.entity.animal;
 
+import com.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.util.GeckoLibUtil;
 import logictechcorp.netherex.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Optional;
 
-public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVariant>>, GeoEntity
+public class NEMogus extends Animal implements GeoEntity
 {
     private static final EntityDataAccessor<Holder<NEMogusVariant>> VARIANT_ID = SynchedEntityData.defineId(NEMogus.class, NetherExEntityDataSerializers.MOGUS_VARIANT);
 
@@ -45,7 +49,7 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     public NEMogus(EntityType<? extends Animal> entityType, Level level)
     {
         super(entityType, level);
-        setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);
+        setPathfindingMalus(PathType.FIRE, -1.0F);
         setPathfindingMalus(PathType.LAVA, -1.0F);
         setPathfindingMalus(PathType.WATER, -1.0F);
     }
@@ -67,8 +71,7 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         super.defineSynchedData(builder);
-        Registry<NEMogusVariant> registry = registryAccess().lookupOrThrow(NetherExRegistries.Keys.MOGUS_VARIANT);
-        builder.define(VARIANT_ID, registry.get(NetherExMogusVariants.BROWN).or(registry::getAny).orElseThrow());
+        builder.define(VARIANT_ID, VariantUtils.getDefaultOrAny(registryAccess(), NetherExMogusVariants.BROWN));
     }
 
     @Override
@@ -87,10 +90,8 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar)
     {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, (animationState ->
+        controllerRegistrar.add(new AnimationController<>("controller", 0, (animationState ->
         {
-            AnimationController<NEMogus> animationController = animationState.getController();
-
             String animationName;
 
             if (animationState.isMoving())
@@ -102,7 +103,7 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
                 animationName = "animation.mogus.idle";
             }
 
-            animationController.setAnimation(RawAnimation.begin().thenLoop(animationName));
+            animationState.controller().setAnimation(RawAnimation.begin().thenLoop(animationName));
             return PlayState.CONTINUE;
         })));
     }
@@ -118,23 +119,23 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     {
         spawnGroupData = super.finalizeSpawn(levelAccessor, difficultyInstance, entitySpawnReason, spawnGroupData);
 
-        Holder<NEMogusVariant> mogusVariant = NetherExMogusVariants.getBiomeSpawnVariant(registryAccess(), random);
+        Holder<NEMogusVariant> mogusVariant = NetherExMogusVariants.getRandomSpawnVariant(registryAccess(), random);
         setVariant(mogusVariant);
         return spawnGroupData;
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compoundTag)
+    public void addAdditionalSaveData(ValueOutput output)
     {
-        super.addAdditionalSaveData(compoundTag);
-        getVariant().unwrapKey().ifPresent(variantResourceKey -> compoundTag.putString("variant", variantResourceKey.location().toString()));
+        super.addAdditionalSaveData(output);
+        getVariant().unwrapKey().ifPresent(variantResourceKey -> output.putString("variant", variantResourceKey.identifier().toString()));
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compoundTag)
+    public void readAdditionalSaveData(ValueInput input)
     {
-        super.readAdditionalSaveData(compoundTag);
-        Optional.ofNullable(ResourceLocation.tryParse(compoundTag.getString("variant")))
+        super.readAdditionalSaveData(input);
+        Optional.ofNullable(Identifier.tryParse(input.getStringOr("variant", "")))
                 .map(location -> ResourceKey.create(NetherExRegistries.Keys.MOGUS_VARIANT, location))
                 .flatMap(key -> registryAccess().lookupOrThrow(NetherExRegistries.Keys.MOGUS_VARIANT).get(key))
                 .ifPresent(this::setVariant);
@@ -146,7 +147,11 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
         return stack.is(NetherExItemTags.MOGUS_FOOD);
     }
 
-    @Override
+    public void setVariant(Holder<NEMogusVariant> variant)
+    {
+        entityData.set(VARIANT_ID, variant);
+    }
+
     public Holder<NEMogusVariant> getVariant()
     {
         return entityData.get(VARIANT_ID);
@@ -186,12 +191,6 @@ public class NEMogus extends Animal implements VariantHolder<Holder<NEMogusVaria
     @Override
     public float getWalkTargetValue(BlockPos pos, LevelReader level)
     {
-        return level.getBlockState(pos.below()).is(BlockTags.MUSHROOM_GROW_BLOCK) ? 10.0f : 0.0f;
-    }
-
-    @Override
-    public void setVariant(Holder<NEMogusVariant> variant)
-    {
-        entityData.set(VARIANT_ID, variant);
+        return level.getBlockState(pos.below()).is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT) ? 10.0f : 0.0f;
     }
 }

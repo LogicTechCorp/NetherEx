@@ -22,7 +22,6 @@
       "translate": "advancements.netherex.nether.kill_mogus.description"
     },
     "icon": {
-      "count": 1,
       "id": "netherex:mogus_spawn_egg"
     },
     "title": {

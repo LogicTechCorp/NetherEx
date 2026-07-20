@@ -1,10 +1,9 @@
 package logictechcorp.netherex.registry;
 
-import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.entity.animal.NEFlaemothVariant;
 import logictechcorp.netherex.entity.animal.NEMogusVariant;
 import logictechcorp.netherex.entity.animal.NESalamanderVariant;
-import logictechcorp.netherex.platform.registration.EntityDataSerializerHelper;
+import logictechcorp.netherex.platform.NEEntityHelper;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -32,6 +31,6 @@ public class NetherExEntityDataSerializers
 
     private static <E> EntityDataSerializer<Holder<E>> registerSimpleEntityDataSerializer(String name, StreamCodec<? super RegistryFriendlyByteBuf, Holder<E>> codec)
     {
-        return EntityDataSerializerHelper.INSTANCE.register(NetherExConstants.resource(name), EntityDataSerializer.forValueType(codec));
+        return NEEntityHelper.INSTANCE.registerEntityDataSerializer(name, codec);
     }
 }

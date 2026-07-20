@@ -25,7 +25,7 @@ public class NEInteractionEventsFabric
     {
         UseBlockCallback.EVENT.register((player, level, hand, hitResult) ->
         {
-            if (level.isClientSide)
+            if (level.isClientSide())
             {
                 return InteractionResult.PASS;
             }

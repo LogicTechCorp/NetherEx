@@ -8,6 +8,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
 import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -18,7 +19,6 @@ import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.EnumSet;
-import java.util.List;
 
 public class NetherExBiomeModifiersNeoForge
 {
@@ -77,16 +77,20 @@ public class NetherExBiomeModifiersNeoForge
         ));
         context.register(ADD_FLAEMOTHS_BIOME_MODIFIER, new BiomeModifiers.AddSpawnsBiomeModifier(
                 vanillaNetherForestBiomes,
-                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.FLAEMOTH.get(), 15, 1, 2))
+                WeightedList.<MobSpawnSettings.SpawnerData>builder()
+                        .add(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.FLAEMOTH.get(), 1, 2), 15)
+                        .build()
         ));
         context.register(ADD_WISPS_BIOME_MODIFIER, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.SOUL_SAND_VALLEY)),
-                List.of(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.WISP.get(), 15, 1, 2))
+                WeightedList.<MobSpawnSettings.SpawnerData>builder()
+                        .add(new MobSpawnSettings.SpawnerData(NetherExEntityTypes.WISP.get(), 1, 2), 15)
+                        .build()
         ));
     }
 
     private static ResourceKey<BiomeModifier> createKey(String name)
     {
-        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, NetherExConstants.resource(name));
+        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, NetherExConstants.identifier(name));
     }
 }

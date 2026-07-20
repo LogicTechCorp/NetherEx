@@ -20,13 +20,13 @@ public class NetherExMobEffects
             new NEMobEffect(MobEffectCategory.NEUTRAL, 15063701)
                     .addAttributeModifier(
                             Attributes.ARMOR_TOUGHNESS,
-                            NetherExConstants.resource("effect.armor_toughness"),
+                            NetherExConstants.identifier("effect.armor_toughness"),
                             1.0d,
                             AttributeModifier.Operation.ADD_VALUE
                     )
                     .addAttributeModifier(
                             Attributes.ATTACK_DAMAGE,
-                            NetherExConstants.resource("effect.attack_damage"),
+                            NetherExConstants.identifier("effect.attack_damage"),
                             -1.0d,
                             AttributeModifier.Operation.ADD_VALUE
                     )
@@ -35,13 +35,13 @@ public class NetherExMobEffects
             new NEMobEffect(MobEffectCategory.BENEFICIAL, 10251191)
                     .addAttributeModifier(
                             Attributes.ATTACK_KNOCKBACK,
-                            NetherExConstants.resource("effect.attack_knockback"),
+                            NetherExConstants.identifier("effect.attack_knockback"),
                             1.0d,
                             AttributeModifier.Operation.ADD_VALUE
                     )
                     .addAttributeModifier(
                             Attributes.KNOCKBACK_RESISTANCE,
-                            NetherExConstants.resource("effect.knockback_resistance"),
+                            NetherExConstants.identifier("effect.knockback_resistance"),
                             -1.0d,
                             AttributeModifier.Operation.ADD_VALUE
                     )

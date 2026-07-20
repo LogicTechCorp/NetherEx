@@ -11,15 +11,15 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.biome.Biome;
 
-public record NEFlaemothVariant(ResourceLocation texture, ResourceLocation lootTable, HolderSet<Biome> spawnBiomes, int spawnWeight)
+public record NEFlaemothVariant(Identifier texture, Identifier lootTable, HolderSet<Biome> spawnBiomes, int spawnWeight)
 {
     public static final Codec<NEFlaemothVariant> ELEMENT_CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                            ResourceLocation.CODEC.fieldOf("texture").forGetter(NEFlaemothVariant::texture),
-                            ResourceLocation.CODEC.fieldOf("loot_table").forGetter(NEFlaemothVariant::lootTable),
+                            Identifier.CODEC.fieldOf("texture").forGetter(NEFlaemothVariant::texture),
+                            Identifier.CODEC.fieldOf("loot_table").forGetter(NEFlaemothVariant::lootTable),
                             RegistryCodecs.homogeneousList(Registries.BIOME).fieldOf("spawn_biomes").forGetter(NEFlaemothVariant::spawnBiomes),
                             Codec.INT.fieldOf("spawn_weight").forGetter(NEFlaemothVariant::spawnWeight)
                     )
@@ -27,14 +27,14 @@ public record NEFlaemothVariant(ResourceLocation texture, ResourceLocation lootT
     );
     public static final Codec<NEFlaemothVariant> NETWORK_CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                            ResourceLocation.CODEC.fieldOf("texture").forGetter(NEFlaemothVariant::texture)
+                            Identifier.CODEC.fieldOf("texture").forGetter(NEFlaemothVariant::texture)
                     )
-                    .apply(instance, (texture) -> new NEFlaemothVariant(texture, NetherExConstants.resource("empty"), HolderSet.empty(), 0))
+                    .apply(instance, (texture) -> new NEFlaemothVariant(texture, NetherExConstants.identifier("empty"), HolderSet.empty(), 0))
     );
     public static final StreamCodec<RegistryFriendlyByteBuf, NEFlaemothVariant> DATA_STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC,
+            Identifier.STREAM_CODEC,
             NEFlaemothVariant::texture,
-            ResourceLocation.STREAM_CODEC,
+            Identifier.STREAM_CODEC,
             NEFlaemothVariant::lootTable,
             ByteBufCodecs.holderSet(Registries.BIOME),
             NEFlaemothVariant::spawnBiomes,

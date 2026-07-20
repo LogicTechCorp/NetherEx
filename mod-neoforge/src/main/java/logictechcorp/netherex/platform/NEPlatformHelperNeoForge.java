@@ -26,6 +26,6 @@ public class NEPlatformHelperNeoForge implements NEPlatformHelper
     public boolean isDevelopmentEnvironment()
     {
 
-        return !FMLLoader.isProduction();
+        return !FMLLoader.getCurrent().isProduction();
     }
 }

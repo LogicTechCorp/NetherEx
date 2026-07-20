@@ -1,6 +1,8 @@
 package logictechcorp.netherex.registry;
 
 import logictechcorp.netherex.NetherExConstants;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -9,7 +11,9 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 
@@ -61,8 +65,8 @@ public class NetherExFeaturePlacements
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         Holder.Reference<ConfiguredFeature<?, ?>> patchFireReference = configuredFeatures.getOrThrow(NetherExFeatureConfigs.PATCH_FIRE);
-        register(context, PATCH_FIRE, patchFireReference, CountPlacement.of(UniformInt.of(0, 5)), InSquarePlacement.spread(), PlacementUtils.RANGE_4_4, BiomeFilter.biome());
-        register(context, PATCH_FIRE_HEAVY, patchFireReference, CountPlacement.of(UniformInt.of(10, 20)), InSquarePlacement.spread(), PlacementUtils.RANGE_8_8, BiomeFilter.biome());
+        register(context, PATCH_FIRE, patchFireReference, CountPlacement.of(UniformInt.of(0, 5)), InSquarePlacement.spread(), PlacementUtils.RANGE_4_4, BiomeFilter.biome(), CountPlacement.of(96), RandomOffsetPlacement.ofTriangle(7, 3), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.NETHERRACKS))));
+        register(context, PATCH_FIRE_HEAVY, patchFireReference, CountPlacement.of(UniformInt.of(10, 20)), InSquarePlacement.spread(), PlacementUtils.RANGE_8_8, BiomeFilter.biome(), CountPlacement.of(96), RandomOffsetPlacement.ofTriangle(7, 3), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.NETHERRACKS))));
 
         register(context, ORE_GLOOMY_QUARTZ, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_GLOOMY_QUARTZ), CountPlacement.of(16), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
         register(context, ORE_GLOOMY_GOLD, configuredFeatures.getOrThrow(NetherExFeatureConfigs.ORE_GLOOMY_GOLD), CountPlacement.of(10), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
@@ -96,19 +100,19 @@ public class NetherExFeaturePlacements
         Holder<ConfiguredFeature<?, ?>> twistedWarpedFungusReference = configuredFeatures.getOrThrow(NetherExFeatureConfigs.TWISTED_WARPED_FUNGUS);
         register(context, TWISTED_WARPED_FUNGI, twistedWarpedFungusReference, CountOnEveryLayerPlacement.of(8), BiomeFilter.biome());
 
-        register(context, THORNSTALK, configuredFeatures.getOrThrow(NetherExFeatureConfigs.THORNSTALK), CountOnEveryLayerPlacement.of(8), BiomeFilter.biome());
+        register(context, THORNSTALK, configuredFeatures.getOrThrow(NetherExFeatureConfigs.THORNSTALK), CountOnEveryLayerPlacement.of(8), BiomeFilter.biome(), CountPlacement.of(4), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(NetherExBlocks.THORNSTALK.get().defaultBlockState(), BlockPos.ZERO))));
 
         register(context, HUGE_BROWN_ELDER_MUSHROOM, configuredFeatures.getOrThrow(NetherExFeatureConfigs.HUGE_BROWN_ELDER_MUSHROOM), CountOnEveryLayerPlacement.of(5), BiomeFilter.biome());
         register(context, HUGE_RED_ELDER_MUSHROOM, configuredFeatures.getOrThrow(NetherExFeatureConfigs.HUGE_RED_ELDER_MUSHROOM), CountOnEveryLayerPlacement.of(5), BiomeFilter.biome());
         register(context, HUGE_ELDER_MUSHROOMS, configuredFeatures.getOrThrow(NetherExFeatureConfigs.HUGE_ELDER_MUSHROOMS), CountOnEveryLayerPlacement.of(10), BiomeFilter.biome());
 
-        register(context, BASALT_FUMAROLE, configuredFeatures.getOrThrow(NetherExFeatureConfigs.BASALT_FUMAROLE), CountPlacement.of(UniformInt.of(4, 8)), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
-        register(context, BLACKSTONE_FUMAROLE, configuredFeatures.getOrThrow(NetherExFeatureConfigs.BLACKSTONE_FUMAROLE), CountPlacement.of(UniformInt.of(4, 8)), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome());
+        register(context, BASALT_FUMAROLE, configuredFeatures.getOrThrow(NetherExFeatureConfigs.BASALT_FUMAROLE), CountPlacement.of(UniformInt.of(4, 8)), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome(), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesBlocks(Direction.UP.getUnitVec3i(), Blocks.AIR), BlockPredicate.noFluid(Direction.DOWN.getUnitVec3i().below()), BlockPredicate.anyOf(BlockPredicate.matchesBlocks(Direction.DOWN.getUnitVec3i(), Blocks.BASALT), BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.LOW_FUMAROLE_HEATER), BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.HIGH_FUMAROLE_HEATER)))));
+        register(context, BLACKSTONE_FUMAROLE, configuredFeatures.getOrThrow(NetherExFeatureConfigs.BLACKSTONE_FUMAROLE), CountPlacement.of(UniformInt.of(4, 8)), InSquarePlacement.spread(), PlacementUtils.RANGE_10_10, BiomeFilter.biome(), CountPlacement.of(96), RandomOffsetPlacement.ofTriangle(7, 7), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesBlocks(Direction.UP.getUnitVec3i(), Blocks.AIR), BlockPredicate.noFluid(Direction.DOWN.getUnitVec3i().below()), BlockPredicate.anyOf(BlockPredicate.matchesBlocks(Direction.DOWN.getUnitVec3i(), Blocks.BLACKSTONE), BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.LOW_FUMAROLE_HEATER), BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.HIGH_FUMAROLE_HEATER)))));
     }
 
     private static ResourceKey<PlacedFeature> createKey(String name)
     {
-        return ResourceKey.create(Registries.PLACED_FEATURE, NetherExConstants.resource(name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, NetherExConstants.identifier(name));
     }
 
     private static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placements)

@@ -26,7 +26,7 @@ public class NEEquipmentAssetProvider extends EquipmentAssetProvider
     public static EquipmentClientInfo horse(String name)
     {
         return EquipmentClientInfo.builder()
-                .addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, EquipmentClientInfo.Layer.leatherDyeable(NetherExConstants.resource(name), false))
+                .addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, EquipmentClientInfo.Layer.leatherDyeable(NetherExConstants.identifier(name), false))
                 .build();
     }
 }

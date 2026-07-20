@@ -1,7 +1,13 @@
 package logictechcorp.netherex.entity.monster;
 
+import com.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.util.GeckoLibUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -9,10 +15,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.NeutralMob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -34,24 +37,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
-import java.util.UUID;
 
 public class NEWisp extends PathfinderMob implements NeutralMob, FlyingAnimal, GeoEntity
 {
-    private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(NEWisp.class, EntityDataSerializers.INT);
-    private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
-    private UUID persistentAngerTarget;
+    private static final EntityDataAccessor<Long> DATA_ANGER_END_TIME = SynchedEntityData.defineId(NEWisp.class, EntityDataSerializers.LONG);
+    private static final UniformInt PERSISTENT_ANGER_TIME_RANGE = TimeUtil.rangeOfSeconds(20, 39);
+    private @Nullable EntityReference<LivingEntity> persistentAngerTarget;
 
     private final AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -99,7 +96,7 @@ public class NEWisp extends PathfinderMob implements NeutralMob, FlyingAnimal, G
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         super.defineSynchedData(builder);
-        builder.define(DATA_REMAINING_ANGER_TIME, 0);
+        builder.define(DATA_ANGER_END_TIME, -1L);
     }
 
     @Override
@@ -117,34 +114,33 @@ public class NEWisp extends PathfinderMob implements NeutralMob, FlyingAnimal, G
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar)
     {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, (animationState ->
+        controllerRegistrar.add(new AnimationController<>("controller", 0, (animationState ->
         {
-            AnimationController<NEWisp> animationController = animationState.getController();
 
             String animationName = "animation.wisp.idle";
-            animationController.setAnimation(RawAnimation.begin().thenLoop(animationName));
+            animationState.controller().setAnimation(RawAnimation.begin().thenLoop(animationName));
             return PlayState.CONTINUE;
         })));
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound)
+    public void addAdditionalSaveData(ValueOutput output)
     {
-        super.addAdditionalSaveData(compound);
-        addPersistentAngerSaveData(compound);
+        super.addAdditionalSaveData(output);
+        addPersistentAngerSaveData(output);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound)
+    public void readAdditionalSaveData(ValueInput input)
     {
-        super.readAdditionalSaveData(compound);
-        readPersistentAngerSaveData(this.level(), compound);
+        super.readAdditionalSaveData(input);
+        readPersistentAngerSaveData(level(), input);
     }
 
     @Override
     public void startPersistentAngerTimer()
     {
-        setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(random));
+        setTimeToRemainAngry(PERSISTENT_ANGER_TIME_RANGE.sample(random));
     }
 
     @Override
@@ -166,25 +162,25 @@ public class NEWisp extends PathfinderMob implements NeutralMob, FlyingAnimal, G
     }
 
     @Override
-    public int getRemainingPersistentAngerTime()
+    public void setPersistentAngerEndTime(long endTime)
     {
-        return this.entityData.get(DATA_REMAINING_ANGER_TIME);
+        entityData.set(DATA_ANGER_END_TIME, endTime);
     }
 
     @Override
-    public void setRemainingPersistentAngerTime(int time)
+    public long getPersistentAngerEndTime()
     {
-        entityData.set(DATA_REMAINING_ANGER_TIME, time);
+        return entityData.get(DATA_ANGER_END_TIME);
     }
 
     @Override
-    public @Nullable UUID getPersistentAngerTarget()
+    public @Nullable EntityReference<LivingEntity> getPersistentAngerTarget()
     {
         return persistentAngerTarget;
     }
 
     @Override
-    public void setPersistentAngerTarget(@Nullable UUID inPersistentAngerTarget)
+    public void setPersistentAngerTarget(@Nullable EntityReference<LivingEntity> inPersistentAngerTarget)
     {
         persistentAngerTarget = inPersistentAngerTarget;
     }

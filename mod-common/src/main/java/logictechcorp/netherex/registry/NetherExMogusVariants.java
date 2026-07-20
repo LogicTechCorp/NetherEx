@@ -6,11 +6,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedRandom;
 
+import java.util.List;
 import java.util.Optional;
 
 public class NetherExMogusVariants
@@ -24,28 +25,27 @@ public class NetherExMogusVariants
 
     public static void bootstrap(BootstrapContext<NEMogusVariant> context)
     {
-        register(context, BROWN, BROWN.location().getPath(), 10);
-        register(context, RED, RED.location().getPath(), 10);
+        register(context, BROWN, BROWN.identifier().getPath(), 10);
+        register(context, RED, RED.identifier().getPath(), 10);
     }
 
-    public static Holder<NEMogusVariant> getBiomeSpawnVariant(RegistryAccess registryAccess, RandomSource randomSource)
+    public static Holder<NEMogusVariant> getRandomSpawnVariant(RegistryAccess registryAccess, RandomSource randomSource)
     {
-        SimpleWeightedRandomList.Builder<Holder.Reference<NEMogusVariant>> spawnVariantsBuilder = new SimpleWeightedRandomList.Builder<>();
         Registry<NEMogusVariant> registry = registryAccess.lookupOrThrow(NetherExRegistries.Keys.MOGUS_VARIANT);
-        registry.listElements().forEach(mogusVariantRef -> spawnVariantsBuilder.add(mogusVariantRef, mogusVariantRef.value().spawnWeight()));
-        Optional<Holder.Reference<NEMogusVariant>> key = spawnVariantsBuilder.build().getRandomValue(randomSource);
-        return key.orElseGet(() -> registry.get(BROWN).orElseThrow());
+        List<Holder.Reference<NEMogusVariant>> mogusVariants = registry.listElements().toList();
+        Optional<Holder.Reference<NEMogusVariant>> randomVariant = WeightedRandom.getRandomItem(randomSource, mogusVariants, mogusVariantRef -> mogusVariantRef.value().spawnWeight());
+        return randomVariant.orElseGet(() -> registry.get(BROWN).orElseThrow());
     }
 
     private static void register(BootstrapContext<NEMogusVariant> context, ResourceKey<NEMogusVariant> Key, String name, int spawnWeight)
     {
-        ResourceLocation texture = NetherExConstants.resource("textures/entity/mogus/" + name + ".png");
-        ResourceLocation lootTable = NetherExConstants.resource("entities/mogus/" + name);
+        Identifier texture = NetherExConstants.identifier("textures/entity/mogus/" + name + ".png");
+        Identifier lootTable = NetherExConstants.identifier("entities/mogus/" + name);
         context.register(Key, new NEMogusVariant(texture, lootTable, spawnWeight));
     }
 
     private static ResourceKey<NEMogusVariant> createKey(String name)
     {
-        return ResourceKey.create(NetherExRegistries.Keys.MOGUS_VARIANT, NetherExConstants.resource(name));
+        return ResourceKey.create(NetherExRegistries.Keys.MOGUS_VARIANT, NetherExConstants.identifier(name));
     }
 }

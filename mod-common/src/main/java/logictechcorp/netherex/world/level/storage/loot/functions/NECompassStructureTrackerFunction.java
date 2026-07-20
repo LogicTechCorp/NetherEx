@@ -7,7 +7,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import logictechcorp.netherex.item.component.NEStructureTracker;
 import logictechcorp.netherex.platform.NEPlatformHelper;
 import logictechcorp.netherex.registry.NetherExDataComponents;
-import logictechcorp.netherex.registry.NetherExLootFunctions;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.Vec3;
@@ -66,6 +64,12 @@ public class NECompassStructureTrackerFunction extends LootItemConditionalFuncti
     public static NECompassStructureTrackerFunction.Builder makeCompassGlobalPosTracker()
     {
         return new NECompassStructureTrackerFunction.Builder();
+    }
+
+    @Override
+    public MapCodec<? extends LootItemConditionalFunction> codec()
+    {
+        return CODEC;
     }
 
     @Override
@@ -124,12 +128,6 @@ public class NECompassStructureTrackerFunction extends LootItemConditionalFuncti
     public Set<ContextKey<?>> getReferencedContextParams()
     {
         return Set.of(LootContextParams.ORIGIN);
-    }
-
-    @Override
-    public LootItemFunctionType<? extends LootItemConditionalFunction> getType()
-    {
-        return NetherExLootFunctions.COMPASS_STRUCTURE_TRACKER_FUNCTION.get();
     }
 
     public static class Builder extends LootItemConditionalFunction.Builder<NECompassStructureTrackerFunction.Builder>

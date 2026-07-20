@@ -1,16 +1,21 @@
 package logictechcorp.netherex.entity.animal;
 
+import com.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.util.GeckoLibUtil;
 import logictechcorp.netherex.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
@@ -26,11 +31,12 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -38,18 +44,13 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.PathType;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-import java.util.UUID;
 
-public class NESalamander extends TamableAnimal implements NeutralMob, VariantHolder<Holder<NESalamanderVariant>>, GeoEntity
+public class NESalamander extends TamableAnimal implements NeutralMob, GeoEntity
 {
     private static final TargetingConditions.Selector PREY_SELECTOR = (livingEntity, serverLevel) ->
     {
@@ -57,10 +58,10 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
         return entityType == EntityType.SPIDER || entityType == EntityType.BEE || entityType == EntityType.SILVERFISH || entityType == EntityType.SLIME;
     };
     private static final EntityDataAccessor<Holder<NESalamanderVariant>> VARIANT_ID = SynchedEntityData.defineId(NESalamander.class, NetherExEntityDataSerializers.SALAMANDER_VARIANT);
-    private static final EntityDataAccessor<Integer> REMAINING_ANGER_TIME = SynchedEntityData.defineId(NESalamander.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Long> DATA_ANGER_END_TIME = SynchedEntityData.defineId(NESalamander.class, EntityDataSerializers.LONG);
     private static final UniformInt PERSISTENT_ANGER_TIME_RANGE = TimeUtil.rangeOfSeconds(30, 60);
 
-    private UUID persistentAngerTarget;
+    private @Nullable EntityReference<LivingEntity> persistentAngerTarget;
 
     private final AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -69,8 +70,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
         super(entityType, level);
         setPathfindingMalus(PathType.WATER, -1.0f);
         setPathfindingMalus(PathType.LAVA, 0.0f);
-        setPathfindingMalus(PathType.DANGER_FIRE, 0.0f);
-        setPathfindingMalus(PathType.DAMAGE_FIRE, 0.0f);
+        setPathfindingMalus(PathType.FIRE, 0.0f);
     }
 
     public static AttributeSupplier createAttributes()
@@ -92,9 +92,8 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         super.defineSynchedData(builder);
-        Registry<NESalamanderVariant> registry = registryAccess().lookupOrThrow(NetherExRegistries.Keys.SALAMANDER_VARIANT);
-        builder.define(VARIANT_ID, registry.get(NetherExSalamanderVariants.ORANGE).or(registry::getAny).orElseThrow());
-        builder.define(REMAINING_ANGER_TIME, 0);
+        builder.define(VARIANT_ID, VariantUtils.getDefaultOrAny(registryAccess(), NetherExSalamanderVariants.ORANGE));
+        builder.define(DATA_ANGER_END_TIME, -1L);
     }
 
     @Override
@@ -122,9 +121,8 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar)
     {
-        controllerRegistrar.add(new AnimationController<>(this, "controller_idle_walk", 0, (animationState ->
+        controllerRegistrar.add(new AnimationController<>("controller_idle_walk", 0, (animationState ->
         {
-            AnimationController<NESalamander> animationController = animationState.getController();
             RawAnimation animation = null;
 
             if (animationState.isMoving())
@@ -139,13 +137,16 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
                 }
             }
 
-            animationController.setAnimation(animation);
+            if (animation != null)
+            {
+                animationState.controller().setAnimation(animation);
+            }
+
             return PlayState.CONTINUE;
         })));
 
-        controllerRegistrar.add(new AnimationController<>(this, "controller_sit_stand", 0, (animationState ->
+        controllerRegistrar.add(new AnimationController<>("controller_sit_stand", 0, (animationState ->
         {
-            AnimationController<NESalamander> animationController = animationState.getController();
             RawAnimation animation = null;
 
             if (isTame())
@@ -160,7 +161,11 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
                 }
             }
 
-            animationController.setAnimation(animation);
+            if (animation != null)
+            {
+                animationState.controller().setAnimation(animation);
+            }
+
             return PlayState.CONTINUE;
         })));
     }
@@ -180,26 +185,28 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compoundTag)
+    public void addAdditionalSaveData(ValueOutput output)
     {
-        super.addAdditionalSaveData(compoundTag);
-        getVariant().unwrapKey().ifPresent(variantResourceKey -> compoundTag.putString("variant", variantResourceKey.location().toString()));
+        super.addAdditionalSaveData(output);
+        getVariant().unwrapKey().ifPresent(variantResourceKey -> output.putString("variant", variantResourceKey.identifier().toString()));
+        addPersistentAngerSaveData(output);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compoundTag)
+    public void readAdditionalSaveData(ValueInput input)
     {
-        super.readAdditionalSaveData(compoundTag);
-        Optional.ofNullable(ResourceLocation.tryParse(compoundTag.getString("variant")))
+        super.readAdditionalSaveData(input);
+        Optional.ofNullable(Identifier.tryParse(input.getStringOr("variant", "")))
                 .map(location -> ResourceKey.create(NetherExRegistries.Keys.SALAMANDER_VARIANT, location))
                 .flatMap(key -> registryAccess().lookupOrThrow(NetherExRegistries.Keys.SALAMANDER_VARIANT).get(key))
                 .ifPresent(this::setVariant);
+        readPersistentAngerSaveData(level(), input);
     }
 
     @Override
     public void startPersistentAngerTimer()
     {
-        setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME_RANGE.sample(random));
+        setTimeToRemainAngry(PERSISTENT_ANGER_TIME_RANGE.sample(random));
     }
 
     @Override
@@ -236,7 +243,7 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
 
             }
         }
-        else if (!level().isClientSide && heldStack.is(NetherExItemTags.SALAMANDER_FOOD) && !isAngry())
+        else if (!level().isClientSide() && heldStack.is(NetherExItemTags.SALAMANDER_FOOD) && !isAngry())
         {
             heldStack.consume(1, player);
             tryToTame(player);
@@ -361,7 +368,11 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
         }
     }
 
-    @Override
+    public void setVariant(Holder<NESalamanderVariant> variant)
+    {
+        entityData.set(VARIANT_ID, variant);
+    }
+
     public Holder<NESalamanderVariant> getVariant()
     {
         return entityData.get(VARIANT_ID);
@@ -404,31 +415,25 @@ public class NESalamander extends TamableAnimal implements NeutralMob, VariantHo
     }
 
     @Override
-    public UUID getPersistentAngerTarget()
+    public @Nullable EntityReference<LivingEntity> getPersistentAngerTarget()
     {
         return persistentAngerTarget;
     }
 
     @Override
-    public int getRemainingPersistentAngerTime()
+    public void setPersistentAngerEndTime(long endTime)
     {
-        return entityData.get(REMAINING_ANGER_TIME);
+        entityData.set(DATA_ANGER_END_TIME, endTime);
     }
 
     @Override
-    public void setVariant(Holder<NESalamanderVariant> variant)
+    public long getPersistentAngerEndTime()
     {
-        entityData.set(VARIANT_ID, variant);
+        return entityData.get(DATA_ANGER_END_TIME);
     }
 
     @Override
-    public void setRemainingPersistentAngerTime(int remainingPersistentAngerTime)
-    {
-        entityData.set(REMAINING_ANGER_TIME, remainingPersistentAngerTime);
-    }
-
-    @Override
-    public void setPersistentAngerTarget(UUID inPersistentAngerTarget)
+    public void setPersistentAngerTarget(@Nullable EntityReference<LivingEntity> inPersistentAngerTarget)
     {
         persistentAngerTarget = inPersistentAngerTarget;
     }

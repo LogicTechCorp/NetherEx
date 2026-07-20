@@ -3,15 +3,15 @@ package logictechcorp.netherex.datagen.server.advancements;
 import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.registry.*;
 import net.minecraft.advancements.*;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -46,7 +46,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         NetherExBlocks.WARPED_NETHER_BRICKS.get(),
                         Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_nether.title"),
                         Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_nether.description"),
-                        ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/nether.png"),
+                        Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/nether.png"),
                         AdvancementType.TASK,
                         true,
                         false,
@@ -59,16 +59,16 @@ public class NENetherAdvancements implements AdvancementSubProvider
         AdvancementHolder enterRuthlessSandsBiome = Advancement.Builder.advancement().parent(netherExRoot)
                 .display(
                         NetherExBlocks.GLOOMY_NETHERRACK.get(),
-                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.title"),
-                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.description"),
+                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.identifier().getPath() + "_biome.title"),
+                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.identifier().getPath() + "_biome.description"),
                         null,
                         AdvancementType.TASK,
                         true,
                         false,
                         false
                 )
-                .addCriterion(NetherExBiomes.RUTHLESS_SANDS.location().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(NetherExBiomes.RUTHLESS_SANDS))))
-                .save(consumer, NetherExConstants.MOD_ID + ":nether/enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome");
+                .addCriterion(NetherExBiomes.RUTHLESS_SANDS.identifier().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(NetherExBiomes.RUTHLESS_SANDS))))
+                .save(consumer, NetherExConstants.MOD_ID + ":nether/enter_" + NetherExBiomes.RUTHLESS_SANDS.identifier().getPath() + "_biome");
 
         Advancement.Builder.advancement().parent(enterRuthlessSandsBiome)
                 .display(
@@ -102,16 +102,16 @@ public class NENetherAdvancements implements AdvancementSubProvider
         AdvancementHolder enterTorridWastelandBiome = Advancement.Builder.advancement().parent(netherExRoot)
                 .display(
                         NetherExBlocks.FIERY_NETHERRACK.get(),
-                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.title"),
-                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.description"),
+                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.identifier().getPath() + "_biome.title"),
+                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.identifier().getPath() + "_biome.description"),
                         null,
                         AdvancementType.TASK,
                         true,
                         false,
                         false
                 )
-                .addCriterion(NetherExBiomes.TORRID_WASTELAND.location().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(NetherExBiomes.TORRID_WASTELAND))))
-                .save(consumer, NetherExConstants.MOD_ID + ":nether/enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome");
+                .addCriterion(NetherExBiomes.TORRID_WASTELAND.identifier().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(NetherExBiomes.TORRID_WASTELAND))))
+                .save(consumer, NetherExConstants.MOD_ID + ":nether/enter_" + NetherExBiomes.TORRID_WASTELAND.identifier().getPath() + "_biome");
 
         Advancement.Builder.advancement().parent(enterTorridWastelandBiome)
                 .display(
@@ -145,16 +145,16 @@ public class NENetherAdvancements implements AdvancementSubProvider
         AdvancementHolder enterFungiForestBiome = Advancement.Builder.advancement().parent(netherExRoot)
                 .display(
                         NetherExBlocks.LIVELY_NETHERRACK.get(),
-                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.title"),
-                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.description"),
+                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.identifier().getPath() + "_biome.title"),
+                        Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.identifier().getPath() + "_biome.description"),
                         null,
                         AdvancementType.TASK,
                         true,
                         false,
                         false
                 )
-                .addCriterion(NetherExBiomes.FUNGI_FOREST.location().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(NetherExBiomes.FUNGI_FOREST))))
-                .save(consumer, NetherExConstants.MOD_ID + ":nether/enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome");
+                .addCriterion(NetherExBiomes.FUNGI_FOREST.identifier().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(NetherExBiomes.FUNGI_FOREST))))
+                .save(consumer, NetherExConstants.MOD_ID + ":nether/enter_" + NetherExBiomes.FUNGI_FOREST.identifier().getPath() + "_biome");
 
         Advancement.Builder.advancement().parent(enterFungiForestBiome)
                 .display(
@@ -304,7 +304,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
 
     protected static ResourceKey<Recipe<?>> getRecipeKey(ItemLike itemLike)
     {
-        return ResourceKey.create(Registries.RECIPE, NetherExConstants.resource(getItemName(itemLike)));
+        return ResourceKey.create(Registries.RECIPE, NetherExConstants.identifier(getItemName(itemLike)));
     }
 
     protected static String getItemName(ItemLike itemLike)

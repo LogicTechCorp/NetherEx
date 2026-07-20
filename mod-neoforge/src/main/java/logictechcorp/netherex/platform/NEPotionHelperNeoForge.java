@@ -24,7 +24,7 @@ public class NEPotionHelperNeoForge implements NEPotionHelper
         POTION_BREWS.add(new PotionBrew(input, reagentSupplier, result));
     }
 
-    @EventBusSubscriber(modid = NetherExConstants.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
+    @EventBusSubscriber(modid = NetherExConstants.MOD_ID)
     public static class EventHandler
     {
         @SubscribeEvent

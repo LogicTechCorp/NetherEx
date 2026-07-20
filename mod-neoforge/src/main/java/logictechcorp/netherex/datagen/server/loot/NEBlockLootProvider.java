@@ -4,11 +4,12 @@ import logictechcorp.netherex.block.NEWarpedWartBlock;
 import logictechcorp.netherex.platform.registration.RegistryObject;
 import logictechcorp.netherex.registry.NetherExBlocks;
 import logictechcorp.netherex.registry.NetherExItems;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -25,12 +26,15 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.StreamSupport;
 
 public class NEBlockLootProvider extends BlockLootSubProvider
 {
+    private final List<ResourceKey<LootTable>> seenBlockLoot = new ArrayList<>();
+
     public NEBlockLootProvider(HolderLookup.Provider registries)
     {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
@@ -111,9 +115,10 @@ public class NEBlockLootProvider extends BlockLootSubProvider
     {
         block.getLootTable().ifPresent(lootTableResourceKey ->
         {
-            if (!map.containsKey(lootTableResourceKey))
+            if (!seenBlockLoot.contains(lootTableResourceKey))
             {
                 super.add(block, builder);
+                seenBlockLoot.add(lootTableResourceKey);
             }
         });
     }

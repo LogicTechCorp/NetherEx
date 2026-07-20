@@ -22,7 +22,6 @@
       "translate": "advancements.netherex.nether.kill_salamander.description"
     },
     "icon": {
-      "count": 1,
       "id": "netherex:salamander_spawn_egg"
     },
     "title": {

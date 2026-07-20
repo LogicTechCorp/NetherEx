@@ -8,8 +8,8 @@ import logictechcorp.netherex.platform.registration.RegistryObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
@@ -165,7 +165,7 @@ public class NetherExBlocks
 
     private static <B extends Block> RegistryObject<Block, B> registerBlock(String blockName, Function<Block.Properties, B> newBlockFunc, Block.Properties blockProperties)
     {
-        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(NetherExConstants.MOD_ID, blockName);
+        Identifier resourceLocation = Identifier.fromNamespaceAndPath(NetherExConstants.MOD_ID, blockName);
         ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, resourceLocation);
         blockProperties.setId(resourceKey);
 
@@ -224,7 +224,7 @@ public class NetherExBlocks
 
     public static <I extends Item> RegistryObject<Item, I> registerItemBlock(String itemName, Function<Item.Properties, I> newItemFunc)
     {
-        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(NetherExConstants.MOD_ID, itemName);
+        Identifier resourceLocation = Identifier.fromNamespaceAndPath(NetherExConstants.MOD_ID, itemName);
         ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, resourceLocation);
         Item.Properties itemProperties = new Item.Properties();
         itemProperties.setId(resourceKey);
@@ -238,7 +238,7 @@ public class NetherExBlocks
         static final BlockBehaviour.Properties GLOOMY_NETHERRACK = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK);
         static final BlockBehaviour.Properties GLOOMY_QUARTZ_ORE = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F).sound(SoundType.NETHER_ORE);
         static final BlockBehaviour.Properties GLOOMY_GOLD_ORE = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F).sound(SoundType.NETHER_GOLD_ORE);
-        static final BlockBehaviour.Properties GLOOMY_NETHERRACK_PATH = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK).isViewBlocking(Properties::always).isSuffocating(Properties::always);
+        static final BlockBehaviour.Properties GLOOMY_NETHERRACK_PATH = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK).isViewBlocking(Properties::alwaysBool).isSuffocating(Properties::alwaysBool);
         static final BlockBehaviour.Properties GLOOMY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
         static final BlockBehaviour.Properties CRACKED_GLOOMY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
         static final BlockBehaviour.Properties CHISELED_GLOOMY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
@@ -254,12 +254,12 @@ public class NetherExBlocks
         static final BlockBehaviour.Properties POLISHED_GLOOMY_NETHERRACK_STAIRS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK);
         static final BlockBehaviour.Properties POLISHED_GLOOMY_NETHERRACK_WALL = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK);
         static final BlockBehaviour.Properties CHISELED_POLISHED_GLOOMY_NETHERRACK = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK);
-        static final BlockBehaviour.Properties THORNSTALK = BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ);
+        static final BlockBehaviour.Properties THORNSTALK = BlockBehaviour.Properties.of().noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ);
 
         static final BlockBehaviour.Properties FIERY_NETHERRACK = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK);
         static final BlockBehaviour.Properties FIERY_QUARTZ_ORE = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F).sound(SoundType.NETHER_ORE);
         static final BlockBehaviour.Properties FIERY_GOLD_ORE = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F).sound(SoundType.NETHER_GOLD_ORE);
-        static final BlockBehaviour.Properties FIERY_NETHERRACK_PATH = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK).isViewBlocking(Properties::always).isSuffocating(Properties::always);
+        static final BlockBehaviour.Properties FIERY_NETHERRACK_PATH = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK).isViewBlocking(Properties::alwaysBool).isSuffocating(Properties::alwaysBool);
         static final BlockBehaviour.Properties FIERY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
         static final BlockBehaviour.Properties CRACKED_FIERY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
         static final BlockBehaviour.Properties CHISELED_FIERY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
@@ -279,7 +279,7 @@ public class NetherExBlocks
         static final BlockBehaviour.Properties LIVELY_NETHERRACK = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK);
         static final BlockBehaviour.Properties LIVELY_QUARTZ_ORE = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F).sound(SoundType.NETHER_ORE);
         static final BlockBehaviour.Properties LIVELY_GOLD_ORE = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F).sound(SoundType.NETHER_GOLD_ORE);
-        static final BlockBehaviour.Properties LIVELY_NETHERRACK_PATH = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK).isViewBlocking(Properties::always).isSuffocating(Properties::always);
+        static final BlockBehaviour.Properties LIVELY_NETHERRACK_PATH = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().strength(0.4f).sound(SoundType.NETHERRACK).isViewBlocking(Properties::alwaysBool).isSuffocating(Properties::alwaysBool);
         static final BlockBehaviour.Properties LIVELY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
         static final BlockBehaviour.Properties CRACKED_LIVELY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
         static final BlockBehaviour.Properties CHISELED_LIVELY_NETHER_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
@@ -324,8 +324,8 @@ public class NetherExBlocks
         static final BlockBehaviour.Properties CRIMSON_NETHER_BRICK_FENCE_GATE = BlockBehaviour.Properties.ofFullCopy(Blocks.RED_NETHER_BRICKS);
 
         static final BlockBehaviour.Properties WARPED_WART = BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_WART).mapColor(MapColor.COLOR_CYAN);
-        static final BlockBehaviour.Properties CRIMSON_NYLIUM_PATH = BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_NYLIUM).isViewBlocking(Properties::always).isSuffocating(Properties::always);
-        static final BlockBehaviour.Properties WARPED_NYLIUM_PATH = BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM).isViewBlocking(Properties::always).isSuffocating(Properties::always);
+        static final BlockBehaviour.Properties CRIMSON_NYLIUM_PATH = BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_NYLIUM).isViewBlocking(Properties::alwaysBool).isSuffocating(Properties::alwaysBool);
+        static final BlockBehaviour.Properties WARPED_NYLIUM_PATH = BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM).isViewBlocking(Properties::alwaysBool).isSuffocating(Properties::alwaysBool);
         static final BlockBehaviour.Properties CRIMSON_ROOT_THATCH = BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).mapColor(MapColor.COLOR_RED);
         static final BlockBehaviour.Properties WARPED_ROOT_THATCH = BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).mapColor(MapColor.COLOR_CYAN);
         static final BlockBehaviour.Properties TWISTED_SHROOMLIGHT = BlockBehaviour.Properties.ofFullCopy(Blocks.SHROOMLIGHT).mapColor(MapColor.COLOR_PURPLE);
@@ -350,16 +350,21 @@ public class NetherExBlocks
         static final BlockBehaviour.Properties WARPED_NETHER_BRICK_STAIRS = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
         static final BlockBehaviour.Properties WARPED_NETHER_BRICK_WALL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).requiresCorrectToolForDrops().strength(2.0f, 6.0f).sound(SoundType.NETHER_BRICKS);
 
-        static final BlockBehaviour.Properties BOOMSTONE = BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).strength(5.0f, 1.0f).lightLevel(state -> 3).isValidSpawn((state, blockGetter, pos, entityType) -> entityType.fireImmune()).hasPostProcess(Properties::always).emissiveRendering(Properties::always);
+        static final BlockBehaviour.Properties BOOMSTONE = BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).strength(5.0f, 1.0f).lightLevel(state -> 3).isValidSpawn((state, blockGetter, pos, entityType) -> entityType.fireImmune()).postProcess(Properties::alwaysPos).emissiveRendering(Properties::alwaysBool);
         static final BlockBehaviour.Properties ASH_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(0.25F).sound(SoundType.POWDER_SNOW).noOcclusion().isRedstoneConductor(Properties::never);
         static final BlockBehaviour.Properties WITHER_BONE_BLOCK = BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).mapColor(MapColor.COLOR_BLACK);
         static final BlockBehaviour.Properties BASALT_FUMAROLE = BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT);
         static final BlockBehaviour.Properties BLACKSTONE_FUMAROLE = BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE);
         static final BlockBehaviour.Properties KILN = BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).mapColor(MapColor.NETHER);
 
-        private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos)
+        private static BlockPos alwaysPos(BlockState state, BlockGetter blockGetter, BlockPos pos)
         {
-            return true;
+            return pos;
+        }
+
+        private static boolean alwaysBool(BlockState state, BlockGetter blockGetter, BlockPos pos)
+        {
+            return false;
         }
 
         private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entityType)

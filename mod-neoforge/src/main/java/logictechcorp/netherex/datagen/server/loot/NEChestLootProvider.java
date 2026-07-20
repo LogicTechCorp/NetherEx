@@ -1,13 +1,12 @@
 package logictechcorp.netherex.datagen.server.loot;
 
-import logictechcorp.netherex.registry.NetherExItems;
 import logictechcorp.netherex.registry.NetherExLootTables;
 import logictechcorp.netherex.world.level.storage.loot.functions.NECompassStructureTrackerFunction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
@@ -34,7 +33,6 @@ public class NEChestLootProvider implements LootTableSubProvider
     {
         HolderLookup.RegistryLookup<Structure> structures = registries.lookupOrThrow(Registries.STRUCTURE);
 
-        consumer.accept(NetherExLootTables.NETHERITE_HORSE_ARMOR_ADDITION, singularLoot(NetherExItems.NETHERITE_HORSE_ARMOR.get()));
         consumer.accept(NetherExLootTables.FORTRESS_COMPASS_STRUCTURE_TRACKER_ADDITION, LootTable.lootTable().withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0f))
                 .add(LootItem.lootTableItem(Items.COMPASS)
@@ -57,6 +55,6 @@ public class NEChestLootProvider implements LootTableSubProvider
 
     private static ResourceKey<Structure> createStructureKey(String modId, String name)
     {
-        return ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(modId, name));
+        return ResourceKey.create(Registries.STRUCTURE, Identifier.fromNamespaceAndPath(modId, name));
     }
 }

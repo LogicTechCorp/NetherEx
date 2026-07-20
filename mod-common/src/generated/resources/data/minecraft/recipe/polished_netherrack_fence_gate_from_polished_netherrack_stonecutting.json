@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "netherex:polished_netherrack",
   "result": {
-    "count": 1,
     "id": "netherex:polished_netherrack_fence_gate"
   }
 }

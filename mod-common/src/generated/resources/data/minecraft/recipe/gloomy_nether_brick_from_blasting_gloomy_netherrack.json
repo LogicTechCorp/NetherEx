@@ -6,7 +6,6 @@
   "group": "gloomy_nether_brick",
   "ingredient": "netherex:gloomy_netherrack",
   "result": {
-    "count": 1,
     "id": "netherex:gloomy_nether_brick"
   }
 }

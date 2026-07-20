@@ -1,19 +1,27 @@
 package logictechcorp.netherex.entity.animal;
 
+import com.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.util.GeckoLibUtil;
 import logictechcorp.netherex.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -23,6 +31,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -32,18 +41,13 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Optional;
 
-public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Holder<NEFlaemothVariant>>, GeoEntity
+public class NEFlaemoth extends Animal implements FlyingAnimal, GeoEntity
 {
     private static final EntityDataAccessor<Holder<NEFlaemothVariant>> VARIANT_ID = SynchedEntityData.defineId(NEFlaemoth.class, NetherExEntityDataSerializers.FLAEMOTH_VARIANT);
 
@@ -55,7 +59,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     {
         super(entityType, level);
         moveControl = new FlyingMoveControl(this, 20, true);
-        setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);
+        setPathfindingMalus(PathType.FIRE, -1.0F);
         setPathfindingMalus(PathType.LAVA, -1.0F);
         setPathfindingMalus(PathType.WATER, -1.0F);
     }
@@ -80,8 +84,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         super.defineSynchedData(builder);
-        Registry<NEFlaemothVariant> registry = registryAccess().lookupOrThrow(NetherExRegistries.Keys.FLAEMOTH_VARIANT);
-        builder.define(VARIANT_ID, registry.get(NetherExFlaemothVariants.CRIMSON).or(registry::getAny).orElseThrow());
+        builder.define(VARIANT_ID, VariantUtils.getDefaultOrAny(registryAccess(), NetherExFlaemothVariants.CRIMSON));
     }
 
     @Override
@@ -117,13 +120,11 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar)
     {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, (animationState ->
+        controllerRegistrar.add(new AnimationController<>("controller", 0, (animationState ->
         {
-            AnimationController<NEFlaemoth> animationController = animationState.getController();
-
             String animationName;
 
-            if (animationState.getAnimatable().isFlying())
+            if (animationState.isMoving())
             {
                 animationName = "animation.flaemoth.fly";
             }
@@ -132,7 +133,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
                 animationName = "animation.flaemoth.idle";
             }
 
-            animationController.setAnimation(RawAnimation.begin().thenLoop(animationName));
+            animationState.controller().setAnimation(RawAnimation.begin().thenLoop(animationName));
             return PlayState.CONTINUE;
         })));
     }
@@ -163,17 +164,17 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compoundTag)
+    protected void addAdditionalSaveData(ValueOutput output)
     {
-        super.addAdditionalSaveData(compoundTag);
-        getVariant().unwrapKey().ifPresent(variantResourceKey -> compoundTag.putString("variant", variantResourceKey.location().toString()));
+        super.addAdditionalSaveData(output);
+        getVariant().unwrapKey().ifPresent(variantResourceKey -> output.putString("variant", variantResourceKey.identifier().toString()));
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compoundTag)
+    protected void readAdditionalSaveData(ValueInput input)
     {
-        super.readAdditionalSaveData(compoundTag);
-        Optional.ofNullable(ResourceLocation.tryParse(compoundTag.getString("variant")))
+        super.readAdditionalSaveData(input);
+        Optional.ofNullable(Identifier.tryParse(input.getStringOr("variant", "")))
                 .map(location -> ResourceKey.create(NetherExRegistries.Keys.FLAEMOTH_VARIANT, location))
                 .flatMap(key -> registryAccess().lookupOrThrow(NetherExRegistries.Keys.FLAEMOTH_VARIANT).get(key))
                 .ifPresent(this::setVariant);
@@ -182,7 +183,7 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     @Override
     protected void customServerAiStep(ServerLevel level)
     {
-        if (isInWaterOrBubble())
+        if (isInWaterOrRain())
         {
             underWaterTicks++;
         }
@@ -246,7 +247,11 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
         return flaemoth;
     }
 
-    @Override
+    public void setVariant(Holder<NEFlaemothVariant> variant)
+    {
+        entityData.set(VARIANT_ID, variant);
+    }
+
     public Holder<NEFlaemothVariant> getVariant()
     {
         return entityData.get(VARIANT_ID);
@@ -268,11 +273,5 @@ public class NEFlaemoth extends Animal implements FlyingAnimal, VariantHolder<Ho
     public boolean isFood(ItemStack stack)
     {
         return stack.is(NetherExItemTags.FLAEMOTH_FOOD);
-    }
-
-    @Override
-    public void setVariant(Holder<NEFlaemothVariant> variant)
-    {
-        entityData.set(VARIANT_ID, variant);
     }
 }

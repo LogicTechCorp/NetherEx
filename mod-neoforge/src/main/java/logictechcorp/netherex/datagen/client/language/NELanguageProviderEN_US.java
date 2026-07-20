@@ -6,8 +6,8 @@ import logictechcorp.netherex.platform.registration.RegistryObject;
 import logictechcorp.netherex.registry.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
@@ -43,24 +43,24 @@ public class NELanguageProviderEN_US extends LanguageProvider
         add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_nether.description", "The Nether, But Hotter Than Ever.");
 
         // Advancements - Nether - Ruthless Sands
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.title", "Ruthless Sands");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.location().getPath() + "_biome.description", "Enter the Ruthless Sands biome.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.identifier().getPath() + "_biome.title", "Ruthless Sands");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.RUTHLESS_SANDS.identifier().getPath() + "_biome.description", "Enter the Ruthless Sands biome.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.kill_spinout.title", "You Spin Me Right 'round");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.kill_spinout.description", "Kill a Spinout.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.kill_wisp.title", "Flame On... More Like Flame Off");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.kill_wisp.description", "Kill a Wisp.");
 
         // Advancements - Nether - Torrid Wasteland
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.title", "Torrid Wasteland");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.location().getPath() + "_biome.description", "Enter the Torrid Wasteland biome.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.identifier().getPath() + "_biome.title", "Torrid Wasteland");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.TORRID_WASTELAND.identifier().getPath() + "_biome.description", "Enter the Torrid Wasteland biome.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.kill_salamander.title", "You Can’t Handle The Heat");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.kill_salamander.description", "Kill a Salamander.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.tame_salamander.title", "It’s Getting Hot In Here");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.tame_salamander.description", "Tame a Salamander.");
 
         // Advancements - Nether - Fungi Forest
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.title", "Fungi Forest");
-        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.location().getPath() + "_biome.description", "Enter the Fungi Forest biome.");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.identifier().getPath() + "_biome.title", "Fungi Forest");
+        add("advancements." + NetherExConstants.MOD_ID + ".nether.enter_" + NetherExBiomes.FUNGI_FOREST.identifier().getPath() + "_biome.description", "Enter the Fungi Forest biome.");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.kill_mogus.title", "Shroom No More");
         add("advancements." + NetherExConstants.MOD_ID + ".nether.kill_mogus.description", "Kill a Mogus.");
 
@@ -178,7 +178,6 @@ public class NELanguageProviderEN_US extends LanguageProvider
 
         // Items
         add(NetherExItems.NETHERITE_NUGGET.get(), "Netherite Nugget");
-        add(NetherExItems.NETHERITE_HORSE_ARMOR.get(), "Netherite Horse Armor");
         add(NetherExItems.WITHER_BONE.get(), "Wither Bone");
         add(NetherExItems.WITHER_BONE_MEAL.get(), "Wither Bone Meal");
         add(NetherExItems.HOGLIN_TUSK.get(), "Hoglin Tusk");
@@ -288,7 +287,7 @@ public class NELanguageProviderEN_US extends LanguageProvider
 
     private void add(ResourceKey<Biome> biomeResourceKey, String displayName)
     {
-        add(biomeResourceKey.location().toLanguageKey("biome"), displayName);
+        add(biomeResourceKey.identifier().toLanguageKey("biome"), displayName);
     }
 
     private void add(RegistryObject<Potion, Potion> potion, String displayName)
@@ -301,8 +300,8 @@ public class NELanguageProviderEN_US extends LanguageProvider
         return BuiltInRegistries.BLOCK.getKey(block).getPath();
     }
 
-    public ResourceLocation modLoc(String name)
+    public Identifier modLoc(String name)
     {
-        return NetherExConstants.resource(name);
+        return NetherExConstants.identifier(name);
     }
 }

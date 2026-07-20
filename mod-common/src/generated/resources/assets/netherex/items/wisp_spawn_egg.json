@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -1
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -14109748
-      }
-    ]
+    "model": "netherex:item/wisp_spawn_egg"
   }
 }

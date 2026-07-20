@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MobBucketItem;
 import net.minecraft.world.level.Level;
@@ -21,12 +21,12 @@ public class NEStriderBucketItem extends MobBucketItem
     }
 
     @Override
-    public void checkExtraContent(@Nullable Player player, Level level, ItemStack bucketStack, BlockPos pos)
+    public void checkExtraContent(@Nullable LivingEntity user, Level level, ItemStack bucketStack, BlockPos pos)
     {
         if (level instanceof ServerLevel)
         {
             spawnStrider((ServerLevel) level, bucketStack, pos);
-            level.gameEvent(player, GameEvent.ENTITY_PLACE, pos);
+            level.gameEvent(user, GameEvent.ENTITY_PLACE, pos);
         }
     }
 

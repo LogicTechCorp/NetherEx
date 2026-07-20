@@ -29,6 +29,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -87,7 +88,7 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
 
     protected abstract void createCap(List<MushroomPiece> mushroomPieces);
 
-    protected void placeMushroom(LevelAccessor level, BlockPos mushroomPos, BlockPos.MutableBlockPos mutablePos, List<MushroomPiece> mushroomPieces, NEBigMushroomFeatureConfiguration config)
+    protected void placeMushroom(WorldGenLevel level, BlockPos mushroomPos, BlockPos.MutableBlockPos mutablePos, List<MushroomPiece> mushroomPieces, NEBigMushroomFeatureConfiguration config)
     {
         RandomSource random = level.getRandom();
 
@@ -95,7 +96,7 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
         {
             mutablePos.setWithOffset(mushroomPos, mushroomPiece.localPos);
 
-            BlockState mushroomState = mushroomPiece.getState(mutablePos, random, config);
+            BlockState mushroomState = mushroomPiece.getState(level, mutablePos, random, config);
             level.setBlock(mutablePos, mushroomState, 2);
         }
     }
@@ -103,7 +104,7 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
     @Override
     public boolean place(FeaturePlaceContext<NEBigMushroomFeatureConfiguration> context)
     {
-        LevelAccessor level = context.level();
+        WorldGenLevel level = context.level();
         BlockPos mushroomPos = context.origin();
         NEBigMushroomFeatureConfiguration config = context.config();
         RandomSource random = level.getRandom();
@@ -136,7 +137,7 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
                 mutablePos.setWithOffset(mushroomPos, x, -1, z);
                 BlockState state = level.getBlockState(mutablePos);
 
-                if (!state.is(BlockTags.MUSHROOM_GROW_BLOCK))
+                if (!state.is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT))
                 {
                     return false;
                 }
@@ -159,10 +160,10 @@ public abstract class NEBigMushroomFeature extends Feature<NEBigMushroomFeatureC
 
     protected record MushroomPiece(Vec3i localPos, boolean cap, boolean down, boolean up, boolean north, boolean south, boolean west, boolean east)
     {
-        public BlockState getState(BlockPos mushroomPos, RandomSource random, NEBigMushroomFeatureConfiguration config)
+        public BlockState getState(WorldGenLevel level, BlockPos mushroomPos, RandomSource random, NEBigMushroomFeatureConfiguration config)
         {
             BlockStateProvider stateProvider = cap ? config.capProvider() : config.stemProvider();
-            BlockState state = stateProvider.getState(random, mushroomPos);
+            BlockState state = stateProvider.getState(level, random, mushroomPos);
 
             if (state.hasProperty(HugeMushroomBlock.DOWN) && state.hasProperty(HugeMushroomBlock.UP) && state.hasProperty(HugeMushroomBlock.NORTH) && state.hasProperty(HugeMushroomBlock.SOUTH) && state.hasProperty(HugeMushroomBlock.WEST) && state.hasProperty(HugeMushroomBlock.EAST))
             {

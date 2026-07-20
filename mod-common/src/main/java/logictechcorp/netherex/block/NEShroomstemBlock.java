@@ -1,7 +1,7 @@
 package logictechcorp.netherex.block;
 
-import logictechcorp.netherex.registry.NetherExItems;
 import com.mojang.serialization.MapCodec;
+import logictechcorp.netherex.registry.NetherExItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class NEShroomstemBlock extends NEAbstractShroomstemBlock
 {
-    public static final MapCodec<NEShroomstemBlock> CODEC = simpleCodec(NEShroomstemBlock::new);
+    public static final MapCodec<BushBlock> CODEC = simpleCodec(NEShroomstemBlock::new);
 
     public NEShroomstemBlock(Properties properties)
     {
@@ -33,7 +33,7 @@ public class NEShroomstemBlock extends NEAbstractShroomstemBlock
     }
 
     @Override
-    protected MapCodec<? extends BushBlock> codec()
+    public MapCodec<BushBlock> codec()
     {
         return CODEC;
     }

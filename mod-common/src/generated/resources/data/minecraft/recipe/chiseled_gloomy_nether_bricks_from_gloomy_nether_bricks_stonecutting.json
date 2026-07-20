@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "netherex:gloomy_nether_bricks",
   "result": {
-    "count": 1,
     "id": "netherex:chiseled_gloomy_nether_bricks"
   }
 }

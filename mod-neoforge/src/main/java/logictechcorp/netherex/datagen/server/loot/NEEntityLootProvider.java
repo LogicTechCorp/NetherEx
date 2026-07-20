@@ -5,7 +5,7 @@ import logictechcorp.netherex.entity.animal.NEMogusVariant;
 import logictechcorp.netherex.entity.animal.NESalamanderVariant;
 import logictechcorp.netherex.platform.registration.RegistryObject;
 import logictechcorp.netherex.registry.*;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.data.loot.EntityLootSubProvider;

@@ -25,7 +25,7 @@ public class NetherExLootTables
 
     private static ResourceKey<LootTable> register(String name)
     {
-        return register(ResourceKey.create(Registries.LOOT_TABLE, NetherExConstants.resource(name)));
+        return register(ResourceKey.create(Registries.LOOT_TABLE, NetherExConstants.identifier(name)));
     }
 
     private static ResourceKey<LootTable> register(ResourceKey<LootTable> name)
@@ -36,7 +36,7 @@ public class NetherExLootTables
         }
         else
         {
-            throw new IllegalArgumentException(name.location() + " is already a registered loot table!");
+            throw new IllegalArgumentException(name.identifier() + " is already a registered loot table!");
         }
     }
 }

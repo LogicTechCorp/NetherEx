@@ -3,7 +3,6 @@ package logictechcorp.netherex.registry;
 import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.world.level.levelgen.feature.config.NEBigMushroomFeatureConfiguration;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -67,7 +66,7 @@ public class NetherExFeatureConfigs
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context)
     {
-        FeatureUtils.register(context, PATCH_FIRE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.FIRE)), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.NETHERRACKS)))));
+        FeatureUtils.register(context, PATCH_FIRE, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.FIRE)));
 
         RuleTest gloomyNetherrackRuleTest = new BlockMatchTest(NetherExBlocks.GLOOMY_NETHERRACK.get());
         register(context, ORE_GLOOMY_QUARTZ, Feature.ORE, new OreConfiguration(gloomyNetherrackRuleTest, NetherExBlocks.GLOOMY_QUARTZ_ORE.get().defaultBlockState(), 14));
@@ -158,20 +157,20 @@ public class NetherExFeatureConfigs
         register(context, TWISTED_WARPED_FUNGUS, Feature.HUGE_FUNGUS, new HugeFungusConfiguration(Blocks.WARPED_NYLIUM.defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), Blocks.WARPED_WART_BLOCK.defaultBlockState(), NetherExBlocks.TWISTED_SHROOMLIGHT.get().defaultBlockState(), replaceableBlocks, false));
         register(context, TWISTED_WARPED_FUNGUS_PLANTED, Feature.HUGE_FUNGUS, new HugeFungusConfiguration(Blocks.WARPED_NYLIUM.defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), Blocks.WARPED_WART_BLOCK.defaultBlockState(), NetherExBlocks.TWISTED_SHROOMLIGHT.get().defaultBlockState(), replaceableBlocks, true));
 
-        register(context, THORNSTALK, Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(4, PlacementUtils.inlinePlaced(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(NetherExBlocks.THORNSTALK.get())), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(NetherExBlocks.THORNSTALK.get().defaultBlockState(), BlockPos.ZERO))))));
+        register(context, THORNSTALK, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(NetherExBlocks.THORNSTALK.get())));
 
         NEBigMushroomFeatureConfiguration bigBrownElderMushroomConfig = new NEBigMushroomFeatureConfiguration(BlockStateProvider.simple(NetherExBlocks.BROWN_ELDER_MUSHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, true).setValue(HugeMushroomBlock.DOWN, false)), BlockStateProvider.simple(NetherExBlocks.ELDER_MUSHROOM_STEM.get().defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)));
         NEBigMushroomFeatureConfiguration bigRedElderMushroomConfig = new NEBigMushroomFeatureConfiguration(BlockStateProvider.simple(NetherExBlocks.RED_ELDER_MUSHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, true).setValue(HugeMushroomBlock.DOWN, false)), BlockStateProvider.simple(NetherExBlocks.ELDER_MUSHROOM_STEM.get().defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)));
         register(context, HUGE_BROWN_ELDER_MUSHROOM, NetherExFeatures.HUGE_BROWN_ELDER_MUSHROOM.get(), bigBrownElderMushroomConfig);
         register(context, HUGE_RED_ELDER_MUSHROOM, NetherExFeatures.HUGE_RED_ELDER_MUSHROOM.get(), bigRedElderMushroomConfig);
         register(context, HUGE_ELDER_MUSHROOMS, Feature.RANDOM_BOOLEAN_SELECTOR, new RandomBooleanFeatureConfiguration(PlacementUtils.inlinePlaced(NetherExFeatures.HUGE_BROWN_ELDER_MUSHROOM.get(), bigBrownElderMushroomConfig, BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(NetherExBlocks.BROWN_ELDER_MUSHROOM.get().defaultBlockState(), BlockPos.ZERO)))), PlacementUtils.inlinePlaced(NetherExFeatures.HUGE_RED_ELDER_MUSHROOM.get(), bigRedElderMushroomConfig, BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(NetherExBlocks.RED_ELDER_MUSHROOM.get().defaultBlockState(), BlockPos.ZERO))))));
-        register(context, BASALT_FUMAROLE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 7, 7, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(NetherExBlocks.BASALT_FUMAROLE.get().defaultBlockState())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesBlocks(Direction.UP.getUnitVec3i(), Blocks.AIR), BlockPredicate.noFluid(Direction.DOWN.getUnitVec3i().below()), BlockPredicate.anyOf(BlockPredicate.matchesBlocks(Direction.DOWN.getUnitVec3i(), Blocks.BASALT), BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.LOW_FUMAROLE_HEATER), BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.HIGH_FUMAROLE_HEATER))))));
-        register(context, BLACKSTONE_FUMAROLE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 7, 7, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(NetherExBlocks.BLACKSTONE_FUMAROLE.get().defaultBlockState())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesBlocks(Direction.UP.getUnitVec3i(), Blocks.AIR), BlockPredicate.noFluid(Direction.DOWN.getUnitVec3i().below()), BlockPredicate.anyOf(BlockPredicate.matchesBlocks(Direction.DOWN.getUnitVec3i(), Blocks.BLACKSTONE), BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.LOW_FUMAROLE_HEATER), BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), NetherExBlockTags.HIGH_FUMAROLE_HEATER))))));
+        register(context, BASALT_FUMAROLE, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(NetherExBlocks.BASALT_FUMAROLE.get().defaultBlockState())));
+        register(context, BLACKSTONE_FUMAROLE, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(NetherExBlocks.BLACKSTONE_FUMAROLE.get().defaultBlockState())));
     }
 
     private static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name)
     {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, NetherExConstants.resource(name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, NetherExConstants.identifier(name));
     }
 
     private static void register(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, Feature<NoneFeatureConfiguration> feature)

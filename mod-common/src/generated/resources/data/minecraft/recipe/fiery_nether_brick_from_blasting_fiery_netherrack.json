@@ -6,7 +6,6 @@
   "group": "fiery_nether_brick",
   "ingredient": "netherex:fiery_netherrack",
   "result": {
-    "count": 1,
     "id": "netherex:fiery_nether_brick"
   }
 }

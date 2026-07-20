@@ -11,22 +11,23 @@ neoForge {
     version = neoforge_version
     // Automatically enable neoforge AccessTransformers if the file exists
     def at = project(':mod-common').file('src/main/resources/META-INF/accesstransformer.cfg')
+
     if (at.exists()) {
         accessTransformers.from(at.absolutePath)
     }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
-    }
+
     runs {
         configureEach {
             ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
         }
         client {
             client()
+            gameDirectory = mkdir(file('runs/client'))
         }
         server {
             server()
+            file('runs/server').createParentDirectories()
+            gameDirectory = mkdir(file('runs/server'))
         }
 
         List<String> dataArgs = List.of(
@@ -39,9 +40,10 @@ neoForge {
                 project(':mod-common').file("src/main/resources/").getAbsolutePath()
         )
 
-        data {
+        clientData {
             programArguments.addAll(dataArgs)
             clientData()
+            gameDirectory = mkdir(file('runs/data'))
         }
     }
     mods {
@@ -53,8 +55,8 @@ neoForge {
 
 dependencies {
     implementation 'com.github.glitchfiend:TerraBlender-neoforge:' + minecraft_version + '-' + terrablender_version
-    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
-    implementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-neoforge-${minecraft_version}:$resourcefulconfig_version"
+    implementation "com.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    implementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-neoforge-$resourcefulconfig_minecraft_version:$resourcefulconfig_version"
 }
 
 sourceSets.main.resources { srcDir project.project(':mod-common').file('src/generated/resources/').getAbsolutePath() }
@@ -81,10 +83,11 @@ modrinth {
     projectId = modrinth_project
     versionName = "${mod_name} ${version} - NeoForge ${minecraft_version}"
     changelog = rootProject.file(mod_changelog_file).getText()
-    uploadFile = jar
+    uploadFile = tasks.jar
     versionType = 'release'
     gameVersions = [minecraft_version]
     loaders = ['neoforge']
+
     dependencies {
         required.project 'fabric-api'
         required.project 'terrablender'

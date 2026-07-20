@@ -6,11 +6,11 @@ import logictechcorp.netherex.registry.NetherExItemTags;
 import logictechcorp.netherex.registry.NetherExItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,7 +18,7 @@ public class NEItemTagsProvider extends ItemTagsProvider
 {
     public NEItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider)
     {
-        super(packOutput, lookupProvider, blockTagProvider, NetherExConstants.MOD_ID);
+        super(packOutput, lookupProvider, NetherExConstants.MOD_ID);
     }
 
     @Override
@@ -68,7 +68,6 @@ public class NEItemTagsProvider extends ItemTagsProvider
                 .add(NetherExItems.COOKED_RIBS.get());
         tag(Tags.Items.CROPS_NETHER_WART)
                 .add(NetherExBlocks.WARPED_WART.get().asItem());
-
         tag(ItemTags.ARROWS)
                 .add(NetherExItems.ASHEN_ARROW.get());
         tag(NetherExItemTags.SALAMANDER_FOOD)

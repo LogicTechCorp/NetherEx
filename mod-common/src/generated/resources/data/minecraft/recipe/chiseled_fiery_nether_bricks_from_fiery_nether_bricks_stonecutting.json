@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "netherex:fiery_nether_bricks",
   "result": {
-    "count": 1,
     "id": "netherex:chiseled_fiery_nether_bricks"
   }
 }

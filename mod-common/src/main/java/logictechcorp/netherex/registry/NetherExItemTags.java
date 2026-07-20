@@ -2,7 +2,7 @@ package logictechcorp.netherex.registry;
 
 import logictechcorp.netherex.NetherExConstants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -16,11 +16,11 @@ public class NetherExItemTags
 
     public static TagKey<Item> createTag(String name)
     {
-        return TagKey.create(Registries.ITEM, NetherExConstants.resource(name));
+        return TagKey.create(Registries.ITEM, NetherExConstants.identifier(name));
     }
 
     public static TagKey<Item> createCTag(String name)
     {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", name));
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", name));
     }
 }

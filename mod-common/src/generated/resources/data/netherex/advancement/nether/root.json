@@ -14,7 +14,6 @@
       "translate": "advancements.netherex.nether.enter_nether.description"
     },
     "icon": {
-      "count": 1,
       "id": "netherex:warped_nether_bricks"
     },
     "title": {

@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class NEWarpedWartBlock extends BushBlock
 {
-    public static final MapCodec<NEWarpedWartBlock> CODEC = simpleCodec(NEWarpedWartBlock::new);
+    public static final MapCodec<BushBlock> CODEC = simpleCodec(NEWarpedWartBlock::new);
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -78,7 +78,7 @@ public class NEWarpedWartBlock extends BushBlock
     }
 
     @Override
-    protected MapCodec<? extends BushBlock> codec()
+    public MapCodec<BushBlock> codec()
     {
         return CODEC;
     }

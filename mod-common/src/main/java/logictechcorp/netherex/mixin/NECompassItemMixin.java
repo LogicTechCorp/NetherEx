@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.item.CompassItem;
@@ -40,7 +41,7 @@ public class NECompassItemMixin
             method = "inventoryTick",
             at = @At("HEAD")
     )
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int itemSlot, boolean isSelected, CallbackInfo callback)
+    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot, CallbackInfo callback)
     {
         if (level instanceof ServerLevel serverLevel && serverLevel.getGameTime() % 20 == 0)
         {

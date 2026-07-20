@@ -27,8 +27,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-public record NEBigMushroomFeatureConfiguration(BlockStateProvider capProvider,
-                                                BlockStateProvider stemProvider) implements FeatureConfiguration
+public record NEBigMushroomFeatureConfiguration(BlockStateProvider capProvider, BlockStateProvider stemProvider) implements FeatureConfiguration
 {
     public static final Codec<NEBigMushroomFeatureConfiguration> CODEC = RecordCodecBuilder.create((kind) ->
     {

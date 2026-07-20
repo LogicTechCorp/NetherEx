@@ -5,7 +5,7 @@ import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.advancement.criterion.NEEntityHolderVariantPredicateType;
 import logictechcorp.netherex.entity.animal.*;
 import logictechcorp.netherex.platform.registration.RegistrationProvider;
-import net.minecraft.advancements.critereon.EntitySubPredicate;
+import net.minecraft.advancements.criterion.EntitySubPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 

@@ -5,7 +5,6 @@
   "experience": 0.1,
   "ingredient": "netherex:warped_nether_bricks",
   "result": {
-    "count": 1,
     "id": "netherex:cracked_warped_nether_bricks"
   }
 }

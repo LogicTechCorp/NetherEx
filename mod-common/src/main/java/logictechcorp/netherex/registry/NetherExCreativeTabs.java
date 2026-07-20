@@ -1,6 +1,7 @@
 package logictechcorp.netherex.registry;
 
 import logictechcorp.netherex.NetherExConstants;
+import logictechcorp.netherex.platform.NECreativeTabHelper;
 import logictechcorp.netherex.platform.registration.RegistrationProvider;
 import logictechcorp.netherex.platform.registration.RegistryObject;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,9 +21,8 @@ public class NetherExCreativeTabs
     public static final RegistryObject<CreativeModeTab, CreativeModeTab> DEFAULT = CREATIVE_TABS.register("default", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
             .icon(() -> new ItemStack(Items.NETHERRACK))
             .title(Component.translatable("creative_mode_tab.netherex.default"))
-            .displayItems((itemDisplayParameters, output) -> getSortedItemEntries().forEach((itemRegistryObject -> output.accept(itemRegistryObject.get()))))
+            .displayItems(NECreativeTabHelper.INSTANCE.getDisplayItemsGenerator())
             .build()
-
     );
 
     public static void initialize()
@@ -30,7 +30,7 @@ public class NetherExCreativeTabs
 
     }
 
-    private static List<RegistryObject<Item, ? extends Item>> getSortedItemEntries()
+    public static List<RegistryObject<Item, ? extends Item>> getSortedItemEntries()
     {
         return Stream.concat(NetherExBlocks.ITEM_BLOCKS.getEntries().stream(), NetherExItems.ITEMS.getEntries().stream()).toList();
     }

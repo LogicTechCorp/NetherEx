@@ -51,16 +51,6 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_netherite_horse_armor": {
-      "conditions": {
-        "items": [
-          {
-            "items": "netherex:netherite_horse_armor"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_netherite_leggings": {
       "conditions": {
         "items": [
@@ -119,8 +109,7 @@
       "has_netherite_helmet",
       "has_netherite_chestplate",
       "has_netherite_leggings",
-      "has_netherite_boots",
-      "has_netherite_horse_armor"
+      "has_netherite_boots"
     ]
   ],
   "rewards": {

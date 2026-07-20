@@ -1,5 +1,13 @@
 package logictechcorp.netherex.entity.monster;
 
+import com.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.LoopType;
+import com.geckolib.animation.object.PlayState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -15,10 +23,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
 
 public class NESpinout extends Monster implements Enemy, GeoEntity
 {
@@ -58,16 +62,12 @@ public class NESpinout extends Monster implements Enemy, GeoEntity
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar)
     {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, (animationState ->
+        controllerRegistrar.add(new AnimationController<>("controller", 0, (animationState ->
         {
-            final AnimationController<NESpinout> animationController = animationState.getController();
 
             if (animationState.isMoving())
             {
-                animationController.setAnimation(RawAnimation
-                        .begin()
-                        .then("animation.spinout.spin", Animation.LoopType.LOOP)
-                );
+                animationState.controller().setAnimation(RawAnimation.begin().then("animation.spinout.spin", LoopType.LOOP));
             }
 
             return PlayState.CONTINUE;

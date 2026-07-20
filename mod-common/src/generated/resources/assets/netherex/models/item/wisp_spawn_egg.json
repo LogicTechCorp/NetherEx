@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "netherex:item/netherite_horse_armor"
+    "layer0": "netherex:item/wisp_spawn_egg"
   }
 }

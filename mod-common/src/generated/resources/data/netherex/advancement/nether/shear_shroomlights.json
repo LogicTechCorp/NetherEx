@@ -50,7 +50,6 @@
       "translate": "advancements.netherex.nether.shear_shroomlights.description"
     },
     "icon": {
-      "count": 1,
       "id": "minecraft:shroomlight"
     },
     "title": {

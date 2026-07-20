@@ -9,9 +9,9 @@ import logictechcorp.netherex.platform.registration.registries.DatapackRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.resources.ResourceKey;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class NetherExRegistries
 
     }
 
-    private static <T> DatapackRegistry<T> register(ResourceKey<Registry<T>> key, @Nonnull Codec<T> elementCodec, @Nullable Codec<T> networkCodec, @Nullable RegistrySetBuilder.RegistryBootstrap<T> bootstrap)
+    private static <T> DatapackRegistry<T> register(ResourceKey<Registry<T>> key, @NotNull Codec<T> elementCodec, @Nullable Codec<T> networkCodec, @Nullable RegistrySetBuilder.RegistryBootstrap<T> bootstrap)
     {
         DatapackRegistry<T> datapackRegistry = DatapackRegistry.builder(key)
                 .withElementCodec(elementCodec)
@@ -62,7 +62,7 @@ public class NetherExRegistries
 
         private static <T> ResourceKey<Registry<T>> createRegistryKey(String name)
         {
-            return ResourceKey.createRegistryKey(NetherExConstants.resource(name));
+            return ResourceKey.createRegistryKey(NetherExConstants.identifier(name));
         }
     }
 }

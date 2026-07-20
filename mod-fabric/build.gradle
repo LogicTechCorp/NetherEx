@@ -2,24 +2,19 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
     id 'multiloader-loader'
-    id 'fabric-loom'
+    id 'net.fabricmc.fabric-loom'
     id 'net.darkhax.curseforgegradle'
     id 'com.modrinth.minotaur'
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
-    mappings loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
-    }
-
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    modImplementation "com.github.glitchfiend:TerraBlender-fabric:${minecraft_version}-${terrablender_version}"
-    modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
-    modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-${minecraft_version}:$resourcefulconfig_version"
+    implementation "com.github.glitchfiend:TerraBlender-fabric:${minecraft_version}-${terrablender_version}"
+    implementation "com.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+    implementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$resourcefulconfig_minecraft_version:$resourcefulconfig_version"
 }
 
 loom {
@@ -27,10 +22,6 @@ loom {
 
     if (aw.exists()) {
         accessWidenerPath.set(aw)
-    }
-
-    mixin {
-        defaultRefmapName.set("${mod_id}.refmap.json")
     }
 
     runs {
@@ -50,13 +41,33 @@ loom {
     }
 }
 
+// Implement mcgradleconventions loader attribute
+def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', String)
+['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements', 'includeInternal', 'modCompileClasspath'].each { variant ->
+    configurations.named(variant) {
+        attributes {
+            attribute(loaderAttribute, 'fabric')
+        }
+    }
+}
+
+sourceSets.configureEach {
+    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant->
+        configurations.named(variant) {
+            attributes {
+                attribute(loaderAttribute, 'fabric')
+            }
+        }
+    }
+}
+
 sourceSets.main.resources { srcDir project.project(':mod-common').file('src/generated/resources/').getAbsolutePath() }
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = rootProject.findProperty('curseforge_token')
     debugMode = false
 
-    var mainFile = upload(curseforge_project, tasks.remapJar)
+    var mainFile = upload(curseforge_project, tasks.jar)
     mainFile.changelog = rootProject.file(mod_changelog_file)
     mainFile.changelogType = 'markdown'
     mainFile.displayName = "${mod_name} ${version} - Fabric ${minecraft_version}"
@@ -75,10 +86,11 @@ modrinth {
     projectId = modrinth_project
     versionName = "${mod_name} ${version} - Fabric ${minecraft_version}"
     changelog = rootProject.file(mod_changelog_file).getText()
-    uploadFile = remapJar
+    uploadFile = tasks.jar
     versionType = 'release'
     gameVersions = [minecraft_version]
     loaders = ['fabric']
+
     dependencies {
         required.project 'fabric-api'
         required.project 'terrablender'

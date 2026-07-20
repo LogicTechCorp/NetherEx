@@ -1,31 +1,30 @@
 package logictechcorp.netherex.client.entity.animal;
 
+import com.geckolib.model.DefaultedEntityGeoModel;
+import com.geckolib.renderer.base.GeoRenderState;
 import logictechcorp.netherex.NetherExConstants;
 import logictechcorp.netherex.entity.animal.NESalamander;
-import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
+import logictechcorp.netherex.registry.NetherExDataTickets;
+import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.Nullable;
 
 public class NESalamanderModel extends DefaultedEntityGeoModel<NESalamander>
 {
     public NESalamanderModel()
     {
-        super(NetherExConstants.resource("salamander"), true);
+        super(NetherExConstants.identifier("salamander"));
     }
 
     @Override
-    public ResourceLocation getTextureResource(NESalamander salamander, GeoRenderer<NESalamander> renderer)
+    public void addAdditionalStateData(NESalamander animatable, @Nullable Object relatedObject, GeoRenderState renderState)
     {
-        return salamander.getVariant().value().texture();
+        renderState.addGeckolibData(NetherExDataTickets.VARIANT_TEXTURE, animatable.getVariant().value().texture());
     }
 
     @Override
-    public void setCustomAnimations(NESalamander animatable, long instanceId, AnimationState<NESalamander> animationState)
+    public Identifier getTextureResource(GeoRenderState renderState)
     {
-        super.setCustomAnimations(animatable, instanceId, animationState);
-
-        float rootScale = animatable.isBaby() ? 0.5f : 1.0f;
-        getBone("salamander").ifPresent(bone -> bone.updateScale(rootScale, rootScale, rootScale));
+        Identifier texture = renderState.getGeckolibData(NetherExDataTickets.VARIANT_TEXTURE);
+        return texture != null ? texture : super.getTextureResource(renderState);
     }
 }

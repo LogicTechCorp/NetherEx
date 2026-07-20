@@ -36,7 +36,7 @@ public class NEBlockBehaviourMixin
 
                     if (checkState.is(NetherExBlockTags.OBSIDIAN_HEATER))
                     {
-                        level.neighborChanged(checkState, checkPos, block, null, causedByPiston);
+                        level.neighborChanged(checkState, checkPos, block, null, false);
                     }
                 }
             }

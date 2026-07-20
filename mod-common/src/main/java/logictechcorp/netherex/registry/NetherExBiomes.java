@@ -2,7 +2,6 @@ package logictechcorp.netherex.registry;
 
 import logictechcorp.netherex.NetherExConstants;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Carvers;
@@ -11,14 +10,20 @@ import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.attribute.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+import java.util.List;
+import java.util.Optional;
 
 public class NetherExBiomes extends OverworldBiomes
 {
@@ -36,26 +41,24 @@ public class NetherExBiomes extends OverworldBiomes
         context.register(FUNGI_FOREST, fungiForest(placedFeatures, configuredWorldCarvers));
     }
 
+    private static Biome.BiomeBuilder baseBiome()
+    {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .temperature(2.0f)
+                .downfall(0.0f)
+                .specialEffects(new BiomeSpecialEffects.Builder().waterColor(4159204).build());
+    }
+
     private static Biome ruthlessSands(HolderGetter<PlacedFeature> placedFeatureHolderGetter, HolderGetter<ConfiguredWorldCarver<?>> configuredWorldCarverHolderGetter)
     {
-        BiomeSpecialEffects.Builder biomeSpecialEffectsBuilder = new BiomeSpecialEffects.Builder()
-                .fogColor(1787717)
-                .waterColor(4159204)
-                .waterFogColor(329011)
-                .skyColor(calculateSkyColor(2.0f))
-                .ambientParticle(new AmbientParticleSettings(ParticleTypes.ASH, 0.00625f))
-                .ambientLoopSound(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_LOOP)
-                .ambientMoodSound(new AmbientMoodSettings(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, 6000, 8, 2.0d))
-                .ambientAdditionsSound(new AmbientAdditionsSettings(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_ADDITIONS, 0.0111d))
-                .backgroundMusic(Musics.createGameMusic(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY));
-
         MobSpawnSettings.Builder mobSpawnSettingsBuilder = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.WISP.get(), 8, 4, 4))
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 60, 1, 2))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.SPINOUT.get(), 30, 4, 4))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.WITHER_SKELETON, 20, 3, 3))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.GHAST, 50, 4, 4))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 1, 4, 4))
+                .addSpawn(MobCategory.AMBIENT, 8, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.WISP.get(), 4, 4))
+                .addSpawn(MobCategory.CREATURE, 60, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 1, 2))
+                .addSpawn(MobCategory.MONSTER, 30, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.SPINOUT.get(), 4, 4))
+                .addSpawn(MobCategory.MONSTER, 20, new MobSpawnSettings.SpawnerData(EntityType.WITHER_SKELETON, 3, 3))
+                .addSpawn(MobCategory.MONSTER, 50, new MobSpawnSettings.SpawnerData(EntityType.GHAST, 4, 4))
+                .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 4, 4))
                 .addMobCharge(NetherExEntityTypes.WISP.get(), 0.7d, 0.15d)
                 .addMobCharge(EntityType.STRIDER, 0.7d, 0.15d)
                 .addMobCharge(NetherExEntityTypes.SPINOUT.get(), 0.4d, 0.25d)
@@ -81,11 +84,17 @@ public class NetherExBiomes extends OverworldBiomes
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_GLOOMY_GOLD)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_GLOOMY_QUARTZ);
 
-        return new Biome.BiomeBuilder()
-                .hasPrecipitation(false)
-                .temperature(2.0f)
-                .downfall(0.0f)
-                .specialEffects(biomeSpecialEffectsBuilder.build())
+        return baseBiome()
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 1787717)
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY))
+                .setAttribute(
+                        EnvironmentAttributes.AMBIENT_SOUNDS,
+                        new AmbientSounds(
+                                Optional.of(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_LOOP),
+                                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, 6000, 8, 2.0d)),
+                                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_SOUL_SAND_VALLEY_ADDITIONS, 0.0111d))
+                        )
+                )
                 .mobSpawnSettings(mobSpawnSettingsBuilder.build())
                 .generationSettings(biomeGenerationSettingsBuilder.build())
                 .build();
@@ -93,21 +102,11 @@ public class NetherExBiomes extends OverworldBiomes
 
     private static Biome torridWasteland(HolderGetter<PlacedFeature> placedFeatureHolderGetter, HolderGetter<ConfiguredWorldCarver<?>> configuredWorldCarverHolderGetter)
     {
-        BiomeSpecialEffects.Builder biomeSpecialEffectsBuilder = new BiomeSpecialEffects.Builder()
-                .fogColor(10505495)
-                .waterColor(4159204)
-                .waterFogColor(329011)
-                .skyColor(calculateSkyColor(2.0f))
-                .ambientLoopSound(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
-                .ambientMoodSound(new AmbientMoodSettings(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0d))
-                .ambientAdditionsSound(new AmbientAdditionsSettings(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111d))
-                .backgroundMusic(Musics.createGameMusic(SoundEvents.MUSIC_BIOME_NETHER_WASTES));
-
         MobSpawnSettings.Builder mobSpawnSettingsBuilder = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.SALAMANDER.get(), 60, 4, 4))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ZOMBIFIED_PIGLIN, 2, 4, 4))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.MAGMA_CUBE, 40, 4, 4))
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 15, 1, 2))
+                .addSpawn(MobCategory.MONSTER, 60, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.SALAMANDER.get(), 4, 4))
+                .addSpawn(MobCategory.MONSTER, 2, new MobSpawnSettings.SpawnerData(EntityType.ZOMBIFIED_PIGLIN, 4, 4))
+                .addSpawn(MobCategory.MONSTER, 40, new MobSpawnSettings.SpawnerData(EntityType.MAGMA_CUBE, 4, 4))
+                .addSpawn(MobCategory.CREATURE, 15, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 1, 2))
                 .addMobCharge(NetherExEntityTypes.SALAMANDER.get(), 0.4d, 0.25d)
                 .addMobCharge(EntityType.ZOMBIFIED_PIGLIN, 0.4d, 0.25d)
                 .addMobCharge(EntityType.MAGMA_CUBE, 0.4d, 0.25d)
@@ -130,11 +129,17 @@ public class NetherExBiomes extends OverworldBiomes
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_NORMAL)
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_NORMAL);
 
-        return new Biome.BiomeBuilder()
-                .hasPrecipitation(false)
-                .temperature(2.0f)
-                .downfall(0.0f)
-                .specialEffects(biomeSpecialEffectsBuilder.build())
+        return baseBiome()
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 10505495)
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_NETHER_WASTES))
+                .setAttribute(
+                        EnvironmentAttributes.AMBIENT_SOUNDS,
+                        new AmbientSounds(
+                                Optional.of(SoundEvents.AMBIENT_NETHER_WASTES_LOOP),
+                                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0d)),
+                                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111d))
+                        )
+                )
                 .mobSpawnSettings(mobSpawnSettingsBuilder.build())
                 .generationSettings(biomeGenerationSettingsBuilder.build())
                 .build();
@@ -142,20 +147,10 @@ public class NetherExBiomes extends OverworldBiomes
 
     private static Biome fungiForest(HolderGetter<PlacedFeature> placedFeatureHolderGetter, HolderGetter<ConfiguredWorldCarver<?>> configuredWorldCarverHolderGetter)
     {
-        BiomeSpecialEffects.Builder biomeSpecialEffectsBuilder = new BiomeSpecialEffects.Builder()
-                .fogColor(1705242)
-                .waterColor(4159204)
-                .waterFogColor(329011)
-                .skyColor(calculateSkyColor(2.0f))
-                .ambientLoopSound(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
-                .ambientMoodSound(new AmbientMoodSettings(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0d))
-                .ambientAdditionsSound(new AmbientAdditionsSettings(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, 0.0111d))
-                .backgroundMusic(Musics.createGameMusic(SoundEvents.MUSIC_BIOME_WARPED_FOREST));
-
         MobSpawnSettings.Builder mobSpawnSettingsBuilder = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.MOGUS.get(), 60, 1, 2))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 1, 4, 4))
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 10, 1, 2))
+                .addSpawn(MobCategory.MONSTER, 60, new MobSpawnSettings.SpawnerData(NetherExEntityTypes.MOGUS.get(), 1, 2))
+                .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 4, 4))
+                .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 1, 2))
                 .addMobCharge(NetherExEntityTypes.MOGUS.get(), 0.4d, 0.25d)
                 .addMobCharge(EntityType.ENDERMAN, 0.7d, 0.15d)
                 .addMobCharge(EntityType.STRIDER, 0.7d, 0.15d);
@@ -170,11 +165,17 @@ public class NetherExBiomes extends OverworldBiomes
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_LIVELY_GOLD)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherExFeaturePlacements.ORE_LIVELY_QUARTZ);
 
-        return new Biome.BiomeBuilder()
-                .hasPrecipitation(false)
-                .temperature(2.0f)
-                .downfall(0.0f)
-                .specialEffects(biomeSpecialEffectsBuilder.build())
+        return baseBiome()
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 1705242)
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_WARPED_FOREST))
+                .setAttribute(
+                        EnvironmentAttributes.AMBIENT_SOUNDS,
+                        new AmbientSounds(
+                                Optional.of(SoundEvents.AMBIENT_WARPED_FOREST_LOOP),
+                                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0d)),
+                                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, 0.0111d))
+                        )
+                )
                 .mobSpawnSettings(mobSpawnSettingsBuilder.build())
                 .generationSettings(biomeGenerationSettingsBuilder.build())
                 .build();
@@ -191,6 +192,6 @@ public class NetherExBiomes extends OverworldBiomes
 
     private static ResourceKey<Biome> createKey(String name)
     {
-        return ResourceKey.create(Registries.BIOME, NetherExConstants.resource(name));
+        return ResourceKey.create(Registries.BIOME, NetherExConstants.identifier(name));
     }
 }

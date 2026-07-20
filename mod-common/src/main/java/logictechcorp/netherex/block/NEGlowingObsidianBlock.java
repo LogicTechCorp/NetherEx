@@ -3,7 +3,9 @@ package logictechcorp.netherex.block;
 import logictechcorp.netherex.registry.NetherExBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -16,6 +18,8 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.material.Fluids;
 
 public class NEGlowingObsidianBlock extends Block
@@ -71,7 +75,8 @@ public class NEGlowingObsidianBlock extends Block
 
     public static boolean hasHeater(LevelReader levelReader, BlockPos pos)
     {
-        boolean hasHeater = levelReader.dimensionType().ultraWarm();
+        Registry<DimensionType> dimensionTypes = levelReader.registryAccess().lookupOrThrow(Registries.DIMENSION_TYPE);
+        boolean hasHeater = levelReader.dimensionType() == dimensionTypes.getValue(BuiltinDimensionTypes.NETHER);
         boolean hasCooler = false;
 
         if (!hasHeater)

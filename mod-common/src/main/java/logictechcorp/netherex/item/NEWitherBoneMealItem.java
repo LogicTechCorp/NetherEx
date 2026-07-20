@@ -80,7 +80,7 @@ public class NEWitherBoneMealItem extends Item
             return false;
         }
 
-        if (block instanceof RootsBlock)
+        if (block instanceof NetherRootsBlock)
         {
             return false;
         }
@@ -100,7 +100,7 @@ public class NEWitherBoneMealItem extends Item
             return handleVanillaBonemeal(level, stack, pos, nylium, state, 0.5d);
         }
 
-        if (block instanceof FungusBlock fungus)
+        if (block instanceof NetherFungusBlock fungus)
         {
             return handleVanillaBonemeal(level, stack, pos, fungus, state);
         }
@@ -309,7 +309,7 @@ public class NEWitherBoneMealItem extends Item
 
     private static void setBlock(Level level, BlockPos pos, BlockState newState)
     {
-        if (level.isClientSide)
+        if (level.isClientSide())
         {
             return;
         }
@@ -326,7 +326,7 @@ public class NEWitherBoneMealItem extends Item
 
     private static void playUseSound(Level level, BlockPos pos)
     {
-        if (level.isClientSide)
+        if (level.isClientSide())
         {
             return;
         }
@@ -336,7 +336,7 @@ public class NEWitherBoneMealItem extends Item
 
     private static void addSmokeParticles(Level level, Vec3 pos)
     {
-        if (!level.isClientSide)
+        if (!level.isClientSide())
         {
             return;
         }

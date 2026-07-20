@@ -16,7 +16,6 @@
       "translate": "advancements.netherex.nether.pick_up_hoglin_tusk.description"
     },
     "icon": {
-      "count": 1,
       "id": "netherex:hoglin_tusk"
     },
     "title": {

@@ -2,7 +2,7 @@ package logictechcorp.netherex.registry;
 
 import logictechcorp.netherex.NetherExConstants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
@@ -17,12 +17,12 @@ public class NetherExBlockTags
 
     public static TagKey<Block> createTag(String name)
     {
-        return TagKey.create(Registries.BLOCK, NetherExConstants.resource(name));
+        return TagKey.create(Registries.BLOCK, NetherExConstants.identifier(name));
     }
 
     public static TagKey<Block> createCTag(String name)
     {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", name));
+        return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("c", name));
     }
 
 }
