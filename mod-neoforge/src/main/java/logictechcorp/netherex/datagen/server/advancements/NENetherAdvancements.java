@@ -46,7 +46,7 @@ public class NENetherAdvancements implements AdvancementSubProvider
                         NetherExBlocks.WARPED_NETHER_BRICKS.get(),
                         Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_nether.title"),
                         Component.translatable("advancements." + NetherExConstants.MOD_ID + ".nether.enter_nether.description"),
-                        Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/nether.png"),
+                        Identifier.withDefaultNamespace("gui/advancements/backgrounds/nether"),
                         AdvancementType.TASK,
                         true,
                         false,
